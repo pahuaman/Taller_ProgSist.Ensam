@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1140374828 source:i:\ \ensamblador_v2\ensamblador\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<math.h>
+
+1464156856 source:c:\users\1frddddddddddddddddd\desktop\ensamblador_v3\ensamblador\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<math.h>
+

@@ -1,0 +1,10024 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include<math.h>
+#define TC 256
+
+typedef struct
+{
+    int sukulemcia; ///bandera para saber que tipo de registro trabajamos
+    char LR[3]; /// longitud de registro
+    char enriquesegoviano[5]; ///dirección
+    char CoD[TC]; ///datos
+    char RiceBall[TC];///datos en hexa
+    char ChickS[3]; ///check sum
+    int acum;
+    int Alive;
+}p10;
+
+int main(int argc, char *argv[])
+{
+    int fd, Rin, Umi,cl, kumiko;
+    char cad[TC], na[20], nb[20],rootha[TC];
+    p10 Minami;
+    Minami.sukulemcia=0;
+    Minami.Alive=0;
+     Umi=0;
+     printf("Dame el nombre del archivo:\n");
+     gets(na);
+     if((fd=open(na,0))<0)
+     {
+         printf("           Error al abrir el archivo\n         Fin del programa");
+         exit(1);
+     }
+     printf("------------------------------------------------------------------------\n");
+    strcpy(nb,na);
+    kumiko=0;
+    while(kumiko<strlen(nb))
+    {
+        if(nb[kumiko]=='.')
+        {
+            nb[kumiko]='\0';
+            break;
+        }
+        kumiko++;
+    }
+    strcat(nb,".obj");
+    cl=creat("cl.txt",0644);
+    close(cl);
+    cl=creat("di.txt",0644);
+    close(cl);
+    cl=creat(nb,0644);
+    close(cl);
+    while((Rin=leetexto(fd,cad))>0)
+        {
+        Umi=identificador_nya(cad);
+        if(Umi>0)
+            break;
+        }
+        if(Umi==0)
+            printf("    Error: No se encontro el END");
+    close(fd);
+    ///Parte 5
+if((fd=open("temporal.txt",0))<0)
+     {
+         printf("           Error al abrir el archivo\n         Fin del programa");
+         exit(1);
+     }
+     strcpy(rootha, argv[0]);
+while((Rin=leetexto(fd,cad))>0)
+        {
+        step2(cad, &Minami, rootha, nb, na);
+        }
+    close(fd);
+    ///fin, parte 5
+}
+
+leetexto(int fd,char cad[])
+{
+ int Nozomi;
+ char Azu;
+ Nozomi=0;
+ while(read(fd,&Azu,1)>0 && Azu!=10)
+        cad[Nozomi++]=Azu;
+ cad[Nozomi]='\0';
+ return(Nozomi);
+}
+
+int identificador_nya(char cad[])
+{
+int Nico,Pana, Maki, Eli, Kotori, Honky, karina, ece, cde, cce, yui, ritsu, Mio, b, c, Sona, w,s;
+int inh, inm, dir, ext, rel, idx, idx1, idx2,idx3, idx4;
+int inhb, inmb, dirb, extb, relb, idxb, idx1b, idx2b,idx3b, idx4b;
+int dir_ini,cont_loc,centinela,org=0;
+int residuo,modulo,equx=0,vuelta_etiqueta=0,errbase=0,k,f;
+char hexa[4],d[6]={'A','B','C','D','E','F'};
+char etiqueta[TC], codop[TC], operando[TC], Mugi, cad3[TC],cad4[TC];
+Honky=0;
+Nico=0;
+Pana=0;
+Maki=0;
+Eli=0;
+ece=0;
+cde=0;
+cce=0;
+s=0;
+Kotori=0;
+etiqueta[0]='\0';
+codop[0]='\0';
+operando[0]='\0';
+karina=strlen(cad);
+
+if(cad[Nico]==59)
+{
+    printf("COMENTARIO\n\n");
+    Kotori=1;
+}
+else
+
+for(Pana=0;Pana<=karina;)
+{
+ if(cad[Nico]==32 || cad[Nico]==9)
+  if(Maki==0 && Nico==0)
+  {
+  etiqueta[0]='\0';
+  Maki++;
+  Pana++;
+  }
+  else
+  if(cad[Nico]=='\0' && Maki==1)
+  {
+  codop[0]='\0';
+  operando[0]='\0';
+  Maki=100;
+  Pana++;
+  }
+  else
+  while(cad[Nico]==32 || cad[Nico]==9)
+  {
+   Nico++;
+   Pana++;
+  }
+ else
+ if(Maki==0)
+ {
+ Eli=0;
+            while(cad[Nico]!=32 && cad[Nico]!=9 && cad[Nico]!='\0')
+            {
+
+                if(cad[Nico]==0)
+                    ;
+                else
+                {
+                if((cad[Nico]>=48 && cad[Nico]<=57) || (cad[Nico]>=65 && cad[Nico]<=90) || (cad[Nico]>=97 && cad[Nico]<=122) || cad[Nico]==95)
+                ;
+                else
+                    ece++;
+                }
+                etiqueta[Eli]=cad[Nico];
+                Nico++;
+                Eli++;
+                Pana++;
+            }
+            etiqueta[Eli]='\0';
+            Maki++;
+ }
+ else
+ if(Maki==1)
+ {
+ Eli=0;
+            while(cad[Nico]!=32 && cad[Nico]!=9 && cad[Nico]!='\0')
+            {
+                if(cad[Nico]==0)
+                    ;
+                else
+                {
+                 if(cad[Nico]=='.')
+                    cde++;
+                if((cad[Nico]>=65 && cad[Nico]<=90) || (cad[Nico]>=97 && cad[Nico]<=122) || cad[Nico]=='.')
+                ;
+                else
+                    cce++;
+                }
+                codop[Eli]=cad[Nico];
+                Nico++;
+                Eli++;
+                Pana++;
+            }
+            codop[Eli]='\0';
+            Maki++;
+ }
+ else
+ if(Maki==2)
+  if(cad[Nico]=='\0')
+  {
+  operando[0]='\0';
+  Maki++;
+  Pana++;
+  }
+ else
+ {
+  Eli=0;
+            while(cad[Nico]!='\0')
+            {
+                operando[Eli]=cad[Nico];
+                Nico++;
+                Eli++;
+                Pana++;
+            }
+            operando[Eli]='\0';
+            Maki++;
+ }
+ if(Maki>=3)
+    break;
+}
+
+if(Kotori==0)
+{
+    if(etiqueta[0]=='\0')
+    printf("ETIQUETA = Null");
+else
+{
+ printf("ETIQUETA = %s",etiqueta);
+ karina=strlen(etiqueta);
+ if(karina>8)
+    printf("\n    Error: La longitud maxima de una etiqueta son 8 caracteres");
+ if(ece>0)
+    printf("\n    Error: Los caracteres validos en una etiqueta son letras, digitos\n           (0...9) y el guion bajo");
+ if((etiqueta[0]<65 || etiqueta[0]>90) && (etiqueta[0]<97 || etiqueta[0]>122))
+    printf("\n    Error: Las etiquetas solo pueden iniciar con letra");
+}
+    printf("\n");
+
+    if(codop[0]=='\0')
+    {
+     printf("CODOP = Null");
+     printf("\n     Error: No puede haber codigos de operacion vacios");
+    }
+else
+{
+    printf("CODOP = %s",codop);
+    karina=strlen(codop);
+ if(strcmpi(codop,"End")==0)
+    Honky++;
+ if(karina>5)
+    printf("\n    Error: La longitud maxima de un codigo de operacion es de 5 caracteres");
+ if(cde>1)
+    printf("\n    Error: Los codigos de operacion no pueden llevar mas de un '.'");
+if(cce>0)
+    printf("\n    Error: Los codigos de operacion solo pueden tener letras y '.'");
+ if((codop[0]<65 || codop[0]>90) && (codop[0]<97 || codop[0]>122))
+    printf("\n    Error: Los codigos de operacion solo pueden iniciar con letra");
+
+//parte dos
+cad3[0]='\0';
+    Mio=0;
+    c=0;
+    b=0;
+inh=inm=dir=ext=rel=idx=idx1=idx2=idx3=idx4=0;
+inhb=inmb=dirb=extb=relb=idxb=idx1b=idx2b=idx3b=idx4b=0;
+    if((yui=open("TABOP.txt",0))<0)
+     {
+         printf("           Error al abrir el archivo\n         Fin del programa");
+         exit(1);
+     }
+     else
+     do{
+            Mio=0;
+            ritsu=0;
+        while(read(yui,&Mugi,1)>0 && Mugi!='/')
+        {
+         cad3[Mio]=Mugi;
+         Mio++;
+        }
+        cad3[Mio]='\0';
+        if(strcmpi(codop,cad3)==0)
+        {
+            Sona=0;
+            do{
+            Mio=0;
+            while(read(yui,&Mugi,1)>0 && Mugi!='-' && Mugi!='|' && Mugi!='\0' && Mugi!='\n')
+                cad3[Mio++]=Mugi;
+
+            if(Mugi=='-')
+                cad3[Mio]='\0';
+              if(Mugi=='\0' || Mugi=='\n' || Mugi=='@')
+            break;
+            switch(Sona)
+            {
+            case 0:
+                if(cad3[0]==49)
+                    b=1;
+                else
+                    b=0;
+                Sona++;
+                break;
+            case 1:
+                printf("\n\tDireccionamiento %s",cad3);
+                strcpy(cad4,cad3);
+                if(strcmpi(cad3,"Inmediato")==0)
+                    inm=1;
+                    else
+                        if(strcmpi(cad3,"Inherente")==0)
+                        inh=1;
+                    else
+                        if(strcmpi(cad3,"Directo")==0)
+                        dir=1;
+                    else
+                        if(strcmpi(cad3,"Extendido")==0)
+                        ext=1;
+                    else
+                        if(strcmpi(cad3,"REL")==0)
+                        rel=1;
+                    else
+                        if(strcmpi(cad3,"IDX")==0)
+                        idx=1;
+                    else
+                        if(strcmpi(cad3,"IDX1")==0)
+                        idx1=1;
+                    else
+                        if(strcmpi(cad3,"IDX2")==0)
+                        idx2=1;
+                    else
+                        if(strcmpi(cad3,"[IDX2]")==0)
+                        idx3=1;
+                    else
+                        if(strcmpi(cad3,"[D,IDX]")==0)
+                        idx4=1;
+                Sona++;
+                break;
+            case 2:
+                printf("\n\t\tCodigo Maquina calculado: %s",cad3);
+                Sona++;
+                break;
+            case 3:
+                printf("\n\t\tBytes por calcular: %s",cad3);
+                Sona++;
+                break;
+            case 4:
+                printf("\n\t\tTotal de bytes: %s",cad3);
+                 if(strcmpi(cad4,"Inmediato")==0)
+                    inmb=atoi(cad3);
+                    else
+                        if(strcmpi(cad4,"Inherente")==0)
+                        inhb=atoi(cad3);
+                    else
+                        if(strcmpi(cad4,"Directo")==0)
+                        dirb=atoi(cad3);
+                    else
+                        if(strcmpi(cad4,"Extendido")==0)
+                        extb=atoi(cad3);
+                    else
+                        if(strcmpi(cad4,"REL")==0)
+                        relb=atoi(cad3);
+                    else
+                        if(strcmpi(cad4,"IDX")==0)
+                        idxb=atoi(cad3);
+                    else
+                        if(strcmpi(cad4,"IDX1")==0)
+                        idx1b=atoi(cad3);
+                    else
+                        if(strcmpi(cad4,"IDX2")==0)
+                        idx2b=atoi(cad3);
+                    else
+                        if(strcmpi(cad4,"[IDX2]")==0)
+                        idx3b=atoi(cad3);
+                    else
+                        if(strcmpi(cad4,"[D,IDX]")==0)
+                        idx4b=atoi(cad3);
+                Sona++;
+                break;
+            }
+            if(Mugi=='|')
+                {
+                    cad3[0]='\0';
+                    Sona=0;
+                    cde=0;
+                }
+
+        }while(Mio!=823);
+        c=1;
+        }
+            else
+                while(read(yui,&Mugi,1)>0 && Mugi!='\0' && Mugi!='\n')
+                ritsu++;
+     if(c==1)
+        break;
+     }while(ritsu>0);
+     close(yui);
+
+Eli=b+c;
+
+ if(Eli==0)
+ {
+    printf("\n  Error, no se encontro el codigo de operaciones <%s>",codop);
+    s=1;
+ }
+ else
+ if(Eli==1 && operando[0]!='\0')
+        printf("\n  Error, el codigo de operaciones <%s> no debe llevar operando",codop);
+    else
+        if(Eli==2 && operando[0]=='\0')
+        printf("\n  Error, el codigo de operaciones <%s> debe llevar operando",codop);
+//final parte dos
+}
+    printf("\n");
+
+    if(operando[0]=='\0')
+    printf("OPERANDO = Null\n");
+else
+    printf("OPERANDO = %s\n",operando);
+//Parte 3/*
+ece=0;
+Mio=0;
+for(w=0;w<strlen(operando);w++)
+{
+    if(operando[w]==',')
+        cce=1;
+    if(operando[w]=='[' || operando[w]== ']')
+        cde=1;
+}
+if(s>0)
+    ;
+else
+if(cce==1 && cde==0)
+    {
+        ece=0;
+     if(operando[0]==',' || operando[0]=='-' || (operando[0]>=48 && operando[0]<=57) || operando[0]=='a' || operando[0]=='A' || operando[0]=='b' || operando[0]=='B' || operando[0]=='d' || operando[0]=='D')
+           if(operando[0]==',')
+     {
+         Eli=0;
+         Pana=1;
+         while(operando[Pana]!='\0')
+         {
+             cad4[Eli]=operando[Pana];
+             if(operando[Pana]==',')
+             ece=1;
+             Pana++;
+             Eli++;
+         }
+         cad4[Eli]='\0';
+         if(ece==1)
+            printf(" Error, el direccionamiento indexado solo puede llevar una coma\n");
+         else
+            if(strcmpi(cad4,"x")==0 || strcmpi(cad4,"y")==0 || strcmpi(cad4,"sp")==0 || strcmpi(cad4,"pc")==0)
+            {
+            printf("Indexado de 5 bits, de %d bytes\n", idxb);
+            idx=2;
+            }
+            else
+                printf("    Los direccionamientos indexados de 5 bits deben de tener alguno de los siguientes registros\n\tde computadora validos: X, Y, SP, o PC");
+}
+     else
+        if(operando[0]=='-' || (operando[0]>=48 && operando[0]<=57))
+         if(operando[0]=='-')
+         {
+             Eli=0;
+            Pana=1;
+         while(operando[Pana]!=',')
+         {
+             cad4[Eli]=operando[Pana];
+             Pana++;
+             Eli++;
+         }
+         Nico=Pana+1;
+         cad4[Eli]='\0';
+         Pana=atoi(cad4);
+         Pana=Pana*-1;
+         if(Pana>=-16 && Pana<0)
+         {
+            Eli=0;
+            while(operando[Nico]!='\0')
+            {
+                cad4[Eli]=operando[Nico];
+                Nico++;
+                Eli++;
+                if(operando[Nico]==',')
+                    ece++;
+            }
+            cad4[Eli]='\0';
+            if(ece>=1)
+             printf(" Error, el direccionamiento indexado solo puede llevar una coma\n");
+            else
+            if(strcmpi(cad4,"x")==0 || strcmpi(cad4,"y")==0 || strcmpi(cad4,"sp")==0 || strcmpi(cad4,"pc")==0)
+            {
+            printf("Indexado de 5 bits, de %d bytes\n", idxb);
+            idx=2;
+            }
+            else
+                 printf("    Los direccionamientos indexados de 5 bits deben de tener alguno de los siguientes registros\n\tde computadora validos: X, Y, SP, o PC");
+         }
+         else
+        if((Pana>=-256 && Pana<=-17))
+        {
+            Eli=0;
+            while(operando[Nico]!='\0')
+            {
+                cad4[Eli]=operando[Nico];
+                Nico++;
+                Eli++;
+                if(operando[Nico]==',')
+                    ece++;
+            }
+            cad4[Eli]='\0';
+            if(ece>=1)
+             printf(" Error, el direccionamiento indexado solo puede llevar una coma\n");
+            else
+            if(strcmpi(cad4,"x")==0 || strcmpi(cad4,"y")==0 || strcmpi(cad4,"sp")==0 || strcmpi(cad4,"pc")==0)
+            {printf("Indexado de 9 bits, de %d bytes\n", idx1b);
+            idx1=2;
+            }
+            else
+                 printf("    Los direccionamientos indexados de 9 bits deben de tener alguno de los siguientes registros\n\tde computadora validos: X, Y, SP, o PC");
+        }
+        else
+            printf("Error, el rango para los indexados de 5 bits es de -16 a 15\n y el rango de los indexados de 9 bits es de -256 a -17, y de 16, a 255\n");
+         }
+     else
+     {
+            Eli=0;
+            Pana=0;
+         while(operando[Pana]!=',')
+         {
+             cad4[Eli]=operando[Pana];
+             Pana++;
+             Eli++;
+         }
+         Nico=Pana+1;
+         Maki=Nico;
+         cad4[Pana]='\0';
+         Pana=atoi(cad4);
+
+
+         if(Pana>=0 && Pana<=15)
+         {
+            Mio=0;
+            Eli=0;
+            while(operando[Nico]!='\0')
+            {
+                cad4[Eli]=operando[Nico];
+                if(operando[Nico]==',')
+                    ece++;
+                if(operando[Nico]=='-' || operando[Nico]=='+')
+                    Mio++;
+                    Nico++;
+                Eli++;
+            }
+            cad4[Eli]='\0';
+            if(ece>=1)
+             printf(" Error, el direccionamiento indexado solo puede llevar una coma\n");
+            else
+                if(Mio>0)
+                {
+                    if(Mio==1)
+                    {
+                        if(operando[Maki+1]=='\0')
+                                printf("    Error, los direccionamientos indexados de pre/post incremeneto deben tener un registro de computadora valio <X, Y, SP> despues o antes del signo\n");
+                            else
+                        if(operando[Maki]=='+')
+                        {
+                            Maki++;
+                            Eli=0;
+                            while(operando[Maki]!='\0')
+                            {
+                                cad4[Eli]=operando[Maki];
+                                Maki++;
+                                Eli++;
+                            }
+                            cad4[Eli]='\0';
+                            if(strcmpi(cad4,"x")==0 || strcmpi(cad4,"y")==0 || strcmpi(cad4,"sp")==0)
+            {printf("Indexado de 5 bits de auto pre incremento, de %d bytes\n", idxb);
+            idx=2;
+            }
+            else
+                printf("    Los direccionamientos indexados de auto pre/post decremento/incremento deben de tener alguno de los siguientes registros\n\tde computadora validos: X, Y, o SP");
+                        }
+                        else
+                            if(operando[Maki]=='-')
+                        {
+                           Maki++;
+                            Eli=0;
+                            while(operando[Maki]!='\0')
+                            {
+                                cad4[Eli]=operando[Maki];
+                                Maki++;
+                                Eli++;
+                            }
+                            cad4[Eli]='\0';
+                            if(strcmpi(cad4,"x")==0 || strcmpi(cad4,"y")==0 || strcmpi(cad4,"sp")==0)
+            {printf("Indexado de 5 bits de auto pre decremento, de %d bytes\n", idxb);
+            idx=2;
+            }
+            else
+                 printf("    Los direccionamientos indexados de auto pre/post decremento/incremento deben de tener alguno de los siguientes registros\n\tde computadora validos: X, Y, o SP");
+                        }
+                        else
+                        {
+                            Eli=0;
+                         while(operando[Maki]!='+' && operando[Maki]!='-')
+                            {
+                                cad4[Eli]=operando[Maki];
+                                Maki++;
+                                Eli++;
+                            }
+                            cad4[Eli]='\0';
+                            if(operando[Maki+1]!='\0')
+                                printf("    Error, sintaxis");
+                            else
+                            {
+                              if(strcmpi(cad4,"x")==0 || strcmpi(cad4,"y")==0 || strcmpi(cad4,"sp")==0)
+                                {
+                                if(operando[Maki]=='-')
+                              {printf("Indexado de 5 bits de auto post decremento, de %d bytes\n", idxb);
+                              idx=2;
+                              }
+                              else
+                              if(operando[Maki]=='+')
+                               {printf("Indexado de 5 bits de auto post incremento, de %d bytes\n", idxb);
+                               idx=2;
+                               }
+                                }
+                                else
+                               printf("    Los direccionamientos indexados de auto pre/post decremento/incremento deben de tener alguno de los siguientes registros\n\tde computadora validos: X, Y, o SP");
+                            }
+                        }
+                    }
+                    else
+                    printf("    Error, signos repetidos");
+                }
+                else
+            if(strcmpi(cad4,"x")==0 || strcmpi(cad4,"y")==0 || strcmpi(cad4,"sp")==0 || strcmpi(cad4,"pc")==0)
+            {printf("Indexado de 5 bits, de %d bytes\n", idxb);
+            idx=2;
+            }
+            else
+                 printf("    Los direccionamientos indexados de 5 bits deben de tener alguno de los siguientes registros\n\tde computadora validos: X, Y, SP, o PC");
+         }
+
+
+         else
+        if((Pana>=16 && Pana<=255))
+        {
+
+            Eli=0;
+            while(operando[Nico]!='\0')
+            {
+                cad4[Eli]=operando[Nico];
+                if(operando[Nico]==',')
+                    ece++;
+                if(operando[Nico]=='-' || operando[Nico]=='+')
+                    Mio++;
+                    Nico++;
+                    Eli++;
+            }
+            cad4[Eli]='\0';
+            if(ece>=1)
+             printf(" Error, el direccionamiento indexado solo puede llevar una coma\n");
+            else
+                if(Mio>0)
+                printf("Error, los direccionamientos indexados de pre/post incremento/decremento solo pueden llevar en el operando, numeros decimales con un rango de 1 a 8");
+            else
+            if(strcmpi(cad4,"x")==0 || strcmpi(cad4,"y")==0 || strcmpi(cad4,"sp")==0 || strcmpi(cad4,"pc")==0)
+            {printf("Indexado de 9 bits, de %d bytes\n", idx1b);
+            idx1=2;
+            }
+            else
+                 printf("    Los direccionamientos indexados de 9 bits deben de tener alguno de los siguientes registros\n\tde computadora validos: X, Y, SP, o PC");
+        }
+        else
+        if((Pana>=256 && Pana<=65535))
+        {
+            Eli=0;
+            while(operando[Nico]!='\0')
+            {
+                cad4[Eli]=operando[Nico];
+                if(operando[Nico]==',')
+                    ece++;
+                if(operando[Nico]=='-' || operando[Nico]=='+')
+                    Mio++;
+                    Nico++;
+                    Eli++;
+            }
+            cad4[Eli]='\0';
+            if(ece>=1)
+             printf(" Error, el direccionamiento indexado solo puede llevar una coma\n");
+            else
+                if(Mio>0)
+                printf("Error, los direccionamientos indexados de pre/post incremento/decremento solo pueden llevar en el operando, numeros decimales con un rango de 1 a 8");
+            else
+            if(strcmpi(cad4,"x")==0 || strcmpi(cad4,"y")==0 || strcmpi(cad4,"sp")==0 || strcmpi(cad4,"pc")==0)
+            {printf("Indexado de 16 bits, de %d bytes\n", idx2b);
+            idx2=2;
+            }
+            else
+                 printf("    Los direccionamientos indexados de 16 bits deben de tener alguno de los siguientes registros\n\tde computadora validos: X, Y, SP, o PC\n");
+        //
+         }
+         else
+            printf("Error, el rango de los indexados de 9 bits es de -256 a -17 y de 16 a 255\n y el rango de los indexados de 16 bits es de 0 na 65535\n");
+     }
+else
+{
+        Eli=0;
+        Pana=0;
+         while(operando[Pana]!=',')
+         {
+             cad4[Eli]=operando[Pana];
+             Pana++;
+             Eli++;
+         }
+         cad4[Eli]='\0';
+          if(strcmpi(cad4,"A")==0 || strcmpi(cad4,"B")==0 || strcmpi(cad4,"d")==0)
+          {
+             Eli=0;
+             Pana++;
+            while(operando[Pana]!='\0')
+            {
+                cad4[Eli]=operando[Pana];
+                Pana++;
+                Eli++;
+                if(operando[Pana]==',')
+                    ece++;
+          }
+          cad4[Eli]='\0';
+          if(ece>=1)
+             printf(" Error, el direccionamiento indexado solo puede llevar una coma\n");
+            else
+            if(strcmpi(cad4,"x")==0 || strcmpi(cad4,"y")==0 || strcmpi(cad4,"sp")==0 || strcmpi(cad4,"pc")==0)
+            {printf("Indexado de acumulador, de %d bytes\n", idxb);
+            idx=2;
+            }
+            else
+                 printf("    Los direccionamientos indexados de acumulador deben de tener alguno de los siguientes registros\n\tde computadora validos: X, Y, SP, o PC");
+          //elseprintf("    Error de sintaxis");
+}
+else
+    printf("    Error de sintaxis, los direccionamientos indexados solo pueden iniciar con numeros decimales, signo menos corchetes, o las letras a, b o d");
+    }
+
+//final de la parte 3 */
+else
+    printf("    Error de sintaxis, los direccionamientos indexados solo pueden iniciar con numeros decimales, signo menos corchetes, o las letras a, b o d");
+}
+else
+ if(cde==1)
+    if(operando[1]=='\0')
+printf("Error, corchete solo.\nla sintaxis de los direccionamientos indexados indirectos es la siguiente:\n\t\t corchete, 'corchete'+valor numerico decimal +','+ registro de computadora valido <x,y,sp,pc> + 'corchete'\n");
+     else
+    if(cce==0)
+    printf("la sintaxis de los direccionamientos indexados indirectos es la siguiente:\n\t\t corchete, 'corchete'+valor numerico decimal +','+ registro de computadora valido <x,y,sp,pc> + 'corchete'\n\n");
+    else
+     if(operando[0]=='[')
+     {
+         Sona=0;
+         w=0;
+         Eli=0;
+         Pana=1;
+         while(operando[Pana]!=',')
+         {
+             cad4[Eli]=operando[Pana];
+             if(operando[Pana]>=48 && operando[Pana]<=57)
+                ;
+                else
+             if(operando[Pana]==']')
+                Sona++;
+                else
+             if(operando[Pana]=='[')
+                w++;
+                else
+                ece++;
+            Pana++;
+             Eli++;
+         }
+         cad4[Eli]='\0';
+         if(w>0)
+            printf("    Error de sintaxis, en los direccionamientos indexados indirectos no puede haber mas de un corchete de apertura\n");
+         else
+            if(Sona>0)
+            {
+            printf("    Error de sintaxis, en los direccionamientos indexados indirectos no se puede cerrar corchetes, si aun hay caracteres.\n");
+            printf("    Error, la sintaxis de los direccionamientos indexados indirectos es la siguiente:\n\t\t corchete, 'corchete'+valor numerico decimal +','+ registro de computadora valido <x,y,sp,pc> + 'corchete'\n");
+            }
+         else
+            if(ece>0)
+                if((strcmpi(cad4, "a")==0) || (strcmpi(cad4, "b")==0) || (strcmpi(cad4, "d")==0))
+                {
+                   Sona=0;
+         w=0;
+         Eli=0;
+         Pana++;
+         while(operando[Pana]!='\0')
+         {
+             cad4[Eli]=operando[Pana];
+             if(operando[Pana]==']')
+                Sona++;
+                else
+             if(operando[Pana]=='[')
+                w++;
+                Pana++;
+                Eli++;
+         }
+         cad4[Eli-Sona-w]='\0';
+         if(w>0)
+            printf("    Error de sintaxis, en los direccionamientos indexados indirectos no puede haber mas de un corchete de apertura\n");
+         else
+            if(Sona==0)
+            {
+            printf("    Error de sintaxis, no se esncontro el corchete de cierre.\n");
+            printf("    Error, la sintaxis de los direccionamientos indexados indirectos es la siguiente:\n\t\t corchete, 'corchete'+valor numerico decimal +','+ registro de computadora valido <x,y,sp,pc> + 'corchete'\n");
+            }
+         else
+            if(Sona>1)
+             printf("    Error de sintaxis, en los direccionamientos indexados de acumulador indirectos no se puede habermas d un corchete de cierre.\n");
+         else
+         {
+             if(strcmpi(cad4,"x")==0 || strcmpi(cad4,"y")==0 || strcmpi(cad4,"sp")==0 || strcmpi(cad4,"pc")==0)
+            {printf("Indexado de acumulador indirecto, de %d bytes\n", idx4b);
+            idx4=2;
+            }
+            else
+                 printf("    Los direccionamientos indexados de acumulador indirecto deben de tener alguno de los siguientes registros\n\tde computadora validos: X, Y, SP, o PC");
+         }
+                }
+                else
+             printf("    Error, la sintaxis de los direccionamientos indexados indirectos es la siguiente:\n\t\t corchete, 'corchete'+valor numerico decimal +','+ registro de computadora valido <x,y,sp,pc> + 'corchete'\n");
+         else
+         {
+             Nico=atoi(cad4);
+             if(Nico>=0 && Nico<=65535)
+             {
+        Sona=0;
+         w=0;
+         Eli=0;
+         Pana++;
+         while(operando[Pana]!='\0')
+         {
+             cad4[Eli]=operando[Pana];
+             if(operando[Pana]==']')
+                Sona++;
+                else
+             if(operando[Pana]=='[')
+                w++;
+             Pana++;
+             Eli++;
+         }
+         cad4[Eli-Sona-w]='\0';
+         if(w>0)
+            printf("    Error de sintaxis, en los direccionamientos indexados indirectos no puede haber mas de un corchete de apertura\n");
+         else
+            if(Sona==0)
+            {
+            printf("    Error de sintaxis, no se esncontro el corchete de cierre.\n");
+            printf("    Error, la sintaxis de los direccionamientos indexados indirectos es la siguiente:\n\t\t corchete, 'corchete'+valor numerico decimal +','+ registro de computadora valido <x,y,sp,pc> + 'corchete'\n");
+            }
+         else
+            if(Sona>1)
+             printf("    Error de sintaxis, en los direccionamientos indexados indirectos no se puede habermas d un corchete de cierre.\n");
+         else
+         {
+             if(strcmpi(cad4,"x")==0 || strcmpi(cad4,"y")==0 || strcmpi(cad4,"sp")==0 || strcmpi(cad4,"pc")==0)
+            {printf("Indexado indexado de 16 bits, de %d bytes\n", idx3b);
+            idx3=2;
+            }
+            else
+                 printf("    Los direccionamientos indexados de acumulador deben de tener alguno de los siguientes registros\n\tde computadora validos: X, Y, SP, o PC");
+         }
+         }
+         else
+            printf("Error, el rango para los direccionamientos indexados indirectos es de 0 a 65535");
+     }
+     }
+     else
+        printf("    Error de sintaxis, los indexados inderectos comienzan con corchete\n");
+///pink ward
+if(cce==0 && cde==0)
+{
+  if(operando[0]=='\0')
+{
+   if(inh==1)
+        {printf("  Inherente, de %d bytes\n",inhb);
+        inh=2;
+        }
+}
+else
+    if(operando[0]=='#')
+{
+    if(operando[1]=='$')
+    {
+        if(operando[2]=='\0')
+        {
+           printf(" Error, la sintaxis para un numero hexadecimal es:\n\t$ seguido de digitos y/o letras (A-F)\n");
+           errbase=1;
+        }
+
+        else
+        {
+        Sona=0;
+        for(Pana=2;Pana<strlen(operando);Pana++)
+        {
+            if((operando[Pana]>=48 && operando[Pana]<=57) || (operando[Pana]>=65 && operando[Pana]<=70) || (operando[Pana]>=97 && operando[Pana]<=102))
+            {
+            cad4[Sona]=operando[Pana];
+            Sona++;
+            }
+        else
+            ece=1;
+        }
+        cad4[Sona]='\0';
+        if(ece==1)
+           {
+               printf(" Error, la sintaxis para un numero hexadecimal es:\n\t$ seguido de digitos y/o letras (A-F)\n");
+               errbase=1;
+           }
+        else
+            {
+             Pana=hex(cad4);
+       if(Pana>=0 && Pana<=255)
+           {
+           if(inmb==2)
+            {
+                printf(" Inmediato de 8 bits, de %d bytes\n",inmb);
+            inm=2;
+            }
+            else
+            if(inmb==3)
+            {
+            printf(" Inmediato de 16 bits, de %d bytes\n",inmb);
+            inm=2;
+            }
+            }
+        else
+          if(Pana>=0 && Pana<=65535)
+            {
+           if(inmb==2)
+            printf(" Error, el rango de un imediato de 8 bits es de 0 a 255\n");
+            else
+            if(inmb==3)
+            {printf(" Inmediato de 16 bits, de %d bytes\n",inmb);
+            inm=2;
+            }
+            }
+            else
+            printf("\n Error, el rango de un imediato de 8 bits es de 0 a 255,\n y el rango de un inmediato de 16 bits es de 0 a 65535");
+            }
+        }
+    }
+    else
+    if(operando[1]=='%')
+    {
+        if(operando[2]=='\0')
+        {
+            printf(" Error, la sintaxis para un numero binario es:\n\t <simbolo de porcentaje> seguido de los digitos 0 y 1\n");
+            errbase=1;
+        }
+        else
+        {
+        Sona=0;
+        for(Pana=2;Pana<strlen(operando);Pana++)
+        {
+            if(operando[Pana]=='0' || operando[Pana]=='1')
+            {
+            cad4[Sona]=operando[Pana];
+            Sona++;
+            }
+        else
+            ece=1;
+        }
+        cad4[Sona]='\0';
+        if(ece==1)
+            {
+                printf(" Error, la sintaxis para un numero binario es:\n\t <simbolo de porcentaje> seguido de los digitos 0 y 1\n");
+                errbase=1;
+            }
+            else
+            {
+                  Pana=base(cad4,2);
+       if(Pana>=0 && Pana<=255)
+           {
+           if(inmb==2)
+            {printf(" Inmediato de 8 bits, de %d bytes\n",inmb);
+            inm=2;
+            }
+            else
+            if(inmb==3)
+            {printf(" Inmediato de 16 bits, de %d bytes\n",inmb);
+            inm=2;
+            }
+            }
+        else
+          if(Pana>=0 && Pana<=65535)
+            {
+           if(inmb==2)
+            printf(" Error, el rango de un imediato de 8 bits es de 0 a 255\n");
+            else
+            if(inmb==3)
+            {printf(" Inmediato de 16 bits, de %d bytes\n",inmb);
+            inm=2;
+            }
+            }
+            else
+            printf(" Error, el rango de un imediato de 8 bits es de 0 a 255,\n y el rango de un inmediato de 16 bits es de 0 a 65535\n");
+            }
+    }
+    }
+    else
+    if(operando[1]=='@')
+    {
+        if(operando[2]=='\0')
+            {
+                printf(" Error, la sintaxis para un numero octal es:\n\t @ seguido de los digitos del 0 al 7\n");
+                errbase=1;
+            }
+        else
+        {
+        Sona=0;
+        for(Pana=2;Pana<strlen(operando);Pana++)
+        {
+            if(operando[Pana]>=48 && operando[Pana]<=55)
+            {
+            cad4[Sona]=operando[Pana];
+            Sona++;
+            }
+        else
+            ece=1;
+        }
+        cad4[Sona]='\0';
+        if(ece==1)
+            {
+                printf(" Error, la sintaxis para un numero octal es:\n\t @ seguido de los digitos del 0 al 7\n");
+                errbase=1;
+            }
+            else
+            {
+                  Pana=base(cad4,8);
+       if(Pana>=0 && Pana<=255)
+           {
+           if(inmb==2)
+            {printf(" Inmediato de 8 bits, de %d bytes\n",inmb);
+            inm=2;
+            }
+            else
+            if(inmb==3)
+            {printf(" Inmediato de 16 bits, de %d bytes\n",inmb);
+            inm=2;
+            }
+            }
+        else
+          if(Pana>=0 && Pana<=65535)
+            {
+           if(inmb==2)
+            printf(" Error, el rango de un imediato de 8 bits es de 0 a 255\n");
+            else
+            if(inmb==3)
+            {printf(" Inmediato de 16 bits, de %d bytes\n",inmb);
+            inm=2;
+            }
+            }
+        else
+            printf(" Error, el rango de un imediato de 2 bytes es de 0 a 255,\n y el rango de un inmediato de 3 bytes es de 0 a 65535\n");
+            }
+    }
+    }
+    else
+    {
+        if(operando[1]=='\0')
+           {
+               printf("Error, la sintaxis de los direccionamientos inmediatos es: <#> seguido de algun simbolo de base numereica, con sus correspondientes valores numericos; o numeros enteros positivos\n");
+               errbase=1;
+           }
+        else
+        if(operando[1]=='-')
+            printf(" Error, el rango de un imediato de 8 bits es de 0 a 255,\n y el rango de un inmediato de 16 bits es de 0 a 65535\n");
+        else
+        {
+        Sona=0;
+        for(Pana=1;Pana<strlen(operando);Pana++)
+        {
+            if(operando[Pana]>=48 && operando[Pana]<=57)
+            {
+            cad4[Sona]=operando[Pana];
+            Sona++;
+            }
+        else
+            ece=1;
+        }
+        cad4[Sona]='\0';
+        if(ece==1)
+            {
+                printf(" Error, la sintaxis para un numero decimal son los digitos del 0 al 9\n");
+                errbase=1;
+            }
+            else
+            {
+                  Pana=atoi(cad4);
+       if(Pana>=0 && Pana<=255)
+           {
+           if(inmb==2)
+            {printf(" Inmediato de 8 bits, de %d bytes\n",inmb);
+            inm=2;
+            }
+            else
+            if(inmb==3)
+            {printf(" Inmediato de 16 bits, de %d bytes\n",inmb);
+            inm=2;
+            }
+            }
+        else
+          if(Pana>=0 && Pana<=65535)
+            {
+           if(inmb==2)
+            printf(" Error, el rango de un imediato de 8 bits es de 0 a 255\n");
+            else
+            if(inmb==3)
+            {printf(" Inmediato de 16 bits, de %d bytes\n",inmb);
+            inm=2;
+            }
+            }
+        else
+            printf(" Error, el rango de un imediato de 8 bits es de 0 a 255,\n y el rango de un inmediato de 16 bits es de 0 a 65535\n");
+            }
+    }
+    }
+}
+else
+    if((operando[0]=='$' || operando[0]=='%' || operando[0]=='@' || (operando[0]>=48 && operando[0]<=57) || (operando[0]>=65 && operando[0]<=90) || (operando[0]>=97 && operando[0]<=122)))
+{
+   if(operando[0]=='$')
+    {
+        if(operando[1]=='\0')
+            {
+                printf(" Error, la sintaxis para un numero hexadecimal es:\n\t$ seguido de digitos y/o letras (A-F)\n");
+                errbase=1;
+            }
+        else
+        {
+        Sona=0;
+        for(Pana=1;Pana<strlen(operando);Pana++)
+        {
+            if((operando[Pana]>=48 && operando[Pana]<=57) || (operando[Pana]>=65 && operando[Pana]<=70) || (operando[Pana]>=97 && operando[Pana]<=102))
+            {
+            cad4[Sona]=operando[Pana];
+            Sona++;
+            }
+        else
+            ece=1;
+        }
+        cad4[Sona]='\0';
+        if(ece==1)
+            {
+                printf("\n Error, la sintaxis para un numero hexadecimal es:\n\t$ seguido de digitos y/o letras (A-F)");
+                errbase=1;
+            }
+        else
+            {
+             Pana=hex(cad4);
+       if(Pana>=0 && Pana<=255)
+           {
+               if(dir==1)
+            {printf(" Directo, de %d bytes\n",dirb);
+            dir=2;
+            }
+            else
+                if(dir==0 && s==0)
+                printf(" Error, el codigo de opreaciones %s, no soporta el direccionamiento directo\n",codop);
+            else
+                if(s==0)
+            printf(" Error, el rango de un direccionamiento directo es de 0 a 255\n");
+            }
+        else
+          if(Pana>=256 && Pana<=65535)
+            {
+           if(ext==1)
+            {printf(" Extendido, de %d bytes\n",extb);
+            ext=2;
+            }
+            else
+                if(ext==0 && s==0)
+            printf(" Error, el codigo de opreaciones %s, no soporta el direccionamiento extendido\n",codop);
+            }
+            else
+                if(s==0)
+            printf(" Error, el rango de un direccionamiento extendido es de 256 a 65535\n");
+            }
+        }
+
+    }
+    else
+    if(operando[0]=='%')
+    {
+        if(operando[1]=='\0')
+           {
+               printf(" Error, la sintaxis para un numero binario es:\n\t <simbolo de porcentaje> seguido de los digitos 0 y 1\n");
+               errbase=1;
+           }
+        else
+        {
+        Sona=0;
+        for(Pana=1;Pana<strlen(operando);Pana++)
+        {
+            if(operando[Pana]=='0' || operando[Pana]=='1')
+            {
+            cad4[Sona]=operando[Pana];
+            Sona++;
+            }
+        else
+            ece=1;
+        }
+        cad4[Sona]='\0';
+        if(ece==1)
+            {
+                printf(" Error, la sintaxis para un numero binario es:\n\t% seguido de los digitos 0 y 1\n");
+                errbase=1;
+            }
+            else
+            {
+                  Pana=base(cad4,2);
+       if(Pana>=0 && Pana<=255)
+           {
+           if(dir==1)
+            {printf(" Directo, de %d bytes\n",dirb);
+            dir=2;
+            }
+            else
+                if(dir==0 && s==0)
+            printf(" Error, el codigo de opreaciones %s, no soporta el direccionamiento directo\n",codop);
+            }
+        else
+            if(Pana>=256 && Pana<=65535)
+            {
+           if(ext==1)
+            {printf(" Extendido, de %d bytes\n",extb);
+            ext=2;
+            }
+            else
+                if(ext==0 && s==0)
+            printf("\n Error, el codigo de opreaciones %s, no soporta el direccionamiento extendido",codop);
+            }
+            else
+                if(s==0)
+            printf("\n Error, el rango de un direccionamiento extendido es de 256 a 65535");
+            }
+    }
+
+    }
+    else
+    if(operando[0]=='@')
+    {
+        if(operando[1]=='\0')
+            {
+                printf(" Error, la sintaxis para un numero octal es:\n\t @ seguido de los digitos del 0 al 7\n");
+                errbase=1;
+            }
+        else
+        {
+        Sona=0;
+        for(Pana=1;Pana<strlen(operando);Pana++)
+        {
+            if(operando[Pana]>=48 && operando[Pana]<=55)
+            {
+            cad4[Sona]=operando[Pana];
+            Sona++;
+            }
+        else
+            ece=1;
+        }
+        cad4[Sona]='\0';
+        if(ece==1)
+            {
+                printf(" Error, la sintaxis para un numero octal es:\n\t @ seguido de los digitos del 0 al 7\n");
+                errbase=1;
+            }
+            else
+            {
+                  Pana=base(cad4,8);
+       if(Pana>=0 && Pana<=255)
+           {
+           if(dir==1)
+            {printf(" Directo, de %d bytes\n",dirb);
+            dir=2;
+            }
+            else
+                if(dir==0 && s==0)
+            printf(" Error, el codigo de opreaciones %s, no soporta el direccionamiento directo\n",codop);
+            }
+        else
+            if(Pana>=256 && Pana<=65535)
+            {
+           if(ext==1)
+            {printf(" Extendido, de %d bytes\n",extb);
+            ext=2;
+            }
+            else
+                if(ext==0 && s==0)
+            printf(" Error, el codigo de opreaciones %s, no soporta el direccionamiento extendido\n",codop);
+            }
+            else
+                if(s==0)
+            printf(" Error, el rango de un direccionamiento extendido es de 256 a 65535\n");
+            }
+    }
+    }
+    else
+    if(operando[0]>=48 && operando[0]<=57)
+    {
+        Sona=0;
+        for(Pana=0;Pana<strlen(operando);Pana++)
+        {
+            if(operando[Pana]>=48 && operando[Pana]<=57)
+            {
+            cad4[Sona]=operando[Pana];
+            Sona++;
+            }
+        else
+            ece=1;
+        }
+        cad4[Sona]='\0';
+        if(ece==1)
+            {
+                printf(" Error, la sintaxis para un numero decimal son los digitos del 0 al 9\n");
+                errbase=1;
+            }
+            else
+            {
+                  Pana=atoi(cad4);
+       if(Pana>=0 && Pana<=255)
+           {
+           if(dir==1)
+            {printf(" Directo, de %d bytes\n",dirb);
+            dir=2;
+            }
+            else
+                if(dir==0 && s==0)
+            printf(" Error, el codigo de opreaciones %s, no soporta el direccionamiento directo\n",codop);
+            }
+        else
+            if(Pana>=256 && Pana<=65535)
+            {
+           if(ext==1)
+            {printf(" Extendido, de %d bytes\n",extb);
+            ext=2;
+            }
+            else
+                if(ext==0 && s==0)
+            printf(" Error, el codigo de opreaciones %s, no soporta el direccionamiento extendido\n",codop);
+            }
+            else
+                if(s==0)
+            printf(" Error, el rango de un direccionamiento directo es de 0 a 255\n      y el rango de un direccionamiento extendido es de 256 a 65535\n");
+            }
+    }
+    else
+    {
+        if((operando[0]>=65 && operando[0]<=90) || (operando[0]>=97 && operando[0]<=122))
+        {
+           for(Pana=0;Pana<strlen(operando);Pana++)
+             if((operando[Pana]>=48 && operando[Pana]<=57) || (operando[Pana]>=65 && operando[Pana]<=90) || (operando[Pana]>=97 && operando[Pana]<=122) || operando[Pana]==95)
+             ;
+        else
+            ece=1;
+karina=strlen(operando);
+if(karina>8)
+    if(ext==1)
+    printf("    Error, el operando de un extendido debe de tener una longitud menor o igual a 8\n");
+else
+    if(rel==1)
+    printf("    Error, el operando de un relativo debe de tener una longitud menor o igual a 8\n");
+     if(ece==1 && ext==1)
+        printf(" Error, la sintaxis del operando de un direccionamiento extendido es:\n\tBase numerica+ digitos y/o letras validas, segun la base.\n\tO bien: letra mayuscula o minuscula + letras, digitos y/o guiones bajos.\n");
+    else
+    if(ece==0 && (rel==0 && ext==1))
+        {printf(" Extendido, de %d bytes\n", extb);
+        ext=2;
+        }
+    else
+    if(ece==1 && rel==1)
+     printf(" Error, la sintaxis del operando de un direccionamiento relativo es:\n\tLetra mayuscula o minuscula + letras, digitos y/o guiones bajos.");
+    else
+        if(ece==0 && (rel==1 && ext==0))
+        {
+            if(relb==2)
+         {printf(" Relativo de 8 bits, de %d bytes\n",relb);
+         rel=2;
+         }
+         if(relb==4)
+         {printf(" Relativo de 16 bits, de %d bytes\n",relb);
+         rel=2;
+         }
+        }
+        }
+        else
+            if(ext==1)
+            printf("    Error, la sintaxis del operando de un direccionamiento extendido es:\n      Base numerica+ digitos y/o letras validas, segun la base.\n\tO bien: letra mayuscula o minuscula + letras, digitos y/o guiones bajos.\n");
+            else
+            if(rel==1)
+            printf("    Error, la sintaxis del operando de un direccionamiento relativo es:\n      Letra mayuscula o minuscula + letras, digitos y/o guiones bajos.\n");
+    }
+}
+else
+    if(operando[0]=='-')
+    printf("    Error, los direccionamientos directos no admiten numeros negativos\n");
+    else
+        if(operando[0]=='-')
+    printf("    Error, los direccionamientos directos son numeros naturales,\n      y no hay necesidad de poner signos positivos\n");
+}
+
+///parte cuatro
+int errdire=0;
+if(operando[0]=='$')
+{
+    Nico=1;
+    Maki=0;
+    while(Nico<strlen(operando))
+    {
+        if((operando[Nico]>=48 && operando[Nico]<=57) || (operando[Nico]>=65 && operando[Nico]<=70) || (operando[Nico]>=97 && operando[Nico]<=102))
+        cad3[Maki]=operando[Nico];
+        else
+            errbase=1;
+        Maki++;
+        Nico++;
+    }
+    cad3[Maki]='\0';
+Pana=hex(cad3);
+}
+else
+    if(operando[0]=='@')
+{
+    Nico=1;
+    Maki=0;
+    while(Nico<strlen(operando))
+    {
+        if((operando[Nico]>=48 && operando[Nico]<=55))
+            {
+            cad3[Maki]=operando[Nico];
+            }
+        else
+            errbase=1;
+        Maki++;
+        Nico++;
+    }
+    cad3[Maki]='\0';
+Pana=base(cad3,8);
+}
+else
+    if(operando[0]=='%')
+{
+        Nico=1;
+    Maki=0;
+    while(Nico<strlen(operando))
+    {
+        if(operando[Nico]==48 || operando[Nico]==49)
+        cad3[Maki]=operando[Nico];
+        else
+            errbase=1;
+        Maki++;
+        Nico++;
+    }
+    cad3[Maki]='\0';
+Pana=base(cad3,2);
+}
+else
+        if(operando[0]=='#')
+{
+ if(operando[1]=='$' || operando[1]=='@' || operando[1]=='%')
+ {
+  if(operando[1]=='$')
+  {
+      Nico=2;
+    Maki=0;
+    while(Nico<strlen(operando))
+    {
+        if((operando[Nico]>=48 && operando[Nico]<=57) || (operando[Nico]>=65 && operando[Nico]<=70) || (operando[Nico]>=97 && operando[Nico]<=102))
+        cad3[Maki]=operando[Nico];
+        else
+            errbase=1;
+        Maki++;
+        Nico++;
+    }
+    Pana=hex(cad3);
+  }
+  else
+    if(operando[1]=='@')
+  {
+      Nico=2;
+    Maki=0;
+    while(Nico<strlen(operando))
+    {
+        if((operando[Nico]>=48 && operando[Nico]<=55))
+            {
+            cad3[Maki]=operando[Nico];
+            }
+        else
+            errbase=1;
+        Maki++;
+        Nico++;
+    }
+    Pana=base(cad3,8);
+  }
+  else
+    if(operando[1]=='%')
+  {
+     Nico=2;
+    Maki=0;
+    while(Nico<strlen(operando))
+    {
+        if(operando[Nico]==48 || operando[Nico]==49)
+        cad3[Maki]=operando[Nico];
+        else
+            errbase=1;
+        Maki++;
+        Nico++;
+    }
+    Pana=base(cad3,2);
+  }
+  else
+  {
+    Nico=2;
+    Maki=0;
+    while(Nico<strlen(operando))
+    {
+        if(operando[Nico]>=48 || operando[Nico]<=57)
+        cad3[Maki]=operando[Nico];
+        else
+            errbase=1;
+        Maki++;
+        Nico++;
+    }
+    Pana=atoi(cad3);
+  }
+
+ }
+ else
+        Nico=1;
+    Maki=0;
+    while(Nico<strlen(operando))
+    {
+        cad3[Maki]=operando[Nico];
+        Maki++;
+        Nico++;
+    }
+    cad3[Maki]='\0';
+Pana=atoi(cad3);
+}
+else
+Pana=atoi(operando);
+if(strcmpi(codop,"EQU")==0)
+{
+    if(etiqueta[0]=='\0')
+    {
+     printf("Error, la directiva EQU debe llevar una etiqueta\n");
+     errdire=1;
+    }
+    if(operando[0]=='\0')
+    {
+     printf("Error, la directiva EQU debe llevar operando\n");
+     errdire=1;
+    }
+    if(Pana<0 || Pana>65535)
+    {
+     printf("Error, la directiva EQU debe tener un operando con valor entre 0 y 65535\n");
+     errdire=1;
+    }
+    ///conversion a hexa
+    residuo=Pana;
+ centinela=3;
+ do
+{
+ modulo=residuo%16;
+ residuo=residuo/16;
+ if(modulo<10)
+ hexa[centinela]=48+modulo;
+ else
+    hexa[centinela]=d[modulo-10];
+centinela--;
+}
+ while(residuo!=0);
+ if(centinela>=0)
+    while(centinela>=0)
+    {
+      hexa[centinela]=48;
+      centinela--;
+    }
+hexa[4]='\0';
+///escribe la directiva
+if(errdire==0 && errbase==0)
+{
+ k=fopen("temporal.txt","at");
+fwrite(hexa,sizeof(char),strlen(hexa),k);
+fputs("/",k);
+if(etiqueta[0]=='\0')
+    fputs("NULL",k);
+else
+fwrite(etiqueta,sizeof(char),strlen(etiqueta),k);
+fputs("|",k);
+fwrite(codop,sizeof(char),strlen(codop),k);
+fputs("|",k);
+if(operando[0]=='\0')
+    fputs("NULL",k);
+else
+fwrite(operando,sizeof(char),strlen(operando),k);
+fputs("|",k);
+fputs("\n",k);
+fclose(k);
+
+///etiquetas
+    ///busqueda de etiquetas
+k=open("TABSIM.txt",0);
+do{
+            cad3[0]='\0';
+            c=0;
+            Mio=0;
+            ritsu=0;
+        while(read(k,&Mugi,1)>0 && (Mugi!='/' && Mugi!='\0'))
+        {
+            cad3[Mio]=Mugi;
+            Mio++;
+        }
+        cad3[Mio]='\0';
+        if(strcmpi(etiqueta,cad3)==0 && etiqueta[0]!='\0')
+        {
+            c=1;
+            printf("Error, no puede haber etiquetas repetidas");
+        }
+else
+                while(read(k,&Mugi,1)>0 && Mugi!='\0' && Mugi!='\n')
+                ritsu++;
+     if(c==1)
+        break;
+     }while(ritsu>0);
+close(k);
+
+///Si no existió error en las etiquetas
+if(c==0 && etiqueta[0]!='\0')
+{
+ k=fopen("TABSIM.txt","at");
+fwrite(etiqueta,sizeof(char),strlen(etiqueta),k);
+fputs("/",k);
+fwrite(hexa,sizeof(char),strlen(hexa),k);
+fputs("|",k);
+fputs("\n",k);
+fclose(k);
+}
+}
+else
+    if(errbase==1)
+printf("Error en la base numerica\n");
+}
+else
+if(strcmpi(codop,"org")==0)
+{
+ org++;
+if(org>1)
+    {
+     printf("Error, solo puede existir una directiva llamada ORG\n");
+     errdire=1;
+    }
+else
+    if(operando[0]=='\0')
+         {
+            printf("Error, la directiva ORG debe tener operando\n");
+            dir_ini=0;
+            cont_loc=0;
+            residuo=dir_ini;
+            centinela=3;
+            do
+{
+ modulo=residuo%16;
+ residuo=residuo/16;
+ if(modulo<10)
+ hexa[centinela]=48+modulo;
+ else
+    hexa[centinela]=d[modulo-10];
+centinela--;
+}
+ while(residuo!=0);
+ if(centinela>=0)
+    while(centinela>=0)
+    {
+      hexa[centinela]=48;
+      centinela--;
+    }
+hexa[4]='\0';
+            Mio=fopen("di.txt","w");
+            fwrite(hexa,sizeof(char),strlen(hexa),Mio);
+            fclose(Mio);
+            Mio=fopen("cl.txt","w");
+            fwrite(hexa,sizeof(char),strlen(hexa),Mio);
+            fclose(Mio);
+if(etiqueta[0]!= '\0')
+{
+ printf("Error, la directiva ORG no lleva etiqueta\n");
+ etiqueta[0]='\0';
+}
+            ///escribe en el temporal
+if(errdire==0)
+ {k=fopen("temporal.txt","at");
+fwrite(hexa,sizeof(char),strlen(hexa),k);
+fputs("/",k);
+if(etiqueta[0]=='\0')
+    fputs("NULL",k);
+else
+fwrite(etiqueta,sizeof(char),strlen(etiqueta),k);
+fputs("|",k);
+fwrite(codop,sizeof(char),strlen(codop),k);
+fputs("|",k);
+if(operando[0]=='\0')
+    fputs("NULL",k);
+else
+fwrite(operando,sizeof(char),strlen(operando),k);
+fputs("|",k);
+fputs("\n",k);
+fclose(k);}
+         }
+        else
+            {
+            if(Pana<0 && Pana>65535)
+            {
+             printf("Error, la directiva ORG debe tener un rango entre 0 y 65535\n");
+            dir_ini=0;
+            cont_loc=0;
+            }
+            else
+            {
+             dir_ini=Pana;
+            cont_loc=Pana;
+            }
+            residuo=dir_ini;
+            centinela=3;
+            do
+{
+ modulo=residuo%16;
+ residuo=residuo/16;
+ if(modulo<10)
+ hexa[centinela]=48+modulo;
+ else
+    hexa[centinela]=d[modulo-10];
+centinela--;
+}
+ while(residuo!=0);
+ if(centinela>=0)
+    while(centinela>=0)
+    {
+      hexa[centinela]=48;
+      centinela--;
+    }
+hexa[4]='\0';
+            Mio=fopen("di.txt","w");
+            fwrite(hexa,sizeof(char),strlen(hexa),Mio);
+            fclose(Mio);
+            Mio=fopen("cl.txt","w");
+            fwrite(hexa,sizeof(char),strlen(hexa),Mio);
+            fclose(Mio);
+
+if(etiqueta[0]!= '\0')
+{
+ printf("Error, la directiva ORG no lleva etiqueta\n");
+ etiqueta[0]='\0';
+}
+            ///escribe en el temporal
+ k=fopen("temporal.txt","at");
+fwrite(hexa,sizeof(char),strlen(hexa),k);
+fputs("/",k);
+if(etiqueta[0]=='\0')
+    fputs("NULL",k);
+else
+fwrite(etiqueta,sizeof(char),strlen(etiqueta),k);
+fputs("|",k);
+fwrite(codop,sizeof(char),strlen(codop),k);
+fputs("|",k);
+if(operando[0]=='\0')
+    fputs("NULL",k);
+else
+fwrite(operando,sizeof(char),strlen(operando),k);
+fputs("|",k);
+fputs("\n",k);
+fclose(k);
+            }
+}
+else
+if(strcmpi(codop,"end")==0)
+{
+    if(operando[0]!='\0')
+        {
+            printf("Error, la directiva END no lleva operando\n");
+            operando[0]='\0';
+        }
+ ///recuperacion del contloc
+f=open("cl.txt",0);
+Mio=0;
+while(read(f,&Mugi,1)>0 && Mugi!='\0')
+        {
+        cad3[Mio++]=Mugi;
+        cad3[Mio]='\0';
+        }
+close(f);
+if(cad3[0]!=0)
+cont_loc=hex(cad3);
+///conversion a hexa
+ if(equx==1)
+    residuo=Pana;
+ else
+ residuo=cont_loc;
+ centinela=3;
+ do
+{
+ modulo=residuo%16;
+ residuo=residuo/16;
+ if(modulo<10)
+ hexa[centinela]=48+modulo;
+ else
+    hexa[centinela]=d[modulo-10];
+centinela--;
+}
+ while(residuo!=0);
+ if(centinela>=0)
+    while(centinela>=0)
+    {
+      hexa[centinela]=48;
+      centinela--;
+    }
+hexa[4]='\0';
+            ///escribe en el temporal
+ k=fopen("temporal.txt","at");
+fwrite(hexa,sizeof(char),strlen(hexa),k);
+fputs("/",k);
+if(etiqueta[0]=='\0')
+    fputs("NULL",k);
+else
+fwrite(etiqueta,sizeof(char),strlen(etiqueta),k);
+fputs("|",k);
+fwrite(codop,sizeof(char),strlen(codop),k);
+fputs("|",k);
+if(operando[0]=='\0')
+    fputs("NULL",k);
+else
+fwrite(operando,sizeof(char),strlen(operando),k);
+fputs("|",k);
+fputs("\n",k);
+fclose(k);
+///etiquetas
+if(etiqueta[0]!='\0')
+{
+    ///busqueda de etiquetas
+k=open("TABSIM.txt",0);
+do{
+            cad3[0]='\0';
+            c=0;
+            Mio=0;
+            ritsu=0;
+        while(read(k,&Mugi,1)>0 && (Mugi!='/' && Mugi!='\0'))
+        {
+            cad3[Mio]=Mugi;
+            Mio++;
+        }
+        cad3[Mio]='\0';
+        if(strcmpi(etiqueta,cad3)==0 && etiqueta[0]!='\0')
+        {
+            c=1;
+            printf("Error, no puede haber etiquetas repetidas");
+        }
+else
+                while(read(k,&Mugi,1)>0 && Mugi!='\0' && Mugi!='\n')
+                ritsu++;
+     if(c==1)
+        break;
+     }while(ritsu>0);
+close(k);
+
+///Si no existió error en las etiquetas
+if(c==0 && etiqueta[0]!='\0')
+{
+ k=fopen("TABSIM.txt","at");
+fwrite(etiqueta,sizeof(char),strlen(etiqueta),k);
+fputs("/",k);
+fwrite(hexa,sizeof(char),strlen(hexa),k);
+fputs("|",k);
+fputs("\n",k);
+fclose(k);
+}
+
+}
+
+}
+else
+    if(s==1)
+{
+ ///recuperacion del contloc
+f=open("cl.txt",0);
+Mio=0;
+while(read(f,&Mugi,1)>0 && Mugi!='\0')
+        {
+        cad3[Mio++]=Mugi;
+        cad3[Mio]='\0';
+        }
+close(f);
+if(cad3[0]!=0)
+cont_loc=hex(cad3);
+
+if(strcmpi(codop,"DB")==0 || strcmpi(codop,"DC.B")==0 || strcmpi(codop,"FCB")==0)
+{
+    if(operando[0]=='\0')
+        {
+            printf("Error, la directiva de constante: %s debe llevar operando\n",codop);
+            errdire=1;
+        }
+    else
+        if(Pana<0 || Pana>255)
+        {
+            printf("Error, la directiva de constante: %s debe tener un operando con valor entre 0 y 255\n");
+            errdire=1;
+        }
+Maki=1;
+}
+else
+if(strcmpi(codop,"DW")==0 || strcmpi(codop,"DC.W")==0 || strcmpi(codop,"FDB")==0)
+{
+    if(operando[0]=='\0')
+        {
+            printf("Error, la directiva de constante: %s debe llevar operando\n",codop);
+            errdire=1;
+        }
+    else
+        if(Pana<0 || Pana>65535)
+        {
+            printf("Error, la directiva de constante: %s debe tener un operando con valor entre 0 y 65535\n");
+            errdire=1;
+        }
+Maki=2;
+}
+else
+if(strcmpi(codop,"FCC")==0)
+{
+    centinela=0;
+    cde=0;
+    cce=0;
+    Pana=strlen(operando);
+    if(operando[0]=='\0')
+        {
+            printf("Error, la directiva de constante: %s debe de llevar operando");
+            errdire=1;
+        }
+        else
+            {
+                centinela=0;
+            while(centinela<Pana)
+            {
+             if(operando[centinela]=='"')
+                    cde++;
+                    centinela++;
+            }
+            if(cde==0 || cde==1)
+             {
+                 printf("Error, la directiva de constante: %s debe de tener su valor entre un par de comillas dobles\n");
+                 errdire=1;
+             }
+            else
+            {
+            Maki=3;
+            }
+            }
+}
+else
+if(strcmpi(codop,"DS")==0 || strcmpi(codop,"DS.B")==0 || strcmpi(codop,"RMB")==0)
+{
+    if(operando[0]=='\0')
+        {
+            printf("Error, la directiva de Reserva de espacio de memoria: %s debe llevar operando\n",codop);
+            errdire=1;
+        }
+    else
+        if(Pana<0 || Pana>65535)
+        {
+            printf("Error, la directiva de Reserva de espacio de memoria: %s debe tener un operando con valor entre 0 y 65535\n");
+            errdire=1;
+        }
+        else
+            Maki=4;
+}
+else
+if(strcmpi(codop,"DS.W")==0 || strcmpi(codop,"RMW")==0)
+{
+    if(operando[0]=='\0')
+        {
+            printf("Error, la directiva de Reserva de espacio de memoria: %s debe llevar operando\n",codop);
+            errdire=1;
+        }
+    else
+        if(Pana<0 || Pana>65535)
+        {
+            printf("Error, la directiva de Reserva de espacio de memoria: %s debe tener un operando con valor entre 0 y 65535\n");
+            errdire=1;
+        }
+        else
+        {
+         Maki=5;
+        }
+}
+///conversion a hexa
+ residuo=cont_loc;
+ centinela=3;
+ do
+{
+ modulo=residuo%16;
+ residuo=residuo/16;
+ if(modulo<10)
+ hexa[centinela]=48+modulo;
+ else
+    hexa[centinela]=d[modulo-10];
+centinela--;
+}
+ while(residuo!=0);
+ if(centinela>=0)
+    while(centinela>=0)
+    {
+      hexa[centinela]=48;
+      centinela--;
+    }
+hexa[4]='\0';
+            ///escribe en el temporal
+            if(errdire==0 && errbase==0)
+{k=fopen("temporal.txt","at");
+fwrite(hexa,sizeof(char),strlen(hexa),k);
+fputs("/",k);
+if(etiqueta[0]=='\0')
+    fputs("NULL",k);
+else
+fwrite(etiqueta,sizeof(char),strlen(etiqueta),k);
+fputs("|",k);
+fwrite(codop,sizeof(char),strlen(codop),k);
+fputs("|",k);
+if(operando[0]=='\0')
+    fputs("NULL",k);
+else
+fwrite(operando,sizeof(char),strlen(operando),k);
+fputs("|",k);
+fputs("\n",k);
+fclose(k);
+
+///etiquetas
+if(etiqueta[0]!='\0')
+{
+    ///busqueda de etiquetas
+k=open("TABSIM.txt",0);
+do{
+            cad3[0]='\0';
+            c=0;
+            Mio=0;
+            ritsu=0;
+        while(read(k,&Mugi,1)>0 && (Mugi!='/' && Mugi!='\0'))
+        {
+            cad3[Mio]=Mugi;
+            Mio++;
+        }
+        cad3[Mio]='\0';
+        if(strcmpi(etiqueta,cad3)==0 && etiqueta[0]!='\0')
+        {
+            c=1;
+            printf("Error, no puede haber etiquetas repetidas");
+        }
+else
+                while(read(k,&Mugi,1)>0 && Mugi!='\0' && Mugi!='\n')
+                ritsu++;
+     if(c==1)
+        break;
+     }while(ritsu>0);
+close(k);
+
+///Si no existió error en las etiquetas
+if(c==0 && etiqueta[0]!='\0')
+{
+ k=fopen("TABSIM.txt","at");
+fwrite(etiqueta,sizeof(char),strlen(etiqueta),k);
+fputs("/",k);
+fwrite(hexa,sizeof(char),strlen(hexa),k);
+fputs("|",k);
+fputs("\n",k);
+fclose(k);
+}
+}
+}
+else
+if(errbase==1)
+printf("Error en la base numerica\n");
+switch(Maki)
+{
+case 1:
+    cont_loc++;
+    break;
+case 2:
+    cont_loc=cont_loc+2;
+    break;
+case 3:
+    Pana=Pana-2;
+    cont_loc=cont_loc+Pana;
+    break;
+case 4:
+    cont_loc=cont_loc+Pana;
+    break;
+case 5:
+    Pana=Pana*2;
+    cont_loc=cont_loc+Pana;
+    break;
+}
+        ///conversion a hexa
+ residuo=cont_loc;
+ centinela=3;
+ do
+{
+ modulo=residuo%16;
+ residuo=residuo/16;
+ if(modulo<10)
+ hexa[centinela]=48+modulo;
+ else
+    hexa[centinela]=d[modulo-10];
+centinela--;
+}
+ while(residuo!=0);
+ if(centinela>=0)
+    while(centinela>=0)
+    {
+      hexa[centinela]=48;
+      centinela--;
+    }
+hexa[4]='\0';
+if(errdire==0)
+{
+///guardar conloc
+            Mio=fopen("cl.txt","w");
+            fwrite(hexa,sizeof(char),strlen(hexa),Mio);
+            fclose(Mio);
+}
+}
+else
+    if(s==0)
+    {
+        ///recuperacion del contloc
+f=open("cl.txt",0);
+Mio=0;
+while(read(f,&Mugi,1)>0 && Mugi!='\0')
+        {
+        cad3[Mio++]=Mugi;
+        cad3[Mio]='\0';
+        }
+close(f);
+if(cad3[0]!=0)
+cont_loc=hex(cad3);
+
+        ///conversion a hexa
+ residuo=cont_loc;
+ centinela=3;
+ do
+{
+ modulo=residuo%16;
+ residuo=residuo/16;
+ if(modulo<10)
+ hexa[centinela]=48+modulo;
+ else
+    hexa[centinela]=d[modulo-10];
+centinela--;
+}
+ while(residuo!=0);
+ if(centinela>=0)
+    while(centinela>=0)
+    {
+      hexa[centinela]=48;
+      centinela--;
+    }
+hexa[4]='\0';
+
+///escribe en temporal
+if(errbase==0)
+{
+k=fopen("temporal.txt","at");
+fwrite(hexa,sizeof(char),strlen(hexa),k);
+fputs("/",k);
+if(etiqueta[0]=='\0')
+    fputs("NULL",k);
+else
+fwrite(etiqueta,sizeof(char),strlen(etiqueta),k);
+fputs("|",k);
+fwrite(codop,sizeof(char),strlen(codop),k);
+fputs("|",k);
+if(operando[0]=='\0')
+    fputs("NULL",k);
+else
+fwrite(operando,sizeof(char),strlen(operando),k);
+fputs("|",k);
+fputs("\n",k);
+fclose(k);
+///etiquetas
+if(etiqueta[0]!='\0')
+{
+    ///busqueda de etiquetas
+k=open("TABSIM.txt",0);
+do{
+            cad3[0]='\0';
+            c=0;
+            Mio=0;
+            ritsu=0;
+        while(read(k,&Mugi,1)>0 && (Mugi!='/' && Mugi!='\0'))
+        {
+            cad3[Mio]=Mugi;
+            Mio++;
+        }
+        cad3[Mio]='\0';
+        if(strcmpi(etiqueta,cad3)==0 && etiqueta[0]!='\0')
+        {
+            c=1;
+            printf("Error, no puede haber etiquetas repetidas");
+        }
+else
+                while(read(k,&Mugi,1)>0 && Mugi!='\0' && Mugi!='\n')
+                ritsu++;
+     if(c==1)
+        break;
+     }while(ritsu>0);
+close(k);
+
+///Si no existió error en las etiquetas
+if(c==0 && etiqueta[0]!='\0')
+{
+ k=fopen("TABSIM.txt","at");
+fwrite(etiqueta,sizeof(char),strlen(etiqueta),k);
+fputs("/",k);
+fwrite(hexa,sizeof(char),strlen(hexa),k);
+fputs("|",k);
+fputs("\n",k);
+fclose(k);
+}
+}
+}
+else
+    if(errbase==1)
+printf("Error en la base numerica\n");
+if(inh==2)
+            cont_loc=cont_loc+inhb;
+        if(inm==2)
+            cont_loc=cont_loc+inmb;
+        if(dir==2)
+            cont_loc=cont_loc+dirb;
+        if(ext==2)
+            cont_loc=cont_loc+extb;
+        if(rel==2)
+            cont_loc=cont_loc+relb;
+        if(idx==2)
+            cont_loc=cont_loc+idxb;
+        if(idx1==2)
+            cont_loc=cont_loc+idx1b;
+        if(idx2==2)
+            cont_loc=cont_loc+idx2b;
+            if(idx3==2)
+            cont_loc=cont_loc+idx3b;
+        if(idx4==2)
+            cont_loc=cont_loc+idx4b;
+        /*else
+        cont_loc=cont_loc+Pana;*/
+        ///conversion a hexa
+ residuo=cont_loc;
+ centinela=3;
+ do
+{
+ modulo=residuo%16;
+ residuo=residuo/16;
+ if(modulo<10)
+ hexa[centinela]=48+modulo;
+ else
+    hexa[centinela]=d[modulo-10];
+centinela--;
+}
+ while(residuo!=0);
+ if(centinela>=0)
+    while(centinela>=0)
+    {
+      hexa[centinela]=48;
+      centinela--;
+    }
+hexa[4]='\0';
+///guardar conloc
+k=fopen("cl.txt","w");
+fwrite(hexa,sizeof(char),strlen(hexa),k);
+fclose(k);
+        }
+
+///fin parte cuatro
+printf("\n\n--------------------------------------------------------------------\n");
+system("pause");
+system("cls");
+}
+if(strcmpi(codop,"end")==0)
+{
+///longitud de bytes
+///recuperacion del contloc
+f=open("cl.txt",0);
+Mio=0;
+while(read(f,&Mugi,1)>0 && Mugi!='\0')
+        {
+        cad3[Mio++]=Mugi;
+        cad3[Mio]='\0';
+        }
+close(f);
+Nico=hex(cad3);
+///recuperacion de direccion inicial
+f=open("di.txt",0);
+Mio=0;
+while(read(f,&Mugi,1)>0 && Mugi!='\0')
+        {
+        cad3[Mio++]=Mugi;
+        cad3[Mio]='\0';
+        }
+close(f);
+Maki=hex(cad3);
+Nico=Nico-Maki;
+///conversion a hexa
+    residuo=Nico;
+ centinela=3;
+ do
+{
+ modulo=residuo%16;
+ residuo=residuo/16;
+ if(modulo<10)
+ hexa[centinela]=48+modulo;
+ else
+    hexa[centinela]=modulo+55;
+centinela--;
+}
+ while(residuo!=0);
+ if(centinela>=0)
+    while(centinela>=0)
+    {
+      hexa[centinela]=48;
+      centinela--;
+    }
+hexa[4]='\0';
+Pana=hex(hexa);
+printf("Longitud de bytes: %d\n",Pana);
+system("pause");
+system("cls");
+}
+return(Honky);
+
+    }
+int hex(char h[])
+{
+        int num, num2, residuo, cociente, base, poti, x, r;
+    num=num2=0;
+    base=16;
+    poti=strlen(h);
+    poti=poti-1;
+    r=0;
+    for(num=0;num<strlen(h);num++)
+    {
+        if(h[num]=='A' || h[num]=='a')
+            x=10;
+            else
+                if(h[num]=='B' || h[num]=='b')
+                x=11;
+            else
+                if(h[num]=='C' || h[num]=='c')
+                x=12;
+            else
+                if(h[num]=='D' || h[num]=='d')
+                x=13;
+            else
+                if(h[num]=='E' || h[num]=='e')
+                x=14;
+            else
+                if(h[num]=='F' || h[num]=='f')
+                x=15;
+            else
+            {
+                x=h[num]-48;
+            }
+
+        cociente=x*pow(base,poti);
+        r=r+cociente;
+        poti--;
+    }
+    return (r);
+}
+
+///Nozomi
+char * xbb(int x, int y, int z, int w, int v)
+{
+int a, b, c, d, e[5], e1[8], e2[16], g, anya;
+char f[8], f1[16], ranko[16];
+a=x;
+if(a<0)
+{
+ g=1;
+ a=a*-1;
+}
+else
+    g=0;
+d=z;
+c=y;
+switch(d)
+{
+case 1:
+    switch(c)
+    {
+    case 1:
+        if(a==0)
+            printf("00");
+            else
+            {
+                b=4;
+                c=1;
+                while(c!=0)
+                {
+                    d=a%2;
+                    c=a/2;
+                    a=c;
+                    e[b]=d;
+                    b--;
+                }
+                if(b>0)
+                    while(b>=0)
+                {
+                    e[b]=0;
+                    b--;
+                }
+                if(g==1)
+                {
+                    b=4;
+                    while(b>=0)
+                    {
+                        if(e[b]==1)
+                        {
+                            b--;
+                            while(b>=0)
+                            {
+                                if(e[b]==1)
+                                    e[b]=0;
+                                else
+                                    e[b]=1;
+                                b--;
+                            }
+                        }
+                        b--;
+                    }
+                }
+                b=0;
+                c=0;
+                a=0;
+                while(b<8)
+                {
+                    if(a<3)
+                        f[b]='0';
+                    else
+                    {
+                        f[b]=e[c]+48;
+                        c++;
+                    }
+                    a++;
+                    b++;
+                }
+                f[8]='\0';
+                strcpy(f1,f);
+                a=base(f,2);
+                printf("%X",a);
+                ///p10
+                c=0;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    ranko[c]=b+55;
+                    else
+                        ranko[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            ranko[c]='\0';
+            ///p10
+            }
+        break;
+    case 2:
+        if(a==0)
+            printf("40");
+            else
+            {
+                b=4;
+                c=1;
+                while(c!=0)
+                {
+                    d=a%2;
+                    c=a/2;
+                    a=c;
+                    e[b]=d;
+                    b--;
+                }
+                if(b>0)
+                    while(b>=0)
+                {
+                    e[b]=0;
+                    b--;
+                }
+                if(g==1)
+                {
+                    b=4;
+                    while(b>=0)
+                    {
+                        if(e[b]==1)
+                        {
+                            b--;
+                            while(b>=0)
+                            {
+                                if(e[b]==1)
+                                    e[b]=0;
+                                else
+                                    e[b]=1;
+                                b--;
+                            }
+                        }
+                        b--;
+                    }
+                }
+                b=0;
+                c=0;
+                a=0;
+                while(b<8)
+                {
+                    if(a<3)
+                    {
+                     if(a==0)
+                        f[b]='0';
+                     if(a==1)
+                        f[b]='1';
+                     if(a==2)
+                        f[b]='0';
+                    }
+                    else
+                    {
+                        f[b]=e[c]+48;
+                        c++;
+                    }
+                    a++;
+                    b++;
+                }
+                f[8]='\0';
+                a=base(f,2);
+                printf("%X",a);
+                 ///p10
+                c=0;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    ranko[c]=b+55;
+                    else
+                        ranko[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            ranko[c]='\0';
+            ///p10
+            }
+        break;
+    case 3:
+        if(a==0)
+            printf("80");
+            else
+            {
+                b=4;
+                c=1;
+                while(c!=0)
+                {
+                    d=a%2;
+                    c=a/2;
+                    a=c;
+                    e[b]=d;
+                    b--;
+                }
+                if(b>0)
+                    while(b>=0)
+                {
+                    e[b]=0;
+                    b--;
+                }
+                if(g==1)
+                {
+                    b=4;
+                    while(b>=0)
+                    {
+                        if(e[b]==1)
+                        {
+                            b--;
+                            while(b>=0)
+                            {
+                                if(e[b]==1)
+                                    e[b]=0;
+                                else
+                                    e[b]=1;
+                                b--;
+                            }
+                        }
+                        b--;
+                    }
+                }
+                b=0;
+                c=0;
+                a=0;
+                while(b<8)
+                {
+                    if(a<3)
+                    {
+                     if(a==0)
+                        f[b]='1';
+                     if(a==1)
+                        f[b]='0';
+                     if(a==2)
+                        f[b]='0';
+                    }
+                    else
+                    {
+                        f[b]=e[c]+48;
+                        c++;
+                    }
+                    a++;
+                    b++;
+                }
+                f[8]='\0';
+                a=base(f,2);
+                printf("%X",a);
+                ///p10
+                c=0;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    ranko[c]=b+55;
+                    else
+                        ranko[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            ranko[c]='\0';
+            ///p10
+            }
+        break;
+    case 4:
+        if(a==0)
+            printf("c0");
+            else
+            {
+                b=4;
+                c=1;
+                while(c!=0)
+                {
+                    d=a%2;
+                    c=a/2;
+                    a=c;
+                    e[b]=d;
+                    b--;
+                }
+                if(b>0)
+                    while(b>=0)
+                {
+                    e[b]=0;
+                    b--;
+                }
+                if(g==1)
+                {
+                    b=4;
+                    while(b>=0)
+                    {
+                        if(e[b]==1)
+                        {
+                            b--;
+                            while(b>=0)
+                            {
+                                if(e[b]==1)
+                                    e[b]=0;
+                                else
+                                    e[b]=1;
+                                b--;
+                            }
+                        }
+                        b--;
+                    }
+                }
+                b=0;
+                c=0;
+                a=0;
+                while(b<8)
+                {
+                    if(a<3)
+                    {
+                     if(a==0)
+                        f[b]='1';
+                     if(a==1)
+                        f[b]='1';
+                     if(a==2)
+                        f[b]='0';
+                    }
+                    else
+                    {
+                        f[b]=e[c]+48;
+                        c++;
+                    }
+                    a++;
+                    b++;
+                }
+               f[8]='\0';
+                a=base(f,2);
+                printf("%X",a);
+                ///p10
+                c=0;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    ranko[c]=b+55;
+                    else
+                        ranko[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            ranko[c]='\0';
+            ///p10
+            }
+        break;
+    }
+   break;
+case 2:
+    switch(c)
+    {
+    case 1:
+                b=0;
+                a=0;
+                while(b<8)
+                {
+                    if(a<3)
+                        f[b]='1';
+                     if(a==3 || a==4)
+                        f[b]='0';
+                     if(a==5)
+                        f[b]='0';
+                    if(a==6)
+                        f[b]='0';
+                     if(a==7)
+                    {
+                        if(g==0)
+                        f[b]='0';
+                    else
+                        f[b]='1';
+                    }
+
+                    a++;
+                    b++;
+                }
+                f[8]='\0';
+                a=base(f,2);
+                printf("%X",a);
+                anya=a;
+
+                b=7;
+                c=1;
+                a=x;
+                if(g==1)
+                    a=a*-1;
+                while(c!=0)
+                {
+                    d=a%2;
+                    c=a/2;
+                    a=c;
+                    e1[b]=d;
+                    b--;
+                }
+                if(b>0)
+                    while(b>=0)
+                {
+                    e1[b]=0;
+                    b--;
+                }
+                if(g==1)
+                {
+                    b=7;
+                    while(b>=0)
+                    {
+                        if(e1[b]==1)
+                        {
+                            b--;
+                            while(b>=0)
+                            {
+                                if(e1[b]==1)
+                                    e1[b]=0;
+                                else
+                                    e1[b]=1;
+                                b--;
+                            }
+                        }
+                        b--;
+                    }
+                }
+                b=0;
+                c=0;
+                while(b<8)
+                {
+                    f[b]=e1[c]+48;
+                    c++;
+                    b++;
+                }
+               f[8]='\0';
+                a=base(f,2);
+                if(a>=0 && a<10)
+                {
+                printf("0%X",a);
+                ///p10
+                if(a==0)
+                    strcpy(ranko,"00");
+                else
+                {c=0;
+                while(a!=0)
+            {
+                if(c==0)
+                {
+                    ranko[c]='0';
+                    c++;
+                }
+                b=a%16;
+                if(b>=10)
+                    ranko[c]=b+55;
+                    else
+                        ranko[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            ranko[c]='\0';
+            strrev(ranko);}
+            ///p10
+                }
+                else
+                    if(a>=10 && a<16)
+                    {
+                        printf("0%X",a+55);
+                        ///p10
+                c=0;
+                while(a!=0)
+            {
+                if(c==0)
+                {
+                    ranko[c]='0';
+                    c++;
+                }
+                b=a%16;
+                if(b>=10)
+                    ranko[c]=b+55;
+                    else
+                        ranko[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            ranko[c]='\0';
+            strrev(ranko);
+            ///p10
+                        }
+                else
+                {
+                    printf("%X",a);
+                    ///p10
+                c=0;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    ranko[c]=b+55;
+                    else
+                        ranko[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            ranko[c]='\0';
+            ///p10
+                    }
+            ///p10
+                c=strlen(ranko);
+                while(anya!=0)
+            {
+                b=anya%16;
+                if(b>=10)
+                    ranko[c]=b+55;
+                    else
+                        ranko[c]=b+48;
+                    c++;
+                    anya=anya/16;
+            }
+            ranko[c]='\0';
+            ///p10
+
+        break;
+    case 2:
+        b=0;
+                a=0;
+                while(b<8)
+                {
+                    if(a<3)
+                        f[b]='1';
+                     if(a==3)
+                     f[b]='0';
+                        if(a==4)
+                        f[b]='1';
+                     if(a==5)
+                        f[b]='0';
+                    if(a==6)
+                        f[b]='0';
+                     if(a==7)
+                    {
+                        if(g==0)
+                        f[b]='0';
+                    else
+                        f[b]='1';
+                    }
+
+                    a++;
+                    b++;
+                }
+               f[8]='\0';
+                a=base(f,2);
+                printf("%X",a);
+                anya=a;
+
+                b=7;
+                c=1;
+                a=x;
+                if(g==1)
+                    a=a*-1;
+                while(c!=0)
+                {
+                    d=a%2;
+                    c=a/2;
+                    a=c;
+                    e1[b]=d;
+                    b--;
+                }
+                if(b>0)
+                    while(b>=0)
+                {
+                    e1[b]=0;
+                    b--;
+                }
+                if(g==1)
+                {
+                    b=7;
+                    while(b>=0)
+                    {
+                        if(e1[b]==1)
+                        {
+                            b--;
+                            while(b>=0)
+                            {
+                                if(e1[b]==1)
+                                    e1[b]=0;
+                                else
+                                    e1[b]=1;
+                                b--;
+                            }
+                        }
+                        b--;
+                    }
+                }
+                b=0;
+                c=0;
+                while(b<8)
+                {
+                    f[b]=e1[c]+48;
+                    c++;
+                    b++;
+                }
+                f[8]='\0';
+                a=base(f,2);
+                if(a>=0 && a<10)
+                {
+                    printf("0%X",a);
+                ///p10
+                c=0;
+                while(a!=0)
+            {
+                if(c==0)
+                {
+                    ranko[c]='0';
+                    c++;
+                }
+                b=a%16;
+                if(b>=10)
+                    ranko[c]=b+55;
+                    else
+                        ranko[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            ranko[c]='\0';
+            strrev(ranko);
+            ///p10
+                }
+                else
+                    if(a>=10 && a<16)
+                    {printf("0%X",a+55);
+                    ///p10
+                c=0;
+                while(a!=0)
+            {
+                if(c==0)
+                {
+                    ranko[c]='0';
+                    c++;
+                }
+                b=a%16;
+                if(b>=10)
+                    ranko[c]=b+55;
+                    else
+                        ranko[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            ranko[c]='\0';
+            strrev(ranko);
+            ///p10
+                    }
+                else
+                {printf("%X",a);
+                ///p10
+                c=0;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    ranko[c]=b+55;
+                    else
+                        ranko[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            ranko[c]='\0';
+            ///p10
+                }
+                ///p10
+                c=strlen(ranko);
+                while(anya!=0)
+            {
+                b=anya%16;
+                if(b>=10)
+                    ranko[c]=b+55;
+                    else
+                        ranko[c]=b+48;
+                    c++;
+                    anya=anya/16;
+            }
+            ranko[c]='\0';
+            ///p10
+        break;
+    case 3:
+        b=0;
+                a=0;
+                while(b<8)
+                {
+                    if(a<3)
+                        f[b]='1';
+                     if(a==3)
+                     f[b]='1';
+                        if(a==4)
+                        f[b]='0';
+                     if(a==5)
+                        f[b]='0';
+                    if(a==6)
+                        f[b]='0';
+                     if(a==7)
+                    {
+                        if(g==0)
+                        f[b]='0';
+                    else
+                        f[b]='1';
+                    }
+
+                    a++;
+                    b++;
+                }
+                f[8]='\0';
+                a=base(f,2);
+                printf("%X",a);
+                anya=a;
+
+                b=7;
+                c=1;
+                a=x;
+                if(g==1)
+                    a=a*-1;
+                while(c!=0)
+                {
+                    d=a%2;
+                    c=a/2;
+                    a=c;
+                    e1[b]=d;
+                    b--;
+                }
+                if(b>0)
+                    while(b>=0)
+                {
+                    e1[b]=0;
+                    b--;
+                }
+                if(g==1)
+                {
+                    b=7;
+                    while(b>=0)
+                    {
+                        if(e1[b]==1)
+                        {
+                            b--;
+                            while(b>=0)
+                            {
+                                if(e1[b]==1)
+                                    e1[b]=0;
+                                else
+                                    e1[b]=1;
+                                b--;
+                            }
+                        }
+                        b--;
+                    }
+                }
+                b=0;
+                c=0;
+                while(b<8)
+                {
+                    f[b]=e1[c]+48;
+                    c++;
+                    b++;
+                }
+                f[8]='\0';
+                a=base(f,2);
+                if(a>=0 && a<10)
+                {printf("0%X",a);
+                ///p10
+                c=0;
+                while(a!=0)
+            {
+                if(c==0)
+                {
+                    ranko[c]='0';
+                    c++;
+                }
+                b=a%16;
+                if(b>=10)
+                    ranko[c]=b+55;
+                    else
+                        ranko[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            ranko[c]='\0';
+            strrev(ranko);
+            ///p10
+                }
+                else
+                    if(a>=10 && a<16)
+                    {printf("0%X",a+55);
+                    ///p10
+                c=0;
+                while(a!=0)
+            {
+                if(c==0)
+                {
+                    ranko[c]='0';
+                    c++;
+                }
+                b=a%16;
+                if(b>=10)
+                    ranko[c]=b+55;
+                    else
+                        ranko[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            ranko[c]='\0';
+            strrev(ranko);
+            ///p10
+                    }
+                else
+                {printf("%X",a);
+                ///p10
+                c=0;
+                while(a!=0)
+            {
+
+                b=a%16;
+                if(b>=10)
+                    ranko[c]=b+55;
+                    else
+                        ranko[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            ranko[c]='\0';
+            ///p10
+                }
+                ///p10
+                c=strlen(ranko);
+                while(anya!=0)
+            {
+                b=anya%16;
+                if(b>=10)
+                    ranko[c]=b+55;
+                    else
+                        ranko[c]=b+48;
+                    c++;
+                    anya=anya/16;
+            }
+            ranko[c]='\0';
+            ///p10
+        break;
+    case 4:
+        b=0;
+                a=0;
+                while(b<8)
+                {
+                    if(a<3)
+                        f[b]='1';
+                     if(a==3 || a==4)
+                        f[b]='1';
+                     if(a==5)
+                        f[b]='0';
+                    if(a==6)
+                        f[b]='0';
+                     if(a==7)
+                    {
+                        if(g==0)
+                        f[b]='0';
+                    else
+                        f[b]='1';
+                    }
+
+                    a++;
+                    b++;
+                }
+                f[8]='\0';
+                a=base(f,2);
+                printf("%X",a);
+                anya=a;
+
+                b=7;
+                c=1;
+                a=x;
+                if(g==1)
+                    a=a*-1;
+                while(c!=0)
+                {
+                    d=a%2;
+                    c=a/2;
+                    a=c;
+                    e1[b]=d;
+                    b--;
+                }
+                if(b>0)
+                    while(b>=0)
+                {
+                    e1[b]=0;
+                    b--;
+                }
+                if(g==1)
+                {
+                    b=7;
+                    while(b>=0)
+                    {
+                        if(e1[b]==1)
+                        {
+                            b--;
+                            while(b>=0)
+                            {
+                                if(e1[b]==1)
+                                    e1[b]=0;
+                                else
+                                    e1[b]=1;
+                                b--;
+                            }
+                        }
+                        b--;
+                    }
+                }
+                b=0;
+                c=0;
+                while(b<8)
+                {
+                    f[b]=e1[c]+48;
+                    c++;
+                    b++;
+                }
+               f[8]='\0';
+                a=base(f,2);
+                if(a>=0 && a<10)
+                {printf("0%X",a);
+                ///p10
+                c=0;
+                while(a!=0)
+            {
+                if(c==0)
+                {
+                    ranko[c]='0';
+                    c++;
+                }
+                b=a%16;
+                if(b>=10)
+                    ranko[c]=b+55;
+                    else
+                        ranko[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            ranko[c]='\0';
+            strrev(ranko);
+            ///p10
+                }
+                else
+                    if(a>=10 && a<16)
+                    {printf("0%X",a+55);
+                    ///p10
+                c=0;
+                while(a!=0)
+            {
+                if(c==0)
+                {
+                    ranko[c]='0';
+                    c++;
+                }
+                b=a%16;
+                if(b>=10)
+                    ranko[c]=b+55;
+                    else
+                        ranko[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            ranko[c]='\0';
+            strrev(ranko);
+            ///p10
+                    }
+                else
+                {printf("%X",a);
+                ///p10
+                c=0;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    ranko[c]=b+55;
+                    else
+                        ranko[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            ranko[c]='\0';
+            ///p10
+                }
+                ///p10
+                c=strlen(ranko);
+                while(anya!=0)
+            {
+                b=anya%16;
+                if(b>=10)
+                    ranko[c]=b+55;
+                    else
+                        ranko[c]=b+48;
+                    c++;
+                    anya=anya/16;
+            }
+            ranko[c]='\0';
+            ///p10
+        break;
+    }
+    break;
+case 3:
+    ///dale carrilla
+    switch(c)
+    {
+    case 1:
+        b=0;
+                a=0;
+                while(b<8)
+                {
+                    if(a<3)
+                        f[b]='1';
+                     if(a==3 || a==4)
+                        f[b]='0';
+                     if(a==5)
+                        f[b]='0';
+                    if(a==6)
+                        f[b]='1';
+                     if(a==7)
+                    {
+                        if(g==0)
+                        f[b]='0';
+                    else
+                        f[b]='1';
+                    }
+
+                    a++;
+                    b++;
+                }
+                f[8]='\0';
+                a=base(f,2);
+                printf("%X",a);
+                anya=a;
+
+                b=15;
+                c=1;
+                a=x;
+                if(g==1)
+                    a=a*-1;
+                while(c!=0)
+                {
+                    d=a%2;
+                    c=a/2;
+                    a=c;
+                    e2[b]=d;
+                    b--;
+                }
+                if(b>0)
+                    while(b>=0)
+                {
+                    e2[b]=0;
+                    b--;
+                }
+                if(g==1)
+                {
+                    b=15;
+                    while(b>=0)
+                    {
+                        if(e2[b]==1)
+                        {
+                            b--;
+                            while(b>=0)
+                            {
+                                if(e2[b]==1)
+                                    e2[b]=0;
+                                else
+                                    e2[b]=1;
+                                b--;
+                            }
+                        }
+                        b--;
+                    }
+                }
+                b=0;
+                c=0;
+                while(b<16)
+                {
+                    f1[b]=e2[c]+48;
+                    c++;
+                    b++;
+                }
+                f1[16]='\0';
+                a=base(f1,2);
+                if(a>=0 && a<10)
+                {printf("0%X",a);
+                ///p10
+                c=0;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    ranko[c]=b+55;
+                    else
+                        ranko[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            ranko[c]='\0';
+            ///p10
+                }
+                else
+                    if(a>=10 && a<16)
+                    {printf("0%X",a+55);
+                    ///p10
+                c=0;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    ranko[c]=b+55;
+                    else
+                        ranko[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            ranko[c]='\0';
+            ///p10
+                    }
+                else
+                {printf("%X",a);
+                ///p10
+                c=0;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    ranko[c]=b+55;
+                    else
+                        ranko[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            ranko[c]='\0';
+            ///p10
+                }
+            ///p10
+                c=strlen(ranko);
+                while(anya!=0)
+            {
+                b=anya%16;
+                if(b>=10)
+                    ranko[c]=b+55;
+                    else
+                        ranko[c]=b+48;
+                    c++;
+                    anya=anya/16;
+            }
+            ranko[c]='\0';
+            ///p10
+
+        break;
+    case 2:
+        b=0;
+                a=0;
+                while(b<8)
+                {
+                    if(a<3)
+                        f[b]='1';
+                     if(a==3)
+                     f[b]='0';
+                        if(a==4)
+                        f[b]='1';
+                     if(a==5)
+                        f[b]='0';
+                    if(a==6)
+                        f[b]='1';
+                     if(a==7)
+                    {
+                        if(g==0)
+                        f[b]='0';
+                    else
+                        f[b]='1';
+                    }
+
+                    a++;
+                    b++;
+                }
+                f[8]='\0';
+                a=base(f,2);
+                printf("%X",a);
+               anya=a;
+
+                b=15;
+                c=1;
+                a=x;
+                if(g==1)
+                    a=a*-1;
+                while(c!=0)
+                {
+                    d=a%2;
+                    c=a/2;
+                    a=c;
+                    e2[b]=d;
+                    b--;
+                }
+                if(b>0)
+                    while(b>=0)
+                {
+                    e2[b]=0;
+                    b--;
+                }
+                if(g==1)
+                {
+                    b=15;
+                    while(b>=0)
+                    {
+                        if(e2[b]==1)
+                        {
+                            b--;
+                            while(b>=0)
+                            {
+                                if(e2[b]==1)
+                                    e2[b]=0;
+                                else
+                                    e2[b]=1;
+                                b--;
+                            }
+                        }
+                        b--;
+                    }
+                }
+                b=0;
+                c=0;
+                while(b<16)
+                {
+                    f1[b]=e2[c]+48;
+                    c++;
+                    b++;
+                }
+                f1[16]='\0';
+                a=base(f1,2);
+                if(a>=0 && a<10)
+                {printf("0%X",a);
+                ///p10
+                c=0;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    ranko[c]=b+55;
+                    else
+                        ranko[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            ranko[c]='\0';
+            ///p10
+                }
+                else
+                    if(a>=10 && a<16)
+                    {printf("0%X",a+55);
+                    ///p10
+                c=0;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    ranko[c]=b+55;
+                    else
+                        ranko[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            ranko[c]='\0';
+            ///p10
+                    }
+                else
+                {printf("%X",a);
+                ///p10
+                c=0;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    ranko[c]=b+55;
+                    else
+                        ranko[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            ranko[c]='\0';
+            ///p10
+                }
+            ///p10
+                c=strlen(ranko);
+                while(anya!=0)
+            {
+                b=anya%16;
+                if(b>=10)
+                    ranko[c]=b+55;
+                    else
+                        ranko[c]=b+48;
+                    c++;
+                    anya=anya/16;
+            }
+            ranko[c]='\0';
+            ///p10
+        break;
+    case 3:
+        b=0;
+                a=0;
+                while(b<8)
+                {
+                    if(a<3)
+                        f[b]='1';
+                     if(a==3)
+                     f[b]='1';
+                        if(a==4)
+                        f[b]='0';
+                     if(a==5)
+                        f[b]='0';
+                    if(a==6)
+                        f[b]='1';
+                     if(a==7)
+                    {
+                        if(g==0)
+                        f[b]='0';
+                    else
+                        f[b]='1';
+                    }
+
+                    a++;
+                    b++;
+                }
+                f[8]='\0';
+                a=base(f,2);
+                printf("%X",a);
+                anya=a;
+                b=15;
+                c=1;
+                a=x;
+                if(g==1)
+                    a=a*-1;
+                while(c!=0)
+                {
+                    d=a%2;
+                    c=a/2;
+                    a=c;
+                    e2[b]=d;
+                    b--;
+                }
+                if(b>0)
+                    while(b>=0)
+                {
+                    e2[b]=0;
+                    b--;
+                }
+                if(g==1)
+                {
+                    b=15;
+                    while(b>=0)
+                    {
+                        if(e2[b]==1)
+                        {
+                            b--;
+                            while(b>=0)
+                            {
+                                if(e2[b]==1)
+                                    e2[b]=0;
+                                else
+                                    e2[b]=1;
+                                b--;
+                            }
+                        }
+                        b--;
+                    }
+                }
+                b=0;
+                c=0;
+                ///Nozomi
+                while(b<16)
+                {
+                    f1[b]=e2[c]+48;
+                    c++;
+                    b++;
+                }
+                f1[16]='\0';
+                a=base(f1,2);
+                if(a>=0 && a<10)
+                {printf("0%X",a);
+                ///p10
+                c=0;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    ranko[c]=b+55;
+                    else
+                        ranko[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            ranko[c]='\0';
+            ///p10
+                }
+                else
+                    if(a>=10 && a<16)
+                    {printf("0%X",a+55);
+                    ///p10
+                c=0;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    ranko[c]=b+55;
+                    else
+                        ranko[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            ranko[c]='\0';
+            ///p10
+                    }
+                else
+                {printf("%X",a);
+                ///p10
+                c=0;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    ranko[c]=b+55;
+                    else
+                        ranko[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            ranko[c]='\0';
+            ///p10
+                }
+            ///p10
+                c=strlen(ranko);
+                while(anya!=0)
+            {
+                b=anya%16;
+                if(b>=10)
+                    ranko[c]=b+55;
+                    else
+                        ranko[c]=b+48;
+                    c++;
+                    anya=anya/16;
+            }
+            ranko[c]='\0';
+            ///p10
+        break;
+    case 4:
+        b=0;
+                a=0;
+                while(b<8)
+                {
+                    if(a<3)
+                        f[b]='1';
+                     if(a==3 || a==4)
+                        f[b]='1';
+                     if(a==5)
+                        f[b]='0';
+                    if(a==6)
+                        f[b]='1';
+                     if(a==7)
+                    {
+                        if(g==0)
+                        f[b]='0';
+                    else
+                        f[b]='1';
+                    }
+
+                    a++;
+                    b++;
+                }
+                f[8]='\0';
+                a=base(f,2);
+                printf("%X",a);
+                anya=a;
+
+                b=15;
+                c=1;
+                a=x;
+                if(g==1)
+                    a=a*-1;
+                while(c!=0)
+                {
+                    d=a%2;
+                    c=a/2;
+                    a=c;
+                    e2[b]=d;
+                    b--;
+                }
+                if(b>0)
+                    while(b>=0)
+                {
+                    e2[b]=0;
+                    b--;
+                }
+                if(g==1)
+                {
+                    b=15;
+                    while(b>=0)
+                    {
+                        if(e2[b]==1)
+                        {
+                            b--;
+                            while(b>=0)
+                            {
+                                if(e2[b]==1)
+                                    e2[b]=0;
+                                else
+                                    e2[b]=1;
+                                b--;
+                            }
+                        }
+                        b--;
+                    }
+                }
+                b=0;
+                c=0;
+                while(b<16)
+                {
+                    f1[b]=e2[c]+48;
+                    c++;
+                    b++;
+                }
+                f[16]='\0';
+                a=base(f1,2);
+                if(a>=0 && a<10)
+                {printf("0%X",a);
+                ///p10
+                c=0;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    ranko[c]=b+55;
+                    else
+                        ranko[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            ranko[c]='\0';
+            ///p10
+                }
+                else
+                    if(a>=10 && a<16)
+                    {printf("0%X",a+55);
+                    ///p10
+                c=0;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    ranko[c]=b+55;
+                    else
+                        ranko[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            ranko[c]='\0';
+            ///p10
+                    }
+                else
+                {printf("%X",a);
+                ///p10
+                c=0;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    ranko[c]=b+55;
+                    else
+                        ranko[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            ranko[c]='\0';
+            ///p10
+                }
+                ///p10
+                c=strlen(ranko);
+                while(anya!=0)
+            {
+                b=anya%16;
+                if(b>=10)
+                    ranko[c]=b+55;
+                    else
+                        ranko[c]=b+48;
+                    c++;
+                    anya=anya/16;
+            }
+            ranko[c]='\0';
+            ///p10
+                a=base(strcat(f,f1),2);
+        break;
+    }
+    break;
+case 4:
+    switch(c)
+    {
+    case 1:
+        b=0;
+                a=0;
+                while(b<8)
+                {
+                    if(a==0 || a==1)
+                        f[b]='0';
+                    if(a==2)
+                        f[b]='1';
+                     if(a==3)
+                     {
+                        if(w==1)
+                        f[b]='0';
+                        else
+                        f[b]='1';
+                     }
+
+                    if(a==4)
+                    {
+                        if(g==0)
+                        {
+                         if(x==1)
+                            while(b<8)
+                         {
+                             if(a==4)
+                             f[b]='0';
+                             if(a==5)
+                             f[b]='0';
+                             if(a==6)
+                             f[b]='0';
+                             if(a==7)
+                             f[b]='0';
+                             a++;
+                             b++;
+                         }
+                         if(x==2)
+                            while(b<8)
+                         {
+                             if(a==4)
+                             f[b]='0';
+                             if(a==5)
+                             f[b]='0';
+                             if(a==6)
+                             f[b]='0';
+                             if(a==7)
+                             f[b]='1';
+                             a++;
+                             b++;
+                         }
+                         if(x==3)
+                            while(b<8)
+                         {
+                             if(a==4)
+                             f[b]='0';
+                             if(a==5)
+                             f[b]='0';
+                             if(a==6)
+                             f[b]='1';
+                             if(a==7)
+                             f[b]='0';
+                             a++;
+                             b++;
+                         }
+                         if(x==4)
+                            while(b<8)
+                         {
+                             if(a==4)
+                             f[b]='0';
+                             if(a==5)
+                             f[b]='0';
+                             if(a==6)
+                             f[b]='1';
+                             if(a==7)
+                             f[b]='1';
+                             a++;
+                             b++;
+                         }
+                         if(x==5)
+                            while(b<8)
+                         {
+                             if(a==4)
+                             f[b]='0';
+                             if(a==5)
+                             f[b]='1';
+                             if(a==6)
+                             f[b]='0';
+                             if(a==7)
+                             f[b]='0';
+                             a++;
+                             b++;
+                         }
+                         if(x==6)
+                            while(b<8)
+                         {
+                             if(a==4)
+                             f[b]='0';
+                             if(a==5)
+                             f[b]='1';
+                             if(a==6)
+                             f[b]='0';
+                             if(a==7)
+                             f[b]='1';
+                             a++;
+                             b++;
+                         }
+                         if(x==7)
+                            while(b<8)
+                         {
+                             if(a==4)
+                             f[b]='0';
+                             if(a==5)
+                             f[b]='1';
+                             if(a==6)
+                             f[b]='1';
+                             if(a==7)
+                             f[b]='0';
+                             a++;
+                             b++;
+                         }
+                         if(x==8)
+                            while(b<8)
+                         {
+                             if(a==4)
+                             f[b]='0';
+                             if(a==5)
+                             f[b]='1';
+                             if(a==6)
+                             f[b]='1';
+                             if(a==7)
+                             f[b]='1';
+                             a++;
+                             b++;
+                         }
+                        }
+                            else
+                        {
+                          if(x==1)
+                            while(b<8)
+                         {
+                             if(a==4)
+                             f[b]='1';
+                             if(a==5)
+                             f[b]='1';
+                             if(a==6)
+                             f[b]='1';
+                             if(a==7)
+                             f[b]='1';
+                             a++;
+                             b++;
+                         }
+                         if(x==2)
+                            while(b<8)
+                         {
+                             if(a==4)
+                             f[b]='1';
+                             if(a==5)
+                             f[b]='1';
+                             if(a==6)
+                             f[b]='1';
+                             if(a==7)
+                             f[b]='0';
+                             a++;
+                             b++;
+                         }
+                         if(x==3)
+                            while(b<8)
+                         {
+                             if(a==4)
+                             f[b]='1';
+                             if(a==5)
+                             f[b]='1';
+                             if(a==6)
+                             f[b]='0';
+                             if(a==7)
+                             f[b]='1';
+                             a++;
+                             b++;
+                         }
+                         if(x==4)
+                            while(b<8)
+                         {
+                             if(a==4)
+                             f[b]='1';
+                             if(a==5)
+                             f[b]='1';
+                             if(a==6)
+                             f[b]='0';
+                             if(a==7)
+                             f[b]='0';
+                             a++;
+                             b++;
+                         }
+                         if(x==5)
+                            while(b<8)
+                         {
+                             if(a==4)
+                             f[b]='1';
+                             if(a==5)
+                             f[b]='0';
+                             if(a==6)
+                             f[b]='1';
+                             if(a==7)
+                             f[b]='1';
+                             a++;
+                             b++;
+                         }
+                         if(x==6)
+                            while(b<8)
+                         {
+                             if(a==4)
+                             f[b]='1';
+                             if(a==5)
+                             f[b]='0';
+                             if(a==6)
+                             f[b]='1';
+                             if(a==7)
+                             f[b]='0';
+                             a++;
+                             b++;
+                         }
+                         if(x==7)
+                            while(b<8)
+                         {
+                             if(a==4)
+                             f[b]='1';
+                             if(a==5)
+                             f[b]='0';
+                             if(a==6)
+                             f[b]='0';
+                             if(a==7)
+                             f[b]='1';
+                             a++;
+                             b++;
+                         }
+                         if(x==8)
+                            while(b<8)
+                         {
+                             if(a==4)
+                             f[b]='1';
+                             if(a==5)
+                             f[b]='0';
+                             if(a==6)
+                             f[b]='0';
+                             if(a==7)
+                             f[b]='0';
+                             a++;
+                             b++;
+                         }
+                        }
+                    }
+                b++;
+                a++;
+                }
+                f[8]='\0';
+                a=base(f,2);
+        if(a>=0 && a<10)
+                {printf("0%X",a);
+                ///p10
+                c=0;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    ranko[c]=b+55;
+                    else
+                        ranko[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            ranko[c]='\0';
+            ///p10
+                }
+                else
+                    if(a>=10 && a<16)
+                    {printf("0%X",a+55);
+                    ///p10
+                c=0;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    ranko[c]=b+55;
+                    else
+                        ranko[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            ranko[c]='\0';
+            ///p10
+                    }
+                else
+                {printf("%X",a);
+                ///p10
+                c=0;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    ranko[c]=b+55;
+                    else
+                        ranko[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            ranko[c]='\0';
+            ///p10
+                }
+        break;
+    case 2:
+        b=0;
+                a=0;
+                while(b<8)
+                {
+                    if(a==0)
+                    f[b]='0';
+                        if(a==1)
+                        f[b]='1';
+                    if(a==2)
+                        f[b]='1';
+                     if(a==3)
+                     {
+                        if(w==1)
+                        f[b]='0';
+                        else
+                        f[b]='1';
+                     }
+
+                    if(a==4)
+                    {
+                        if(g==0)
+                        {
+                         if(x==1)
+                            while(b<8)
+                         {
+                             if(a==4)
+                             f[b]='0';
+                             if(a==5)
+                             f[b]='0';
+                             if(a==6)
+                             f[b]='0';
+                             if(a==7)
+                             f[b]='0';
+                             a++;
+                             b++;
+                         }
+                         if(x==2)
+                            while(b<8)
+                         {
+                             if(a==4)
+                             f[b]='0';
+                             if(a==5)
+                             f[b]='0';
+                             if(a==6)
+                             f[b]='0';
+                             if(a==7)
+                             f[b]='1';
+                             a++;
+                             b++;
+                         }
+                         if(x==3)
+                            while(b<8)
+                         {
+                             if(a==4)
+                             f[b]='0';
+                             if(a==5)
+                             f[b]='0';
+                             if(a==6)
+                             f[b]='1';
+                             if(a==7)
+                             f[b]='0';
+                             a++;
+                             b++;
+                         }
+                         if(x==4)
+                            while(b<8)
+                         {
+                             if(a==4)
+                             f[b]='0';
+                             if(a==5)
+                             f[b]='0';
+                             if(a==6)
+                             f[b]='1';
+                             if(a==7)
+                             f[b]='1';
+                             a++;
+                             b++;
+                         }
+                         if(x==5)
+                            while(b<8)
+                         {
+                             if(a==4)
+                             f[b]='0';
+                             if(a==5)
+                             f[b]='1';
+                             if(a==6)
+                             f[b]='0';
+                             if(a==7)
+                             f[b]='0';
+                             a++;
+                             b++;
+                         }
+                         if(x==6)
+                            while(b<8)
+                         {
+                             if(a==4)
+                             f[b]='0';
+                             if(a==5)
+                             f[b]='1';
+                             if(a==6)
+                             f[b]='0';
+                             if(a==7)
+                             f[b]='1';
+                             a++;
+                             b++;
+                         }
+                         if(x==7)
+                            while(b<8)
+                         {
+                             if(a==4)
+                             f[b]='0';
+                             if(a==5)
+                             f[b]='1';
+                             if(a==6)
+                             f[b]='1';
+                             if(a==7)
+                             f[b]='0';
+                             a++;
+                             b++;
+                         }
+                         if(x==8)
+                            while(b<8)
+                         {
+                             if(a==4)
+                             f[b]='0';
+                             if(a==5)
+                             f[b]='1';
+                             if(a==6)
+                             f[b]='1';
+                             if(a==7)
+                             f[b]='1';
+                             a++;
+                             b++;
+                         }
+                        }
+                            else
+                        {
+                          if(x==1)
+                            while(b<8)
+                         {
+                             if(a==4)
+                             f[b]='1';
+                             if(a==5)
+                             f[b]='1';
+                             if(a==6)
+                             f[b]='1';
+                             if(a==7)
+                             f[b]='1';
+                             a++;
+                             b++;
+                         }
+                         if(x==2)
+                            while(b<8)
+                         {
+                             if(a==4)
+                             f[b]='1';
+                             if(a==5)
+                             f[b]='1';
+                             if(a==6)
+                             f[b]='1';
+                             if(a==7)
+                             f[b]='0';
+                             a++;
+                             b++;
+                         }
+                         if(x==3)
+                            while(b<8)
+                         {
+                             if(a==4)
+                             f[b]='1';
+                             if(a==5)
+                             f[b]='1';
+                             if(a==6)
+                             f[b]='0';
+                             if(a==7)
+                             f[b]='1';
+                             a++;
+                             b++;
+                         }
+                         if(x==4)
+                            while(b<8)
+                         {
+                             if(a==4)
+                             f[b]='1';
+                             if(a==5)
+                             f[b]='1';
+                             if(a==6)
+                             f[b]='0';
+                             if(a==7)
+                             f[b]='0';
+                             a++;
+                             b++;
+                         }
+                         if(x==5)
+                            while(b<8)
+                         {
+                             if(a==4)
+                             f[b]='1';
+                             if(a==5)
+                             f[b]='0';
+                             if(a==6)
+                             f[b]='1';
+                             if(a==7)
+                             f[b]='1';
+                             a++;
+                             b++;
+                         }
+                         if(x==6)
+                            while(b<8)
+                         {
+                             if(a==4)
+                             f[b]='1';
+                             if(a==5)
+                             f[b]='0';
+                             if(a==6)
+                             f[b]='1';
+                             if(a==7)
+                             f[b]='0';
+                             a++;
+                             b++;
+                         }
+                         if(x==7)
+                            while(b<8)
+                         {
+                             if(a==4)
+                             f[b]='1';
+                             if(a==5)
+                             f[b]='0';
+                             if(a==6)
+                             f[b]='0';
+                             if(a==7)
+                             f[b]='1';
+                             a++;
+                             b++;
+                         }
+                         if(x==8)
+                            while(b<8)
+                         {
+                             if(a==4)
+                             f[b]='1';
+                             if(a==5)
+                             f[b]='0';
+                             if(a==6)
+                             f[b]='0';
+                             if(a==7)
+                             f[b]='0';
+                             a++;
+                             b++;
+                         }
+                        }
+                    }
+                b++;
+                a++;
+                }
+                f[8]='\0';
+                a=base(f,2);
+        if(a>=0 && a<10)
+                {printf("0%X",a);
+                ///p10
+                c=0;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    ranko[c]=b+55;
+                    else
+                        ranko[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            ranko[c]='\0';
+            ///p10
+                }
+                else
+                    if(a>=10 && a<16)
+                    {printf("0%X",a+55);
+                    ///p10
+                c=0;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    ranko[c]=b+55;
+                    else
+                        ranko[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            ranko[c]='\0';
+            ///p10
+                    }
+                else
+                {printf("%X",a);
+                ///p10
+                c=0;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    ranko[c]=b+55;
+                    else
+                        ranko[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            ranko[c]='\0';
+            ///p10
+                }
+        break;
+    case 3:
+                f[0]='\0';
+                b=0;
+                a=0;
+                while(b<8)
+                {
+                    if(a==0)
+                    f[b]='1';
+                        if(a==1)
+                        f[b]='0';
+                    if(a==2)
+                        f[b]='1';
+                     if(a==3)
+                     {
+                        if(w==1)
+                        f[b]='0';
+                        else
+                        f[b]='1';
+                     }
+
+                    if(a==4)
+                    {
+                        if(v==0)
+                        {
+                         if(x==1)
+                            while(b<8)
+                         {
+                             if(a==4)
+                             f[b]='0';
+                             if(a==5)
+                             f[b]='0';
+                             if(a==6)
+                             f[b]='0';
+                             if(a==7)
+                             f[b]='0';
+                             a++;
+                             b++;
+                         }
+                         if(x==2)
+                            while(b<8)
+                         {
+                             if(a==4)
+                             f[b]='0';
+                             if(a==5)
+                             f[b]='0';
+                             if(a==6)
+                             f[b]='0';
+                             if(a==7)
+                             f[b]='1';
+                             a++;
+                             b++;
+                         }
+                         if(x==3)
+                            while(b<8)
+                         {
+                             if(a==4)
+                             f[b]='0';
+                             if(a==5)
+                             f[b]='0';
+                             if(a==6)
+                             f[b]='1';
+                             if(a==7)
+                             f[b]='0';
+                             a++;
+                             b++;
+                         }
+                         if(x==4)
+                            while(b<8)
+                         {
+                             if(a==4)
+                             f[b]='0';
+                             if(a==5)
+                             f[b]='0';
+                             if(a==6)
+                             f[b]='1';
+                             if(a==7)
+                             f[b]='1';
+                             a++;
+                             b++;
+                         }
+                         if(x==5)
+                            while(b<8)
+                         {
+                             if(a==4)
+                             f[b]='0';
+                             if(a==5)
+                             f[b]='1';
+                             if(a==6)
+                             f[b]='0';
+                             if(a==7)
+                             f[b]='0';
+                             a++;
+                             b++;
+                         }
+                         if(x==6)
+                            while(b<8)
+                         {
+                             if(a==4)
+                             f[b]='0';
+                             if(a==5)
+                             f[b]='1';
+                             if(a==6)
+                             f[b]='0';
+                             if(a==7)
+                             f[b]='1';
+                             a++;
+                             b++;
+                         }
+                         if(x==7)
+                            while(b<8)
+                         {
+                             if(a==4)
+                             f[b]='0';
+                             if(a==5)
+                             f[b]='1';
+                             if(a==6)
+                             f[b]='1';
+                             if(a==7)
+                             f[b]='0';
+                             a++;
+                             b++;
+                         }
+                         if(x==8)
+                            while(b<8)
+                         {
+                             if(a==4)
+                             f[b]='0';
+                             if(a==5)
+                             f[b]='1';
+                             if(a==6)
+                             f[b]='1';
+                             if(a==7)
+                             f[b]='1';
+                             a++;
+                             b++;
+                         }
+                        }
+                            else
+                        {
+                          if(x==1)
+                            while(b<8)
+                         {
+                             if(a==4)
+                             f[b]='1';
+                             if(a==5)
+                             f[b]='1';
+                             if(a==6)
+                             f[b]='1';
+                             if(a==7)
+                             f[b]='1';
+                             a++;
+                             b++;
+                         }
+                         if(x==2)
+                            while(b<8)
+                         {
+                             if(a==4)
+                             f[b]='1';
+                             if(a==5)
+                             f[b]='1';
+                             if(a==6)
+                             f[b]='1';
+                             if(a==7)
+                             f[b]='0';
+                             a++;
+                             b++;
+                         }
+                         if(x==3)
+                            while(b<8)
+                         {
+                             if(a==4)
+                             f[b]='1';
+                             if(a==5)
+                             f[b]='1';
+                             if(a==6)
+                             f[b]='0';
+                             if(a==7)
+                             f[b]='1';
+                             a++;
+                             b++;
+                         }
+                         if(x==4)
+                            while(b<8)
+                         {
+                             if(a==4)
+                             f[b]='1';
+                             if(a==5)
+                             f[b]='1';
+                             if(a==6)
+                             f[b]='0';
+                             if(a==7)
+                             f[b]='0';
+                             a++;
+                             b++;
+                         }
+                         if(x==5)
+                            while(b<8)
+                         {
+                             if(a==4)
+                             f[b]='1';
+                             if(a==5)
+                             f[b]='0';
+                             if(a==6)
+                             f[b]='1';
+                             if(a==7)
+                             f[b]='1';
+                             a++;
+                             b++;
+                         }
+                         if(x==6)
+                            while(b<8)
+                         {
+                             if(a==4)
+                             f[b]='1';
+                             if(a==5)
+                             f[b]='0';
+                             if(a==6)
+                             f[b]='1';
+                             if(a==7)
+                             f[b]='0';
+                             a++;
+                             b++;
+                         }
+                         if(x==7)
+                            while(b<8)
+                         {
+                             if(a==4)
+                             f[b]='1';
+                             if(a==5)
+                             f[b]='0';
+                             if(a==6)
+                             f[b]='0';
+                             if(a==7)
+                             f[b]='1';
+                             a++;
+                             b++;
+                         }
+                         if(x==8)
+                            while(b<8)
+                         {
+                             if(a==4)
+                             f[b]='1';
+                             if(a==5)
+                             f[b]='0';
+                             if(a==6)
+                             f[b]='0';
+                             if(a==7)
+                             f[b]='0';
+                             a++;
+                             b++;
+                         }
+                        }
+                    }
+                b++;
+                a++;
+                }
+                f[8]='\0';
+     ///lalalalalala
+                a=base(f,2);
+        if(a>=0 && a<10)
+                {printf("0%X",a);
+                ///p10
+                c=0;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    ranko[c]=b+55;
+                    else
+                        ranko[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            ranko[c]='\0';
+            ///p10
+                }
+                else
+                    if(a>=10 && a<16)
+                    {printf("0%X",a+55);
+                    ///p10
+                c=0;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    ranko[c]=b+55;
+                    else
+                        ranko[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            ranko[c]='\0';
+            ///p10
+                    }
+                else
+                {printf("%X",a);
+                ///p10
+                c=0;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    ranko[c]=b+55;
+                    else
+                        ranko[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            ranko[c]='\0';
+            ///p10
+                }
+        break;
+    }
+    break;
+case 5:
+    ///work out
+    switch(c)
+    {
+    case 1:
+        b=0;
+        a=0;
+        while(b<8)
+        {
+            if(a<3)
+                f[b]='1';
+            if(a==3 || a==4)
+                f[b]='0';
+            if(a==5)
+                f[b]='1';
+            if(a==6)
+            {
+                if(x==0)
+                    f[b]='0';
+                if(x==1)
+                    f[b]='0';
+                    if(x==2)
+                    f[b]='1';
+            }
+            if(a==7)
+            {
+                if(x==0)
+                    f[b]='0';
+                if(x==1)
+                    f[b]='1';
+                    if(x==2)
+                    f[b]='0';
+            }
+            a++;
+            b++;
+        }
+        f[8]='\0';
+        a=base(f,2);
+        if(a>=0 && a<10)
+                {printf("0%X",a);
+                ///p10
+                c=0;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    ranko[c]=b+55;
+                    else
+                        ranko[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            ranko[c]='\0';
+            ///p10
+                }
+                else
+                    if(a>=10 && a<16)
+                    {printf("0%X",a+55);
+                    ///p10
+                c=0;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    ranko[c]=b+55;
+                    else
+                        ranko[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            ranko[c]='\0';
+            ///p10
+                    }
+                else
+                {printf("%X",a);
+                ///p10
+                c=0;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    ranko[c]=b+55;
+                    else
+                        ranko[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            ranko[c]='\0';
+            ///p10
+                }
+        break;
+    case 2:
+        b=0;
+        a=0;
+        while(b<8)
+        {
+            if(a<3)
+                f[b]='1';
+            if(a==3)
+            f[b]='0';
+                if(a==4)
+                f[b]='1';
+            if(a==5)
+                f[b]='1';
+            if(a==6)
+            {
+                if(x==0)
+                    f[b]='0';
+                if(x==1)
+                    f[b]='0';
+                    if(x==2)
+                    f[b]='1';
+            }
+            if(a==7)
+            {
+                if(x==0)
+                    f[b]='0';
+                if(x==1)
+                    f[b]='1';
+                    if(x==2)
+                    f[b]='0';
+            }
+            a++;
+            b++;
+        }
+        f[8]='\0';
+        a=base(f,2);
+        if(a>=0 && a<10)
+                {printf("0%X",a);
+                ///p10
+                c=0;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    ranko[c]=b+55;
+                    else
+                        ranko[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            ranko[c]='\0';
+            ///p10
+                }
+                else
+                    if(a>=10 && a<16)
+                    {printf("0%X",a+55);
+                    ///p10
+                c=0;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    ranko[c]=b+55;
+                    else
+                        ranko[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            ranko[c]='\0';
+            ///p10
+                    }
+                else
+                {printf("%X",a);
+                ///p10
+                c=0;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    ranko[c]=b+55;
+                    else
+                        ranko[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            ranko[c]='\0';
+            ///p10
+                }
+        break;
+    case 3:
+        b=0;
+        a=0;
+        while(b<8)
+        {
+            if(a<3)
+                f[b]='1';
+            if(a==3)
+            f[b]='1';
+                if(a==4)
+                f[b]='0';
+            if(a==5)
+                f[b]='1';
+            if(a==6)
+            {
+                if(x==0)
+                    f[b]='0';
+                if(x==1)
+                    f[b]='0';
+                    if(x==2)
+                    f[b]='1';
+            }
+            if(a==7)
+            {
+                if(x==0)
+                    f[b]='0';
+                if(x==1)
+                    f[b]='1';
+                    if(x==2)
+                    f[b]='0';
+            }
+            a++;
+            b++;
+        }
+        f[8]='\0';
+        a=base(f,2);
+        if(a>=0 && a<10)
+                {printf("0%X",a);
+                ///p10
+                c=0;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    ranko[c]=b+55;
+                    else
+                        ranko[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            ranko[c]='\0';
+            ///p10
+                }
+                else
+                    if(a>=10 && a<16)
+                    {printf("0%X",a+55);
+                    ///p10
+                c=0;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    ranko[c]=b+55;
+                    else
+                        ranko[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            ranko[c]='\0';
+            ///p10
+                    }
+                else
+                {printf("%X",a);
+                ///p10
+                c=0;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    ranko[c]=b+55;
+                    else
+                        ranko[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            ranko[c]='\0';
+            ///p10
+                }
+        break;
+    case 4:
+        b=0;
+        a=0;
+        while(b<8)
+        {
+            if(a<3)
+                f[b]='1';
+            if(a==3 || a==4)
+                f[b]='1';
+            if(a==5)
+                f[b]='1';
+            if(a==6)
+            {
+                if(x==0)
+                    f[b]='0';
+                if(x==1)
+                    f[b]='0';
+                    if(x==2)
+                    f[b]='1';
+            }
+            if(a==7)
+            {
+                if(x==0)
+                    f[b]='0';
+                if(x==1)
+                    f[b]='1';
+                    if(x==2)
+                    f[b]='0';
+            }
+            a++;
+            b++;
+        }
+        f[8]='\0';
+        a=base(f,2);
+        if(a>=0 && a<10)
+                {printf("0%X",a);
+                ///p10
+                c=0;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    ranko[c]=b+55;
+                    else
+                        ranko[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            ranko[c]='\0';
+            ///p10
+                }
+                else
+                    if(a>=10 && a<16)
+                    {printf("0%X",a+55);
+                    ///p10
+                c=0;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    ranko[c]=b+55;
+                    else
+                        ranko[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            ranko[c]='\0';
+            ///p10
+                    }
+                else
+                {printf("%X",a);
+                ///p10
+                c=0;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    ranko[c]=b+55;
+                    else
+                        ranko[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            ranko[c]='\0';
+            ///p10
+                }
+        break;
+    }
+    break;
+
+    ///practica 7
+    case 6:
+        b=0;
+        while(b<8)
+        {
+            if(b<3 || (b>5 && b<=7))
+            e1[b]=1;
+            else
+            if(b<5)
+            {
+                if(c==1)
+                {
+                    e1[b]=0;
+                    e1[b+1]=0;
+                    b=5;
+                }
+                if(c==2)
+                {
+                    e1[b]=0;
+                    e1[b+1]=1;
+                    b=5;
+                }
+                if(c==3)
+                {
+                    e1[b]=1;
+                    e1[b+1]=0;
+                    b=5;
+                }
+                if(c==4)
+                {
+                    e1[b]=1;
+                    e1[b+1]=1;
+                    b=5;
+                }
+            }
+            if(b==5)
+                    e1[b]=0;
+            b++;
+        }
+        b=0;
+                c=0;
+                while(b<8)
+                {
+                        f[b]=e1[c]+48;
+                        c++;
+                    b++;
+                }
+                f[8]='\0';
+        b=base(f,2);
+        anya=b;
+        g=a;
+        if(g>4095 && g<=65535)
+            {
+            printf("%X",b);
+            printf("%X",g);
+            ///p10
+                c=0;
+                while(g!=0)
+            {
+                anya=g%16;
+                if(anya>=10)
+                    ranko[c]=anya+55;
+                    else
+                        ranko[c]=anya+48;
+                    c++;
+                    g=g/16;
+            }
+            ranko[c]='\0';
+            g=823;
+
+            c=strlen(ranko);
+                while(b!=0)
+            {
+                anya=b%16;
+                if(anya>=10)
+                    ranko[c]=anya+55;
+                    else
+                        ranko[c]=anya+48;
+                    c++;
+                    b=b/16;
+            }
+            ranko[c]='\0';
+            if(a<=4095)
+            strrev(ranko);
+            ///strrev(ranko);
+            ///p10
+            }
+        ///p10
+        if(g!=823)
+        {printf("%X",b);
+                c=0;
+                while(b!=0)
+            {
+                anya=b%16;
+                if(anya>=10)
+                    ranko[c]=anya+55;
+                    else
+                        ranko[c]=anya+48;
+                    c++;
+                    b=b/16;
+            }
+            ranko[c]='\0';
+            if(a<=4095)
+            strrev(ranko);
+            ///p10
+        if(a>=0 && a<=15)
+            {printf("000%X",a);
+            ///p10
+            if(a==0)
+            anya=0;
+            else
+                anya=1;
+        c=strlen(ranko);
+            while(anya<4)
+            {
+                ranko[c]='0';
+                c++;
+                anya++;
+            }
+               ///c=0;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    ranko[c]=b+55;
+                    else
+                        ranko[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            if(a!=0)
+            ranko[c]='\0';
+            strrev(ranko);
+            ///p10
+            }
+        else
+            if(a>15 && a<=255)
+            {printf("00%X",a);
+            ///p10
+            anya=0;
+        c=strlen(ranko);
+            while(anya<2)
+            {
+                ranko[c]='0';
+                c++;
+                anya++;
+            }
+               ranko[c]='\0';
+               c=0;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    f1[c]=b+55;
+                    else
+                        f1[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            f1[c]='\0';
+            strrev(f1);
+            strcat(ranko,f1);
+            strrev(ranko);
+            ///p10
+            }
+        else
+            if(a>255 && a<=4095)
+            {printf("0%X",a);
+            ///p10
+            anya=0;
+        c=strlen(ranko);
+            while(anya<1)
+            {
+                ranko[c]='0';
+                c++;
+                anya++;
+            }
+            ranko[c]='\0';
+            c=0;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    f1[c]=b+55;
+                    else
+                        f1[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            f1[c]='\0';
+            strrev(f1);
+            strcat(ranko,f1);
+            strrev(ranko);
+            ///p10
+            }
+        else
+            ;}
+        break;
+    case 7:
+        b=0;
+        while(b<8)
+        {
+            if((b>=0 && b<3) || (b>=5 && b<=7))
+                e1[b]=1;
+            else
+            {
+                if(c==1)
+                {
+                    e1[b]=0;
+                    e1[b+1]=0;
+                    b=4;
+                }
+                if(c==2)
+                {
+                    e1[b]=0;
+                    e1[b+1]=1;
+                    b=4;
+                }
+                if(c==3)
+                {
+                    e1[b]=1;
+                    e1[b+1]=0;
+                    b=4;
+                }
+                if(c==4)
+                {
+                    e1[b]=1;
+                    e1[b+1]=1;
+                    b=4;
+                }
+            }
+            b++;
+        }
+        b=0;
+                c=0;
+                while(b<8)
+                {
+                        f[b]=e1[c]+48;
+                    c++;
+                    b++;
+                }
+                f[8]='\0';
+        b=base(f,2);
+        printf("%X",b);
+        ///p10
+                c=0;
+                while(b!=0)
+            {
+                a=b%16;
+                if(a>=10)
+                    ranko[c]=a+55;
+                    else
+                        ranko[c]=a+48;
+                    c++;
+                    b=b/16;
+            }
+            ranko[c]='\0';
+            ///p10
+        break;
+    case 8:
+        b=7;
+                c=1;
+                while(c!=0)
+                {
+                    d=a%2;
+                    c=a/2;
+                    a=c;
+                    e1[b]=d;
+                    b--;
+                }
+                if(b>0)
+                    while(b>=0)
+                {
+                    e1[b]=0;
+                    b--;
+                }
+                if(g==1)
+                {
+                    b=7;
+                    while(b>=0)
+                    {
+                        if(e1[b]==1)
+                        {
+                            b--;
+                            while(b>=0)
+                            {
+                                if(e1[b]==1)
+                                    e1[b]=0;
+                                else
+                                    e1[b]=1;
+                                b--;
+                            }
+                        }
+                        b--;
+                    }
+                }
+               b=0;
+                c=0;
+                while(b<8)
+                {
+                        f[b]=e1[c]+48;
+                    c++;
+                    b++;
+                }
+                f[8]='\0';
+        b=base(f,2);
+                if(b<=15)
+                    {printf("0%X",b);
+                    ///p10
+                c=0;
+                a=b;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    ranko[c]=b+55;
+                    else
+                        ranko[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            while(a<1)
+            {
+                ranko[c]='0';
+                a++;
+                c++;
+            }
+            ranko[c]='\0';
+
+            ///p10
+
+                    }
+                else
+                {printf("%X",b);
+                ///p10
+                c=0;
+                a=b;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    ranko[c]=b+55;
+                    else
+                        ranko[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            ranko[c]='\0';
+
+            ///p10
+                }
+        break;
+    case 9:
+        b=15;
+                c=1;
+                while(c!=0)
+                {
+                    d=a%2;
+                    c=a/2;
+                    a=c;
+                    e2[b]=d;
+                    b--;
+                }
+                if(b>0)
+                    while(b>=0)
+                {
+                    e2[b]=0;
+                    b--;
+                }
+                if(g==1)
+                {
+                    b=15;
+                    while(b>=0)
+                    {
+                        if(e2[b]==1)
+                        {
+                            b--;
+                            while(b>=0)
+                            {
+                                if(e2[b]==1)
+                                    e2[b]=0;
+                                else
+                                    e2[b]=1;
+                                b--;
+                            }
+                        }
+                        b--;
+                    }
+                }
+                b=0;
+                c=0;
+                while(b<16)
+                {
+                        f1[b]=e2[c]+48;
+                    c++;
+                    b++;
+                }
+                f1[16]='\0';
+        b=base(f1,2);
+                if(b<=15)
+                    {printf("000%X",b);
+                    ///p10
+                c=0;
+                a=b;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    ranko[c]=b+55;
+                    else
+                        ranko[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            while(a<4)
+            {
+                ranko[c]='0';
+                a++;
+                c++;
+            }
+            ranko[c]='\0';
+
+            ///p10
+                    }
+                else
+                    if(b>15 && b<=255)
+                {printf("00%X",b);
+                ///p10
+                c=0;
+                a=b;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    ranko[c]=b+55;
+                    else
+                        ranko[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            while(a<2)
+            {
+                ranko[c]='0';
+                a++;
+                c++;
+            }
+            ranko[c]='\0';
+
+            ///p10
+                }
+                else
+                    if(b>255 && b<=4095)
+                {printf("0%X",b);
+                ///p10
+                c=0;
+                a=b;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    ranko[c]=b+55;
+                    else
+                        ranko[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            while(a<1)
+            {
+                ranko[c]='0';
+                a++;
+                c++;
+            }
+            ranko[c]='\0';
+
+            ///p10
+                }
+                else
+                  {printf("%X",b);
+                  ///p10
+                c=0;
+                a=b;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    ranko[c]=b+55;
+                    else
+                        ranko[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            ranko[c]='\0';
+
+            ///p10
+                  }
+        break;
+}
+return(ranko);
+}
+
+int base(char h[], int base)
+{
+    int num, num2, residuo, cociente, poti, x, r;
+    num=num2=0;
+    poti=strlen(h);
+    poti=poti-1;
+    r=0;
+    for(x=0;x<strlen(h);x++)
+    {
+      num=h[x]-48;
+      cociente=num*pow(base,poti);
+      poti--;
+      r=r+cociente;
+    }
+    return(r);
+}
+void step2(char cad[], p10 *Minami, char rootha[],char nb[], char na[])
+{
+int Nico,Pana, Maki, Eli, Kotori, Honky, karina, ece, cde, cce, yui, ritsu, Mio, a , b, c, Sona, w,s,x;
+int inh, inm, dir, ext, rel, idx, idx1, idx2,idx3, idx4;
+int inhb, inmb, dirb, extb, relb, idxb, idx1b, idx2b,idx3b, idx4b;
+int dir_ini,cont_loc,centinela,org=0;
+int residuo,modulo,equx=0,vuelta_etiqueta=0,errbase=0,k,f;
+char hexa[4],hexa2[6],d[6]={'A','B','C','D','E','F'};
+char etiqueta[TC], codop[TC], operando[TC], valor[TC], Mugi, cad3[TC],cad4[TC], cad5[TC], Chihiro[3];
+char inhcm[4], inmcm[4], dircm[4], extcm[4], relcm[4], idxcm[4], idx1cm[4], idx2cm[4],idx3cm[4], idx4cm[4], xbeiby[TC];
+Honky=0;
+Nico=0;
+Pana=0;
+Maki=0;
+Eli=0;
+ece=0;
+cde=0;
+cce=0;
+s=0;
+Kotori=0;
+etiqueta[0]='\0';
+codop[0]='\0';
+operando[0]='\0';
+valor[0]='\0';
+xbeiby[0]='\0';
+karina=strlen(cad);
+ for(Pana=0;Pana<=karina;)
+{
+ if(Maki==0)
+ {
+ Eli=0;
+            while(cad[Nico]!='/')
+            {
+                valor[Eli]=cad[Nico];
+                Nico++;
+                Eli++;
+                Pana++;
+            }
+            valor[Eli]='\0';
+            Maki++;
+            Nico++;
+ }
+ else
+ if(Maki==1)
+ {
+ Eli=0;
+            while(cad[Nico]!='|')
+            {
+                etiqueta[Eli]=cad[Nico];
+                Nico++;
+                Eli++;
+                Pana++;
+            }
+            etiqueta[Eli]='\0';
+            Maki++;
+            Nico++;
+ }
+ else
+ if(Maki==2)
+ {
+  Eli=0;
+            while(cad[Nico]!='|')
+            {
+                codop[Eli]=cad[Nico];
+                Nico++;
+                Eli++;
+                Pana++;
+            }
+            codop[Eli]='\0';
+            Maki++;
+            Nico++;
+ }
+ if(Maki==3)
+    {
+  Eli=0;
+            while(cad[Nico]!='|')
+            {
+                operando[Eli]=cad[Nico];
+                Nico++;
+                Eli++;
+                Pana++;
+            }
+            operando[Eli]='\0';
+            Maki++;
+
+ }
+ if(Maki>3)
+    break;
+}
+
+///práctica 10
+if(Minami->sukulemcia==0)
+{
+    strcpy(Minami->enriquesegoviano,"0000");
+    strcpy(Minami->CoD,rootha);
+
+for(Nico=0; Nico<strlen(Minami->CoD);Nico++)
+{
+        Sona=0;
+   while(Minami->CoD[Nico]!=47 && Minami->CoD[Nico]!=92 && Minami->CoD[Nico]!='\0')
+   {
+       cad5[Sona]=Minami->CoD[Nico];
+       Sona++;
+       Nico++;
+   }
+   cad5[Sona]='\0';
+}
+Sona=strlen(Minami->CoD)-strlen(cad5);
+Minami->CoD[Sona]='\0';
+strcat(Minami->CoD,na);
+cad5[0]='\0';
+Nico=0;
+strcpy(cad5,Minami->CoD);
+for(Sona=0;Sona<strlen(Minami->CoD);Sona++)
+{
+     Pana=Minami->CoD[Sona];
+     b=Pana/16;
+     c=Pana%16;
+     if(b>=10)
+         Chihiro[0]=d[b-10];
+         else
+            Chihiro[0]=b+48;
+    if(c>=10)
+        Chihiro[1]=d[c-10];
+         else
+            Chihiro[1]=c+48;
+    Chihiro[2]='\0';
+    b=0;
+ while(b<2)
+ {
+  Minami->RiceBall[Nico]=Chihiro[b];
+  b++;
+  Nico++;
+ }
+
+}
+Minami->RiceBall[Nico]='\0';
+strcpy(cad5,Minami->RiceBall);
+Pana=strlen(Minami->CoD)+3;
+b=Pana/16;
+     c=Pana%16;
+     if(b>=10)
+         Chihiro[0]=d[b-10];
+         else
+            Chihiro[0]=b+48;
+    if(c>=10)
+        Chihiro[1]=d[c-10];
+         else
+            Chihiro[1]=c+48;
+    Chihiro[2]='\0';
+    Nico=0;
+    while(Nico<2)
+ {
+  Minami->LR[Nico]=Chihiro[Nico];
+  Nico++;
+ }
+ Minami->LR[Nico]='\0';
+ Pana=Minami->CoD[0];
+ strrev(Minami->RiceBall);
+ strcat(Minami->RiceBall,Minami->LR);
+ strrev(Minami->RiceBall);
+///checksum
+strcpy(cad5,Minami->RiceBall);
+b=0;
+    x=0;
+    a=0;
+    while(x<strlen(cad5))
+    {
+        c=0;
+        while(c<2)
+        {
+            Chihiro[c]=cad5[x];
+            x++;
+            if(c==0)
+            {
+                if(Chihiro[c]>=65 && Chihiro[c]<=70)
+                {
+                    b=Chihiro[c]-55;
+                    b=b*16;
+                    a=a+b;
+                }
+                else
+                {
+                    b=Chihiro[c]-48;
+                    b=b*16;
+                    a=a+b;
+                }
+            }
+            else
+            {
+                if(Chihiro[c]>=65 && Chihiro[c]<=70)
+                {
+                    b=Chihiro[c]-55;
+                    a=a+b;
+                }
+                else
+                {
+                b=Chihiro[c]-48;
+                a=a+b;
+                }
+            }
+              c++;
+        }
+    }
+    c=0;
+    while(c<2)
+    {
+    b=a%16;
+    b=15-b;
+    if(b>=10)
+        Chihiro[c]=d[b-10];
+    else
+        Chihiro[c]=b+48;
+        c++;
+        a=a/16;
+        }
+        Chihiro[c]='\0';
+        strrev(Chihiro);
+///fin Checksum
+strcpy(Minami->ChickS,Chihiro);
+strcpy(cad5,"S0");
+strcat(cad5,strcat(Minami->LR,strcat(Minami->enriquesegoviano,strcat(Minami->RiceBall,Minami->ChickS))));
+ k=fopen(nb,"at");
+fwrite(cad5,sizeof(char),strlen(cad5),k);
+fputs("\n",k);
+fclose(k);
+Minami->sukulemcia++;
+}
+
+
+///lo bueno
+ cad3[0]='\0';
+    Mio=0;
+    c=0;
+    b=0;
+inh=inm=dir=ext=rel=idx=idx1=idx2=idx3=idx4=0;
+inhb=inmb=dirb=extb=relb=idxb=idx1b=idx2b=idx3b=idx4b=0;
+    if((yui=open("TABOP.txt",0))<0)
+     {
+         printf("           Error al abrir el archivo\n         Fin del programa");
+         exit(1);
+     }
+     else
+     do{
+            Mio=0;
+            ritsu=0;
+        while(read(yui,&Mugi,1)>0 && Mugi!='/')
+        {
+         cad3[Mio]=Mugi;
+         Mio++;
+        }
+        cad3[Mio]='\0';
+        if(strcmpi(codop,cad3)==0)
+        {
+            Sona=0;
+            do{
+            Mio=0;
+            while(read(yui,&Mugi,1)>0 && Mugi!='-' && Mugi!='|' && Mugi!='\0' && Mugi!='\n')
+                cad3[Mio++]=Mugi;
+
+            if(Mugi=='-')
+                cad3[Mio]='\0';
+              if(Mugi=='\0' || Mugi=='\n' || Mugi=='@')
+            break;
+            switch(Sona)
+            {
+            case 0:
+                if(cad3[0]==49)
+                    b=1;
+                else
+                    b=0;
+                Sona++;
+                break;
+            case 1:
+                strcpy(cad4,cad3);
+                if(strcmpi(cad3,"Inmediato")==0)
+                    inm=1;
+                    else
+                        if(strcmpi(cad3,"Inherente")==0)
+                        inh=1;
+                    else
+                        if(strcmpi(cad3,"Directo")==0)
+                        dir=1;
+                    else
+                        if(strcmpi(cad3,"Extendido")==0)
+                        ext=1;
+                    else
+                        if(strcmpi(cad3,"REL")==0)
+                        rel=1;
+                    else
+                        if(strcmpi(cad3,"IDX")==0)
+                        idx=1;
+                    else
+                        if(strcmpi(cad3,"IDX1")==0)
+                        idx1=1;
+                    else
+                        if(strcmpi(cad3,"IDX2")==0)
+                        idx2=1;
+                    else
+                        if(strcmpi(cad3,"[IDX2]")==0)
+                        idx3=1;
+                    else
+                        if(strcmpi(cad3,"[D,IDX]")==0)
+                        idx4=1;
+                Sona++;
+                break;
+            case 2:
+                if(strcmpi(cad4,"Inmediato")==0)
+                    strcpy(inmcm,cad3);
+                    else
+                        if(strcmpi(cad4,"Inherente")==0)
+                        strcpy(inhcm,cad3);
+                    else
+                        if(strcmpi(cad4,"Directo")==0)
+                        strcpy(dircm,cad3);
+                    else
+                        if(strcmpi(cad4,"Extendido")==0)
+                        strcpy(extcm,cad3);
+                    else
+                        if(strcmpi(cad4,"REL")==0)
+                        strcpy(relcm,cad3);
+                    else
+                        if(strcmpi(cad4,"IDX")==0)
+                        strcpy(idxcm,cad3);
+                    else
+                        if(strcmpi(cad4,"IDX1")==0)
+                        strcpy(idx1cm,cad3);
+                    else
+                        if(strcmpi(cad4,"IDX2")==0)
+                        strcpy(idx2cm,cad3);
+                    else
+                        if(strcmpi(cad4,"[IDX2]")==0)
+                        strcpy(idx3cm,cad3);
+                    else
+                        if(strcmpi(cad4,"[D,IDX]")==0)
+                        strcpy(idx4cm,cad3);
+                Sona++;
+                break;
+            case 3:
+                Sona++;
+                break;
+            case 4:
+                 if(strcmpi(cad4,"Inmediato")==0)
+                    inmb=atoi(cad3);
+                    else
+                        if(strcmpi(cad4,"Inherente")==0)
+                        inhb=atoi(cad3);
+                    else
+                        if(strcmpi(cad4,"Directo")==0)
+                        dirb=atoi(cad3);
+                    else
+                        if(strcmpi(cad4,"Extendido")==0)
+                        extb=atoi(cad3);
+                    else
+                        if(strcmpi(cad4,"REL")==0)
+                        relb=atoi(cad3);
+                    else
+                        if(strcmpi(cad4,"IDX")==0)
+                        idxb=atoi(cad3);
+                    else
+                        if(strcmpi(cad4,"IDX1")==0)
+                        idx1b=atoi(cad3);
+                    else
+                        if(strcmpi(cad4,"IDX2")==0)
+                        idx2b=atoi(cad3);
+                    else
+                        if(strcmpi(cad4,"[IDX2]")==0)
+                        idx3b=atoi(cad3);
+                    else
+                        if(strcmpi(cad4,"[D,IDX]")==0)
+                        idx4b=atoi(cad3);
+                Sona++;
+                break;
+            }
+            if(Mugi=='|')
+                {
+                    cad3[0]='\0';
+                    Sona=0;
+                    cde=0;
+                }
+
+        }while(Mio!=823);
+        c=1;
+        }
+            else
+                while(read(yui,&Mugi,1)>0 && Mugi!='\0' && Mugi!='\n')
+                ritsu++;
+     if(c==1)
+        break;
+     }while(ritsu>0);
+     close(yui);
+
+Eli=b+c;
+
+ if(Eli==0)
+ {
+    ///printf("\n No encontrado");
+    s=1;
+    ///return 0;
+ }
+
+ ece=0;
+Mio=0;
+for(w=0;w<strlen(operando);w++)
+{
+    if(operando[w]==',')
+        cce=1;
+    if(operando[w]=='[' || operando[w]== ']')
+        cde=1;
+}
+if(s>0)
+    ;
+else
+///Xbebé
+if(cce==1 && cde==0)
+    {
+        ece=0;
+     if(operando[0]==',' || operando[0]=='-' || (operando[0]>=48 && operando[0]<=57) || operando[0]=='a' || operando[0]=='A' || operando[0]=='b' || operando[0]=='B' || operando[0]=='d' || operando[0]=='D')
+           if(operando[0]==',')
+     {
+         Eli=0;
+         Pana=1;
+         while(operando[Pana]!='\0')
+         {
+             cad4[Eli]=operando[Pana];
+             if(operando[Pana]==',')
+             ece=1;
+             Pana++;
+             Eli++;
+         }
+         cad4[Eli]='\0';
+         if(ece==1)
+            printf(" Error, el direccionamiento indexado solo puede llevar una coma\n");
+         else
+            if(strcmpi(cad4,"x")==0 || strcmpi(cad4,"y")==0 || strcmpi(cad4,"sp")==0 || strcmpi(cad4,"pc")==0)
+            {
+             if(strcmpi(cad4,"x")==0)
+             {
+              printf("\n%s00",idx1cm);
+             strcpy(xbeiby,strcat(idx1cm,"00"));
+             }
+             if(strcmpi(cad4,"y")==0)
+             {
+                 printf("\n%s40",idx1cm);
+             strcpy(xbeiby,strcat(idx1cm,"40"));
+             }
+             if(strcmpi(cad4,"sp")==0)
+             {
+                 printf("\n%s80",idx1cm);
+             strcpy(xbeiby,strcat(idx1cm,"80"));
+             }
+             if(strcmpi(cad4,"pc")==0)
+            {
+                printf("\n%sC0",idx1cm);
+            strcpy(xbeiby,strcat(idx1cm,"C0"));
+            }
+            idx=2;
+            }
+            else
+                printf("    Los direccionamientos indexados de 5 bits deben de tener alguno de los siguientes registros\n\tde computadora validos: X, Y, SP, o PC");
+}
+     else
+        if(operando[0]=='-' || (operando[0]>=48 && operando[0]<=57))
+         if(operando[0]=='-')
+         {
+             Eli=0;
+            Pana=1;
+         while(operando[Pana]!=',')
+         {
+             cad4[Eli]=operando[Pana];
+             Pana++;
+             Eli++;
+         }
+         Nico=Pana+1;
+         cad4[Eli]='\0';
+         Pana=atoi(cad4);
+         Pana=Pana*-1;
+         if(Pana>=-16 && Pana<0)
+         {
+            Eli=0;
+            while(operando[Nico]!='\0')
+            {
+                cad4[Eli]=operando[Nico];
+                Nico++;
+                Eli++;
+                if(operando[Nico]==',')
+                    ece++;
+            }
+            cad4[Eli]='\0';
+            if(ece>=1)
+             printf(" Error, el direccionamiento indexado solo puede llevar una coma\n");
+            else
+            if(strcmpi(cad4,"x")==0 || strcmpi(cad4,"y")==0 || strcmpi(cad4,"sp")==0 || strcmpi(cad4,"pc")==0)
+            {
+            if(strcmpi(cad4,"x")==0)
+                if(Pana==0)
+                {
+                printf("\n%s00",idx1cm);
+             strcpy(xbeiby,strcat(idx1cm,"00"));
+                }
+            else
+            {
+             printf("\n%s",idx1cm);
+            strcpy(xbeiby,xbb(Pana,1,1,0,1));
+            strcat(xbeiby,strrev(idx1cm));
+            strrev(xbeiby);
+            }
+             if(strcmpi(cad4,"y")==0)
+             if(Pana==0)
+             {
+              printf("\n%s40",idx1cm);
+                 strcpy(xbeiby,strcat(idx1cm,"40"));
+             }
+             else
+                {
+                    printf("\n%s",idx1cm);
+                    strcpy(xbeiby,xbb(Pana,2,1,0,1));
+            strcat(xbeiby,strrev(idx1cm));
+            strrev(xbeiby);
+                }
+             if(strcmpi(cad4,"sp")==0)
+                if(Pana==0)
+             {
+                 printf("\n%s80",idx1cm);
+                 strcpy(xbeiby,strcat(idx1cm,"80"));
+
+             }
+             else
+            {
+                printf("\n%s",idx1cm);
+                strcpy(xbeiby,xbb(Pana,3,1,0,1));
+            strcat(xbeiby,strrev(idx1cm));
+            strrev(xbeiby);
+            }
+             if(strcmpi(cad4,"pc")==0)
+             if(Pana==0)
+            {
+                printf("\n%sC0",idx1cm);
+                 strcpy(xbeiby,strcat(idx1cm,"C0"));
+            }
+            else
+            {
+             printf("\n%s",idx1cm);
+             strcpy(xbeiby,xbb(Pana,4,1,0,1));
+            strcat(xbeiby,strrev(idx1cm));
+            strrev(xbeiby);
+            }
+            idx=2;
+            }
+            else
+                 printf("    Los direccionamientos indexados de 5 bits deben de tener alguno de los siguientes registros\n\tde computadora validos: X, Y, SP, o PC");
+         }
+         else
+        if((Pana>=-256 && Pana<=-17))
+        {
+            Eli=0;
+            while(operando[Nico]!='\0')
+            {
+                cad4[Eli]=operando[Nico];
+                Nico++;
+                Eli++;
+                if(operando[Nico]==',')
+                    ece++;
+            }
+            cad4[Eli]='\0';
+            if(ece>=1)
+             printf(" Error, el direccionamiento indexado solo puede llevar una coma\n");
+            else
+            if(strcmpi(cad4,"x")==0 || strcmpi(cad4,"y")==0 || strcmpi(cad4,"sp")==0 || strcmpi(cad4,"pc")==0)
+             {
+            if(strcmpi(cad4,"x")==0)
+                if(Pana==0)
+             printf("\n%s00",idx1cm);
+            else
+            {
+             printf("\n%s",idx1cm);
+            strcpy(xbeiby,xbb(Pana,1,2,0,1));
+            strcat(xbeiby,strrev(idx1cm));
+            strrev(xbeiby);
+            }
+
+             if(strcmpi(cad4,"y")==0)
+             if(Pana==0)
+             printf("\n%s40",idx1cm);
+             else
+                {
+                    printf("\n%s",idx1cm);
+                    strcpy(xbeiby,xbb(Pana,2,2,0,1));
+            strcat(xbeiby,strrev(idx1cm));
+            strrev(xbeiby);
+                }
+             if(strcmpi(cad4,"sp")==0)
+                if(Pana==0)
+             printf("\n%s80",idx1cm);
+             else
+            {
+                printf("\n%s",idx1cm);
+            strcpy(xbeiby,xbb(Pana,3,2,0,1));
+            strcat(xbeiby,strrev(idx1cm));
+            strrev(xbeiby);
+            }
+             if(strcmpi(cad4,"pc")==0)
+             if(Pana==0)
+            printf("\n%sC0",idx1cm);
+            else
+            {
+             printf("\n%s",idx1cm);
+            strcpy(xbeiby,xbb(Pana,4,2,0,1));
+            strcat(xbeiby,strrev(idx1cm));
+            strrev(xbeiby);
+            }
+            idx=2;
+            }
+            else
+                 printf("    Los direccionamientos indexados de 9 bits deben de tener alguno de los siguientes registros\n\tde computadora validos: X, Y, SP, o PC");
+        }
+        else
+            printf("Error, el rango para los indexados de 5 bits es de -16 a 15\n y el rango de los indexados de 9 bits es de -256 a -17, y de 16, a 255\n");
+         }
+     else
+     {
+            Eli=0;
+            Pana=0;
+         while(operando[Pana]!=',')
+         {
+             cad4[Eli]=operando[Pana];
+             Pana++;
+             Eli++;
+         }
+         Nico=Pana+1;
+         Maki=Nico;
+         cad4[Pana]='\0';
+         Pana=atoi(cad4);
+
+
+         if(Pana>=0 && Pana<=15)
+         {
+            Mio=0;
+            Eli=0;
+            while(operando[Nico]!='\0')
+            {
+                cad4[Eli]=operando[Nico];
+                if(operando[Nico]==',')
+                    ece++;
+                if(operando[Nico]=='-' || operando[Nico]=='+')
+                    Mio++;
+                    Nico++;
+                Eli++;
+            }
+            cad4[Eli]='\0';
+            if(ece>=1)
+             printf(" Error, el direccionamiento indexado solo puede llevar una coma\n");
+            else
+                if(Mio>0)
+                {
+                    if(Mio==1)
+                    {
+                        if(operando[Maki+1]=='\0')
+                                printf("    Error, los direccionamientos indexados de pre/post incremeneto deben tener un registro de computadora valio <X, Y, SP> despues o antes del signo\n");
+                            else
+                        if(operando[Maki]=='+')
+                        {
+                            Maki++;
+                            Eli=0;
+                            while(operando[Maki]!='\0')
+                            {
+                                cad4[Eli]=operando[Maki];
+                                Maki++;
+                                Eli++;
+                            }
+                            cad4[Eli]='\0';
+                            if(strcmpi(cad4,"x")==0 || strcmpi(cad4,"y")==0 || strcmpi(cad4,"sp")==0)
+            {
+            if(strcmpi(cad4,"x")==0)
+                if(Pana==0)
+             printf("\n%s00",idx1cm);
+            else
+            {
+             printf("\n%s",idx1cm);
+            strcpy(xbeiby,xbb(Pana,1,4,1,0));
+            strcat(xbeiby,strrev(idx1cm));
+            strrev(xbeiby);
+            }
+             if(strcmpi(cad4,"y")==0)
+             if(Pana==0)
+             printf("\n%s40",idx1cm);
+             else
+                {
+                    printf("\n%s",idx1cm);
+            strcpy(xbeiby,xbb(Pana,2,4,1,0));
+            strcat(xbeiby,strrev(idx1cm));
+            strrev(xbeiby);
+                }
+             if(strcmpi(cad4,"sp")==0)
+                if(Pana==0)
+             printf("\n%s80",idx1cm);
+             else
+            {
+                printf("\n%s",idx1cm);
+            strcpy(xbeiby,xbb(Pana,3,4,1,0));
+            strcat(xbeiby,strrev(idx1cm));
+            strrev(xbeiby);
+            }
+             if(strcmpi(cad4,"pc")==0)
+             if(Pana==0)
+            printf("\n%sC0",idx1cm);
+            else
+            {
+             printf("\n%s",idx1cm);
+            strcpy(xbeiby,xbb(Pana,4,4,1,0));
+            strcat(xbeiby,strrev(idx1cm));
+            strrev(xbeiby);
+            }
+            idx=2;
+            }
+            else
+                printf("    Los direccionamientos indexados de auto pre/post decremento/incremento deben de tener alguno de los siguientes registros\n\tde computadora validos: X, Y, o SP");
+                        }
+                        else
+                            if(operando[Maki]=='-')
+                        {
+                           Maki++;
+                            Eli=0;
+                            while(operando[Maki]!='\0')
+                            {
+                                cad4[Eli]=operando[Maki];
+                                Maki++;
+                                Eli++;
+                            }
+                            cad4[Eli]='\0';
+                            if(strcmpi(cad4,"x")==0 || strcmpi(cad4,"y")==0 || strcmpi(cad4,"sp")==0)
+            {
+            if(strcmpi(cad4,"x")==0)
+                if(Pana==0)
+             printf("\n%s00",idx1cm);
+            else
+            {
+             printf("\n%s",idx1cm);
+            strcpy(xbeiby,xbb(Pana,1,4,1,1));
+            strcat(xbeiby,strrev(idx1cm));
+            strrev(xbeiby);
+            }
+             if(strcmpi(cad4,"y")==0)
+             if(Pana==0)
+             printf("\n%s40",idx1cm);
+             else
+                {
+                    printf("\n%s",idx1cm);
+            strcpy(xbeiby,xbb(Pana,2,4,1,1));
+            strcat(xbeiby,strrev(idx1cm));
+            strrev(xbeiby);
+                }
+             if(strcmpi(cad4,"sp")==0)
+                if(Pana==0)
+             printf("\n%s80",idx1cm);
+             else
+            {
+                printf("\n%s",idx1cm);
+           strcpy(xbeiby,xbb(Pana,3,4,1,1));
+            strcat(xbeiby,strrev(idx1cm));
+            strrev(xbeiby);
+            }
+             if(strcmpi(cad4,"pc")==0)
+             if(Pana==0)
+            printf("\n%sC0",idx1cm);
+            else
+            {
+             printf("\n%s",idx1cm);
+            strcpy(xbeiby,xbb(Pana,4,4,1,1));
+            strcat(xbeiby,strrev(idx1cm));
+            strrev(xbeiby);
+            }
+            idx=2;
+            }
+            else
+                 printf("    Los direccionamientos indexados de auto pre/post decremento/incremento deben de tener alguno de los siguientes registros\n\tde computadora validos: X, Y, o SP");
+                        }
+                        else
+                        {
+                            Eli=0;
+                         while(operando[Maki]!='+' && operando[Maki]!='-')
+                            {
+                                cad4[Eli]=operando[Maki];
+                                Maki++;
+                                Eli++;
+                            }
+                            cad4[Eli]='\0';
+                            if(operando[Maki+1]!='\0')
+                                printf("    Error, sintaxis");
+                            else
+                            {
+                              if(strcmpi(cad4,"x")==0 || strcmpi(cad4,"y")==0 || strcmpi(cad4,"sp")==0)
+                                {
+                                if(operando[Maki]=='-')
+                              {
+            if(strcmpi(cad4,"x")==0)
+                if(Pana==0)
+             printf("\n%s00",idx1cm);
+            else
+            {
+             printf("\n%s",idx1cm);
+            strcpy(xbeiby,xbb(Pana,1,4,0,1));
+            strcat(xbeiby,strrev(idx1cm));
+            strrev(xbeiby);
+            }
+             if(strcmpi(cad4,"y")==0)
+             if(Pana==0)
+             printf("\n%s40",idx1cm);
+             else
+                {
+                    printf("\n%s",idx1cm);
+            strcpy(xbeiby,xbb(Pana,2,4,0,1));
+            strcat(xbeiby,strrev(idx1cm));
+            strrev(xbeiby);
+                }
+             if(strcmpi(cad4,"sp")==0)
+                if(Pana==0)
+             printf("\n%s80",idx1cm);
+             else
+            {
+                printf("\n%s",idx1cm);
+            strcpy(xbeiby,xbb(Pana,3,4,0,1));
+            strcat(xbeiby,strrev(idx1cm));
+            strrev(xbeiby);
+            }
+             if(strcmpi(cad4,"pc")==0)
+             if(Pana==0)
+            printf("\n%sC0",idx1cm);
+            else
+            {
+             printf("\n%s",idx1cm);
+            strcpy(xbeiby,xbb(Pana,4,4,0,1));
+            strcat(xbeiby,strrev(idx1cm));
+            strrev(xbeiby);
+            }
+            idx=2;
+            }
+                              else
+                              if(operando[Maki]=='+')
+                               {
+            if(strcmpi(cad4,"x")==0)
+                if(Pana==0)
+             printf("\n%s00",idx1cm);
+            else
+            {
+             printf("\n%s",idx1cm);
+            strcpy(xbeiby,xbb(Pana,1,4,0,0));
+            strcat(xbeiby,strrev(idx1cm));
+            strrev(xbeiby);
+            }
+             if(strcmpi(cad4,"y")==0)
+             if(Pana==0)
+             printf("\n%s40",idx1cm);
+             else
+                {
+                    printf("\n%s",idx1cm);
+            strcpy(xbeiby,xbb(Pana,2,4,0,0));
+            strcat(xbeiby,strrev(idx1cm));
+            strrev(xbeiby);
+                }
+             if(strcmpi(cad4,"sp")==0)
+                if(Pana==0)
+             printf("\n%s80",idx1cm);
+             else
+            {
+                printf("\n%s",idx1cm);
+            strcpy(xbeiby,xbb(Pana,3,4,0,0));
+            strcat(xbeiby,strrev(idx1cm));
+            strrev(xbeiby);
+            }
+             if(strcmpi(cad4,"pc")==0)
+             if(Pana==0)
+            printf("\n%sC0",idx1cm);
+            else
+            {
+             printf("\n%s",idx1cm);
+            strcpy(xbeiby,xbb(Pana,4,4,0,0));
+            strcat(xbeiby,strrev(idx1cm));
+            strrev(xbeiby);
+            }
+            idx=2;
+            }
+                                }
+                                else
+                               printf("    Los direccionamientos indexados de auto pre/post decremento/incremento deben de tener alguno de los siguientes registros\n\tde computadora validos: X, Y, o SP");
+                            }
+                        }
+                    }
+                    else
+                    printf("    Error, signos repetidos");
+                }
+                else
+            if(strcmpi(cad4,"x")==0 || strcmpi(cad4,"y")==0 || strcmpi(cad4,"sp")==0 || strcmpi(cad4,"pc")==0)
+                {
+     ///revolvertl
+            if(strcmpi(cad4,"x")==0)
+            {
+             if(Pana==0)
+             {printf("\n%s00",idx1cm);
+             strcpy(xbeiby,strcat(idx1cm,"00"));
+             }
+             else
+                if(Pana<10 && Pana>0)
+             {
+                printf("\n%s0%i",idx1cm,Pana);
+                Chihiro[0]='0';
+                Chihiro[1]=Pana+48;
+                Chihiro[2]='\0';
+                strcpy(xbeiby,idx1cm);
+                strcat(xbeiby,Chihiro);
+             }
+             else
+                if(Pana<=16 && Pana>=10)
+             {
+                 Pana=Pana+55;
+                 printf("\n%s0%c",idx1cm,Pana);
+                 Chihiro[0]='0';
+                Chihiro[1]=d[Pana-10];
+                Chihiro[2]='\0';
+                strcpy(xbeiby,idx1cm);
+                strcat(xbeiby,Chihiro);
+             }
+            else
+            {
+             printf("\n%s",idx1cm);
+            strcpy(xbeiby,xbb(Pana,1,1,0,1));
+            strcat(xbeiby,strrev(idx1cm));
+            strrev(xbeiby);
+            }
+            }
+             if(strcmpi(cad4,"y")==0)
+             {
+                if(Pana==0)
+             {printf("\n%s40",idx1cm);
+             strcpy(xbeiby,strcat(idx1cm,"40"));
+             }
+             else
+                if(Pana<10 && Pana>0)
+             {
+                printf("\n%s0%i",idx1cm,Pana);
+                Chihiro[0]='0';
+                Chihiro[1]=Pana+48;
+                Chihiro[2]='\0';
+                strcpy(xbeiby,idx1cm);
+                strcat(xbeiby,Chihiro);
+             }
+             else
+                if(Pana<=16 && Pana>=10)
+             {
+                 Pana=Pana+55;
+                 printf("\n%s0%c",idx1cm,Pana);
+                 Chihiro[0]='0';
+                Chihiro[1]=d[Pana-10];
+                Chihiro[2]='\0';
+                strcpy(xbeiby,idx1cm);
+                strcat(xbeiby,Chihiro);
+             }
+            else
+                {
+                    printf("\n%s",idx1cm);
+            strcpy(xbeiby,xbb(Pana,2,1,0,1));
+            strcat(xbeiby,strrev(idx1cm));
+            strrev(xbeiby);
+                }
+             }
+             if(strcmpi(cad4,"sp")==0)
+                {
+                    if(Pana==0)
+             {printf("\n%s80",idx1cm);
+             strcpy(xbeiby,strcat(idx1cm,"80"));
+             }
+             if(Pana<10 && Pana>0)
+             {
+                printf("\n%s0%i",idx1cm,Pana);
+                Chihiro[0]='0';
+                Chihiro[1]=Pana+48;
+                Chihiro[2]='\0';
+                strcpy(xbeiby,idx1cm);
+                strcat(xbeiby,Chihiro);
+             }
+             else
+                if(Pana<=16 && Pana>=10)
+             {
+                 Pana=Pana+55;
+                 printf("\n%s0%c",idx1cm,Pana);
+                 Chihiro[0]='0';
+                Chihiro[1]=d[Pana-10];
+                Chihiro[2]='\0';
+                strcpy(xbeiby,idx1cm);
+                strcat(xbeiby,Chihiro);
+             }
+             else
+            {
+                printf("\n%s",idx1cm);
+            strcpy(xbeiby,xbb(Pana,3,1,0,1));
+            strcat(xbeiby,strrev(idx1cm));
+            strrev(xbeiby);
+            }
+             }
+             if(strcmpi(cad4,"pc")==0)
+             {
+            if(Pana==0)
+            {printf("\n%sC0",idx1cm);
+            strcpy(xbeiby,strcat(idx1cm,"C0"));
+            }
+            if(Pana<10 && Pana>0)
+             {
+                printf("\n%s0%i",idx1cm,Pana);
+                Chihiro[0]='0';
+                Chihiro[1]=Pana+48;
+                Chihiro[2]='\0';
+                strcpy(xbeiby,idx1cm);
+                strcat(xbeiby,Chihiro);
+             }
+             else
+                if(Pana<=16 && Pana>=10)
+             {
+                 Pana=Pana+55;
+                 printf("\n%s0%c",idx1cm,Pana);
+                 Chihiro[0]='0';
+                Chihiro[1]=d[Pana-10];
+                Chihiro[2]='\0';
+                strcpy(xbeiby,idx1cm);
+                strcat(xbeiby,Chihiro);
+             }
+            else
+            {
+             printf("\n%s",idx1cm);
+            strcpy(xbeiby,xbb(Pana,4,1,0,1));
+            strcat(xbeiby,strrev(idx1cm));
+            strrev(xbeiby);
+            }
+            }
+            idx=2;
+            }
+            else
+                 printf("    Los direccionamientos indexados de 5 bits deben de tener alguno de los siguientes registros\n\tde computadora validos: X, Y, SP, o PC");
+         }
+
+
+         else
+        if((Pana>=16 && Pana<=255))
+        {
+
+            Eli=0;
+            while(operando[Nico]!='\0')
+            {
+                cad4[Eli]=operando[Nico];
+                if(operando[Nico]==',')
+                    ece++;
+                if(operando[Nico]=='-' || operando[Nico]=='+')
+                    Mio++;
+                    Nico++;
+                    Eli++;
+            }
+            cad4[Eli]='\0';
+            if(ece>=1)
+             printf(" Error, el direccionamiento indexado solo puede llevar una coma\n");
+            else
+                if(Mio>0)
+                printf("Error, los direccionamientos indexados de pre/post incremento/decremento solo pueden llevar en el operando, numeros decimales con un rango de 1 a 8");
+            else
+            if(strcmpi(cad4,"x")==0 || strcmpi(cad4,"y")==0 || strcmpi(cad4,"sp")==0 || strcmpi(cad4,"pc")==0)
+             {
+            if(strcmpi(cad4,"x")==0)
+                if(Pana==0)
+             printf("\n%s00",idx1cm);
+            else
+            {
+             printf("\n%s",idx1cm);
+            strcpy(xbeiby,xbb(Pana,1,2,0,1));
+            strcat(xbeiby,strrev(idx1cm));
+            strrev(xbeiby);
+            }
+             if(strcmpi(cad4,"y")==0)
+             if(Pana==0)
+             printf("\n%s40",idx1cm);
+             else
+                {
+                    printf("\n%s",idx1cm);
+            strcpy(xbeiby,xbb(Pana,2,2,0,1));
+            strcat(xbeiby,strrev(idx1cm));
+            strrev(xbeiby);
+                }
+             if(strcmpi(cad4,"sp")==0)
+                if(Pana==0)
+             printf("\n%s80",idx1cm);
+             else
+            {
+                printf("\n%s",idx1cm);
+            strcpy(xbeiby,xbb(Pana,3,2,0,1));
+            strcat(xbeiby,strrev(idx1cm));
+            strrev(xbeiby);
+            }
+             if(strcmpi(cad4,"pc")==0)
+             if(Pana==0)
+            printf("\n%sC0",idx1cm);
+            else
+            {
+             printf("\n%s",idx1cm);
+            strcpy(xbeiby,xbb(Pana,4,2,0,1));
+            strcat(xbeiby,strrev(idx1cm));
+            strrev(xbeiby);
+            }
+            idx=2;
+            }
+            else
+                 printf("    Los direccionamientos indexados de 9 bits deben de tener alguno de los siguientes registros\n\tde computadora validos: X, Y, SP, o PC");
+        }
+        else
+        if((Pana>=256 && Pana<=65535))
+        {
+            Eli=0;
+            while(operando[Nico]!='\0')
+            {
+                cad4[Eli]=operando[Nico];
+                if(operando[Nico]==',')
+                    ece++;
+                if(operando[Nico]=='-' || operando[Nico]=='+')
+                    Mio++;
+                    Nico++;
+                    Eli++;
+            }
+            cad4[Eli]='\0';
+            if(ece>=1)
+             printf(" Error, el direccionamiento indexado solo puede llevar una coma\n");
+            else
+                if(Mio>0)
+                printf("Error, los direccionamientos indexados de pre/post incremento/decremento solo pueden llevar en el operando, numeros decimales con un rango de 1 a 8");
+            else
+            if(strcmpi(cad4,"x")==0 || strcmpi(cad4,"y")==0 || strcmpi(cad4,"sp")==0 || strcmpi(cad4,"pc")==0)
+                {
+            if(strcmpi(cad4,"x")==0)
+                if(Pana==0)
+             printf("\n%s00",idx1cm);
+            else
+            {
+             printf("\n%s",idx1cm);
+            strcpy(xbeiby,xbb(Pana,1,3,0,1));
+            strcat(xbeiby,strrev(idx1cm));
+            strrev(xbeiby);
+            }
+             if(strcmpi(cad4,"y")==0)
+             if(Pana==0)
+             printf("\n%s40",idx1cm);
+             else
+                {
+                    printf("\n%s",idx1cm);
+            strcpy(xbeiby,xbb(Pana,2,3,0,1));
+            strcat(xbeiby,strrev(idx1cm));
+            strrev(xbeiby);
+                }
+             if(strcmpi(cad4,"sp")==0)
+                if(Pana==0)
+             printf("\n%s80",idx1cm);
+             else
+            {
+                printf("\n%s",idx1cm);
+            strcpy(xbeiby,xbb(Pana,3,3,0,1));
+            strcat(xbeiby,strrev(idx1cm));
+            strrev(xbeiby);
+            }
+             if(strcmpi(cad4,"pc")==0)
+             if(Pana==0)
+            printf("\n%sC0",idx1cm);
+            else
+            {
+             printf("\n%s",idx1cm);
+            strcpy(xbeiby,xbb(Pana,4,3,0,1));
+            strcat(xbeiby,strrev(idx1cm));
+            strrev(xbeiby);
+            }
+            idx=2;
+            }
+            else
+                 printf("    Los direccionamientos indexados de 16 bits deben de tener alguno de los siguientes registros\n\tde computadora validos: X, Y, SP, o PC\n");
+        //
+         }
+         else
+            printf("Error, el rango de los indexados de 9 bits es de -256 a -17 y de 16 a 255\n y el rango de los indexados de 16 bits es de 0 na 65535\n");
+     }
+else
+{
+        Eli=0;
+        Pana=0;
+         while(operando[Pana]!=',')
+         {
+             cad4[Eli]=operando[Pana];
+             Pana++;
+             Eli++;
+         }
+         cad4[Eli]='\0';
+          if(strcmpi(cad4,"A")==0 || strcmpi(cad4,"B")==0 || strcmpi(cad4,"d")==0)
+          {
+            if(strcmpi(cad4,"A")==0)
+                Nico=0;
+            if(strcmpi(cad4,"B")==0)
+                Nico=1;
+                if(strcmpi(cad4,"d")==0)
+                Nico=2;
+             Eli=0;
+             Pana++;
+            while(operando[Pana]!='\0')
+            {
+                cad4[Eli]=operando[Pana];
+                Pana++;
+                Eli++;
+                if(operando[Pana]==',')
+                    ece++;
+          }
+          cad4[Eli]='\0';
+          if(ece>=1)
+             printf(" Error, el direccionamiento indexado solo puede llevar una coma\n");
+            else
+            if(strcmpi(cad4,"x")==0 || strcmpi(cad4,"y")==0 || strcmpi(cad4,"sp")==0 || strcmpi(cad4,"pc")==0)
+            {
+            if(strcmpi(cad4,"x")==0)
+                if(Pana==0)
+             printf("\n%s00",idx1cm);
+            else
+            {
+             printf("\n%s",idx1cm);
+            strcpy(xbeiby,xbb(Nico,1,5,0,1));
+            strcat(xbeiby,strrev(idx1cm));
+            strrev(xbeiby);
+            }
+             if(strcmpi(cad4,"y")==0)
+             if(Pana==0)
+             printf("\n%s40",idx1cm);
+             else
+                {
+                    printf("\n%s",idx1cm);
+            strcpy(xbeiby,xbb(Nico,2,5,0,1));
+            strcat(xbeiby,strrev(idx1cm));
+            strrev(xbeiby);
+                }
+             if(strcmpi(cad4,"sp")==0)
+                if(Pana==0)
+             printf("\n%s80",idx1cm);
+             else
+            {
+                printf("\n%s",idx1cm);
+            strcpy(xbeiby,xbb(Nico,3,5,0,1));
+            strcat(xbeiby,strrev(idx1cm));
+            strrev(xbeiby);
+            }
+             if(strcmpi(cad4,"pc")==0)
+             if(Pana==0)
+            printf("\n%sC0",idx1cm);
+            else
+            {
+             printf("\n%s",idx1cm);
+            strcpy(xbeiby,xbb(Nico,4,5,0,1));
+            strcat(xbeiby,strrev(idx1cm));
+            strrev(xbeiby);
+            }
+            idx=2;
+            }
+            else
+                 printf("    Los direccionamientos indexados de acumulador deben de tener alguno de los siguientes registros\n\tde computadora validos: X, Y, SP, o PC");
+          //elseprintf("    Error de sintaxis");
+}
+else
+    printf("    Error de sintaxis, los direccionamientos indexados solo pueden iniciar con numeros decimales, signo menos corchetes, o las letras a, b o d");
+    }
+
+//final de la parte 3 */
+else
+    printf("    Error de sintaxis, los direccionamientos indexados solo pueden iniciar con numeros decimales, signo menos corchetes, o las letras a, b o d");
+}
+else
+ if(cde==1)
+    if(operando[1]=='\0')
+printf("Error, corchete solo.\nla sintaxis de los direccionamientos indexados indirectos es la siguiente:\n\t\t corchete, 'corchete'+valor numerico decimal +','+ registro de computadora valido <x,y,sp,pc> + 'corchete'\n");
+     else
+    if(cce==0)
+    printf("la sintaxis de los direccionamientos indexados indirectos es la siguiente:\n\t\t corchete, 'corchete'+valor numerico decimal +','+ registro de computadora valido <x,y,sp,pc> + 'corchete'\n\n");
+    else
+     if(operando[0]=='[')
+     {
+         Sona=0;
+         w=0;
+         Eli=0;
+         Pana=1;
+         while(operando[Pana]!=',')
+         {
+             cad4[Eli]=operando[Pana];
+             if(operando[Pana]>=48 && operando[Pana]<=57)
+                ;
+                else
+             if(operando[Pana]==']')
+                Sona++;
+                else
+             if(operando[Pana]=='[')
+                w++;
+                else
+                ece++;
+            Pana++;
+             Eli++;
+         }
+         cad4[Eli]='\0';
+         if(w>0)
+            printf("    Error de sintaxis, en los direccionamientos indexados indirectos no puede haber mas de un corchete de apertura\n");
+         else
+            if(Sona>0)
+            {
+            printf("    Error de sintaxis, en los direccionamientos indexados indirectos no se puede cerrar corchetes, si aun hay caracteres.\n");
+            printf("    Error, la sintaxis de los direccionamientos indexados indirectos es la siguiente:\n\t\t corchete, 'corchete'+valor numerico decimal +','+ registro de computadora valido <x,y,sp,pc> + 'corchete'\n");
+            }
+         else
+            if(ece>0)
+                if(strcmpi(cad4, "d")==0)
+                {
+                   Sona=0;
+         w=0;
+         Eli=0;
+         Pana++;
+         while(operando[Pana]!='\0')
+         {
+             cad4[Eli]=operando[Pana];
+             if(operando[Pana]==']')
+                Sona++;
+                else
+             if(operando[Pana]=='[')
+                w++;
+                Pana++;
+                Eli++;
+         }
+         cad4[Eli-Sona-w]='\0';
+         if(w>0)
+            printf("    Error de sintaxis, en los direccionamientos indexados indirectos no puede haber mas de un corchete de apertura\n");
+         else
+            if(Sona==0)
+            {
+            printf("    Error de sintaxis, no se esncontro el corchete de cierre.\n");
+            printf("    Error, la sintaxis de los direccionamientos indexados indirectos es la siguiente:\n\t\t corchete, 'corchete'+valor numerico decimal +','+ registro de computadora valido <x,y,sp,pc> + 'corchete'\n");
+            }
+         else
+            if(Sona>1)
+             printf("    Error de sintaxis, en los direccionamientos indexados de acumulador indirectos no se puede habermas d un corchete de cierre.\n");
+         else
+         {
+             ///tugfa7.1
+             if(strcmpi(cad4,"x")==0 || strcmpi(cad4,"y")==0 || strcmpi(cad4,"sp")==0 || strcmpi(cad4,"pc")==0)
+            {
+            printf("\n%s",idx1cm);
+            if(strcmpi(cad4,"x")==0)
+            {
+                strcpy(xbeiby,xbb(Pana,1,7,0,1));
+            strcat(xbeiby,strrev(idx1cm));
+            strrev(xbeiby);
+            }
+            if(strcmpi(cad4,"y")==0)
+            {
+                strcpy(xbeiby,xbb(Pana,2,7,0,1));
+            strcat(xbeiby,strrev(idx1cm));
+            strrev(xbeiby);
+            }
+            if(strcmpi(cad4,"sp")==0)
+            {
+                strcpy(xbeiby,xbb(Pana,3,7,0,1));
+            strcat(xbeiby,strrev(idx1cm));
+            strrev(xbeiby);
+            }
+            if(strcmpi(cad4,"pc")==0)
+           {
+               strcpy(xbeiby,xbb(Pana,4,7,0,1));
+            strcat(xbeiby,strrev(idx1cm));
+            strrev(xbeiby);
+           }
+            }
+            else
+                 printf("    Los direccionamientos indexados de acumulador indirecto deben de tener alguno de los siguientes registros\n\tde computadora validos: X, Y, SP, o PC");
+         }
+                }
+                else
+             printf("    Error, la sintaxis de los direccionamientos indexados indirectos es la siguiente:\n\t\t corchete, 'corchete'+valor numerico decimal +','+ registro de computadora valido <x,y,sp,pc> + 'corchete'\n");
+         else
+         {
+             Nico=atoi(cad4);
+             if(Nico>=0 && Nico<=65535)
+             {
+        Sona=0;
+         w=0;
+         Eli=0;
+         Pana++;
+         while(operando[Pana]!='\0')
+         {
+             cad4[Eli]=operando[Pana];
+             if(operando[Pana]==']')
+                Sona++;
+                else
+             if(operando[Pana]=='[')
+                w++;
+             Pana++;
+             Eli++;
+         }
+         cad4[Eli-Sona-w]='\0';
+         if(w>0)
+            printf("    Error de sintaxis, en los direccionamientos indexados indirectos no puede haber mas de un corchete de apertura\n");
+         else
+            if(Sona==0)
+            {
+            printf("    Error de sintaxis, no se esncontro el corchete de cierre.\n");
+            printf("    Error, la sintaxis de los direccionamientos indexados indirectos es la siguiente:\n\t\t corchete, 'corchete'+valor numerico decimal +','+ registro de computadora valido <x,y,sp,pc> + 'corchete'\n");
+            }
+         else
+            if(Sona>1)
+             printf("    Error de sintaxis, en los direccionamientos indexados indirectos no se puede habermas d un corchete de cierre.\n");
+         else
+         {
+             ///tugfa7.2
+             if(strcmpi(cad4,"x")==0 || strcmpi(cad4,"y")==0 || strcmpi(cad4,"sp")==0 || strcmpi(cad4,"pc")==0)
+            {printf("\n%s",idx1cm);
+            if(strcmpi(cad4,"x")==0)
+            {
+                strcpy(xbeiby,xbb(Nico,1,6,0,1));
+            strcat(xbeiby,strrev(idx1cm));
+            strrev(xbeiby);
+            }
+            if(strcmpi(cad4,"y")==0)
+            {
+                strcpy(xbeiby,xbb(Nico,2,6,0,1));
+            strcat(xbeiby,strrev(idx1cm));
+            strrev(xbeiby);
+            }
+            if(strcmpi(cad4,"sp")==0)
+            {
+                strcpy(xbeiby,xbb(Nico,3,6,0,1));
+            strcat(xbeiby,strrev(idx1cm));
+            strrev(xbeiby);
+            }
+            if(strcmpi(cad4,"pc")==0)
+            {
+                strcpy(xbeiby,xbb(Nico,4,6,0,1));
+            strcat(xbeiby,strrev(idx1cm));
+            strrev(xbeiby);
+            }
+            }
+            else
+                 printf("    Los direccionamientos indexados de acumulador deben de tener alguno de los siguientes registros\n\tde computadora validos: X, Y, SP, o PC");
+         }
+         }
+         else
+            printf("Error, el rango para los direccionamientos indexados indirectos es de 0 a 65535");
+     }
+     }
+     else
+        printf("    Error de sintaxis, los indexados inderectos comienzan con corchete\n");
+///pink ward
+if(cce==0 && cde==0)
+{
+if(s!=1)
+{
+  if(strcmpi(operando,"NULL")==0)
+{
+   if(inh==1)
+        {
+        Pana=hex(inhcm);
+        if(inhb==1)
+        {printf("\n%s",inhcm);
+        strcpy(xbeiby,inhcm);
+        }
+        else
+            {printf("\n%s",inhcm);
+            strcpy(xbeiby,inhcm);
+            }
+
+        }
+}
+else
+    if(operando[0]=='#')
+{
+    if(operando[1]=='$')
+    {
+        Sona=0;
+        for(Pana=2;Pana<strlen(operando);Pana++)
+        {
+            cad4[Sona]=operando[Pana];
+            Sona++;
+        }
+        cad4[Sona]='\0';
+        Pana=hex(cad4);
+        if(inmb==3)
+        {if(Pana<=4095)
+            {
+            if(Pana<=255 && Pana>15)
+            {printf("\n%s00%X",inmcm,Pana);
+            ///p10
+                c=0;
+                a=Pana;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    xbeiby[c]=b+55;
+                    else
+                        xbeiby[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            while(a<2)
+            {
+                xbeiby[c]='0';
+                a++;
+                c++;
+            }
+            xbeiby[c]='\0';
+            strcat(xbeiby,strrev(inmcm));
+            strrev(xbeiby);
+            ///p10
+            }
+        else
+            if(Pana<=15)
+            {printf("\n%s000%X",inmcm,Pana);
+            ///p10
+                c=0;
+                a=Pana;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    xbeiby[c]=b+55;
+                    else
+                        xbeiby[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            while(a<3)
+            {
+                xbeiby[c]='0';
+                a++;
+                c++;
+            }
+            xbeiby[c]='\0';
+            strcat(xbeiby,strrev(inmcm));
+            strrev(xbeiby);
+            ///p10
+      strrev(relcm);      }
+        else
+            {printf("\n%s0%X",inmcm,Pana);
+            ///p10
+                c=0;
+                a=Pana;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    xbeiby[c]=b+55;
+                    else
+                        xbeiby[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            while(a<1)
+            {
+                xbeiby[c]='0';
+                a++;
+                c++;
+            }
+            xbeiby[c]='\0';
+            strcat(xbeiby,strrev(inmcm));
+            strrev(xbeiby);
+            ///p10
+            }
+            }
+        else
+        {printf("\n%s%X",inmcm,Pana);
+        ///p10
+                c=0;
+                a=Pana;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    xbeiby[c]=b+55;
+                    else
+                        xbeiby[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            xbeiby[c]='\0';
+            strcat(xbeiby,strrev(inmcm));
+            strrev(xbeiby);
+            ///p10
+        }
+        }
+        else
+            if(inmb==2)
+        {
+           if(Pana<=255 && Pana>15)
+            {printf("\n%s%X",inmcm,Pana);
+            ///p10
+                c=0;
+                a=Pana;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    xbeiby[c]=b+55;
+                    else
+                        xbeiby[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            xbeiby[c]='\0';
+            strcat(xbeiby,strrev(inmcm));
+            strrev(xbeiby);
+            ///p10
+            }
+        else
+            if(Pana<=15)
+            {printf("\n%s0%X",inmcm,Pana);
+            ///p10
+                c=0;
+                a=Pana;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    xbeiby[c]=b+55;
+                    else
+                        xbeiby[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            while(a<1)
+            {
+                xbeiby[c]='0';
+                a++;
+                c++;
+            }
+            xbeiby[c]='\0';
+            strcat(xbeiby,strrev(inmcm));
+            strrev(xbeiby);
+            ///p10
+            }
+        }
+}
+
+    else
+    if(operando[1]=='%')
+    {
+        Sona=0;
+        for(Pana=2;Pana<strlen(operando);Pana++)
+        {
+            cad4[Sona]=operando[Pana];
+            Sona++;
+        }
+        cad4[Sona]='\0';
+        Pana=base(cad4,2);
+        if(inmb==3)
+        {if(Pana<=4095)
+            {
+            if(Pana<=255 && Pana>15)
+            {printf("\n%s00%X",inmcm,Pana);
+            ///p10
+                c=0;
+                a=Pana;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    xbeiby[c]=b+55;
+                    else
+                        xbeiby[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            while(a<2)
+            {
+                xbeiby[c]='0';
+                a++;
+                c++;
+            }
+            xbeiby[c]='\0';
+            strcat(xbeiby,strrev(inmcm));
+            strrev(xbeiby);
+            ///p10
+            }
+        else
+            if(Pana<=15)
+            {printf("\n%s000%X",inmcm,Pana);
+            ///p10
+                c=0;
+                a=Pana;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    xbeiby[c]=b+55;
+                    else
+                        xbeiby[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            while(a<3)
+            {
+                xbeiby[c]='0';
+                a++;
+                c++;
+            }
+            xbeiby[c]='\0';
+            strcat(xbeiby,strrev(inmcm));
+            strrev(xbeiby);
+            ///p10
+            }
+        else
+            {printf("\n%s0%X",inmcm,Pana);
+            ///p10
+                c=0;
+                a=Pana;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    xbeiby[c]=b+55;
+                    else
+                        xbeiby[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            while(a<1)
+            {
+                xbeiby[c]='0';
+                a++;
+                c++;
+            }
+            xbeiby[c]='\0';
+            strcat(xbeiby,strrev(inmcm));
+            strrev(xbeiby);
+            ///p10
+            }
+            }
+        else
+        {printf("\n%s%X",inmcm,Pana);
+        ///p10
+                c=0;
+                a=Pana;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    xbeiby[c]=b+55;
+                    else
+                        xbeiby[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            xbeiby[c]='\0';
+            strcat(xbeiby,strrev(inmcm));
+            strrev(xbeiby);
+            ///p10
+        }
+        }
+        else
+            if(inmb==2)
+        {
+           if(Pana<=255 && Pana>15)
+            {printf("\n%s%X",inmcm,Pana);
+            ///p10
+                c=0;
+                a=Pana;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    xbeiby[c]=b+55;
+                    else
+                        xbeiby[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            xbeiby[c]='\0';
+            strcat(xbeiby,strrev(inmcm));
+            strrev(xbeiby);
+            ///p10
+            }
+        else
+            if(Pana<=15)
+            {printf("\n%s0%X",inmcm,Pana);
+            ///p10
+                c=0;
+                a=Pana;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    xbeiby[c]=b+55;
+                    else
+                        xbeiby[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            while(a<1)
+            {
+                xbeiby[c]='0';
+                a++;
+                c++;
+            }
+            xbeiby[c]='\0';
+            strcat(xbeiby,strrev(inmcm));
+            strrev(xbeiby);
+            ///p10
+            }
+        }
+}
+    else
+    if(operando[1]=='@')
+    {
+
+        Sona=0;
+        for(Pana=2;Pana<strlen(operando);Pana++)
+        {
+            cad4[Sona]=operando[Pana];
+            Sona++;
+        }
+        cad4[Sona]='\0';
+        Pana=base(cad4,8);
+        printf("\n%s%X",inmcm,Pana);
+        if(inmb==3)
+        {if(Pana<=4095)
+            {
+            if(Pana<=255 && Pana>15)
+            {printf("\n%s00%X",inmcm,Pana);
+            ///p10
+                c=0;
+                a=Pana;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    xbeiby[c]=b+55;
+                    else
+                        xbeiby[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            while(a<2)
+            {
+                xbeiby[c]='0';
+                a++;
+                c++;
+            }
+            xbeiby[c]='\0';
+            strcat(xbeiby,strrev(inmcm));
+            strrev(xbeiby);
+            ///p10
+            }
+        else
+            if(Pana<=15)
+            {printf("\n%s000%X",inmcm,Pana);
+            ///p10
+                c=0;
+                a=Pana;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    xbeiby[c]=b+55;
+                    else
+                        xbeiby[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            while(a<3)
+            {
+                xbeiby[c]='0';
+                a++;
+                c++;
+            }
+            xbeiby[c]='\0';
+            strcat(xbeiby,strrev(inmcm));
+            strrev(xbeiby);
+            ///p10
+            }
+        else
+            {printf("\n%s0%X",inmcm,Pana);
+            ///p10
+                c=0;
+                a=Pana;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    xbeiby[c]=b+55;
+                    else
+                        xbeiby[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            while(a<1)
+            {
+                xbeiby[c]='0';
+                a++;
+                c++;
+            }
+            xbeiby[c]='\0';
+            strcat(xbeiby,strrev(inmcm));
+            strrev(xbeiby);
+            ///p10
+            }
+            }
+        else
+        {printf("\n%s%X",inmcm,Pana);
+        ///p10
+                c=0;
+                a=Pana;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    xbeiby[c]=b+55;
+                    else
+                        xbeiby[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            xbeiby[c]='\0';
+            strcat(xbeiby,strrev(inmcm));
+            strrev(xbeiby);
+            ///p10
+        }
+        }
+        else
+            if(inmb==2)
+        {
+           if(Pana<=255 && Pana>15)
+            {printf("\n%s%X",inmcm,Pana);
+            ///p10
+                c=0;
+                a=Pana;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    xbeiby[c]=b+55;
+                    else
+                        xbeiby[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            xbeiby[c]='\0';
+            strcat(xbeiby,strrev(inmcm));
+            strrev(xbeiby);
+            ///p10
+            }
+        else
+            if(Pana<=15)
+            {printf("\n%s0%X",inmcm,Pana);
+            ///p10
+                c=0;
+                a=Pana;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    xbeiby[c]=b+55;
+                    else
+                        xbeiby[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            while(a<1)
+            {
+                xbeiby[c]='0';
+                a++;
+                c++;
+            }
+            xbeiby[c]='\0';
+            strcat(xbeiby,strrev(inmcm));
+            strrev(xbeiby);
+            ///p10
+            }
+        }
+
+    }
+    else
+    {
+        Sona=0;
+        for(Pana=1;Pana<strlen(operando);Pana++)
+        {
+            cad4[Sona]=operando[Pana];
+            Sona++;
+        }
+        cad4[Sona]='\0';
+        Pana=atoi(cad4);
+
+        if(inmb==3)
+        {if(Pana<=4095)
+            {
+            if(Pana<=255 && Pana>15)
+            {printf("\n%s00%X",inmcm,Pana);
+            ///p10
+                c=0;
+                a=Pana;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    xbeiby[c]=b+55;
+                    else
+                        xbeiby[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            while(a<2)
+            {
+                xbeiby[c]='0';
+                a++;
+                c++;
+            }
+            xbeiby[c]='\0';
+            strcat(xbeiby,strrev(inmcm));
+            strrev(xbeiby);
+            ///p10
+            }
+        else
+            if(Pana<=15)
+            {printf("\n%s000%X",inmcm,Pana);
+            ///p10
+                c=0;
+                a=Pana;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    xbeiby[c]=b+55;
+                    else
+                        xbeiby[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            while(a<3)
+            {
+                xbeiby[c]='0';
+                a++;
+                c++;
+            }
+            xbeiby[c]='\0';
+            strcat(xbeiby,strrev(inmcm));
+            strrev(xbeiby);
+            ///p10
+            }
+        else
+            {printf("\n%s0%X",inmcm,Pana);
+            ///p10
+                c=0;
+                a=Pana;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    xbeiby[c]=b+55;
+                    else
+                        xbeiby[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            while(a<1)
+            {
+                xbeiby[c]='0';
+                a++;
+                c++;
+            }
+            xbeiby[c]='\0';
+            strcat(xbeiby,strrev(inmcm));
+            strrev(xbeiby);
+            ///p10
+            }
+            }
+        else
+        {printf("\n%s%X",inmcm,Pana);
+        ///p10
+                c=0;
+                a=Pana;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    xbeiby[c]=b+55;
+                    else
+                        xbeiby[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            xbeiby[c]='\0';
+            strcat(xbeiby,strrev(inmcm));
+            strrev(xbeiby);
+            ///p10
+        }
+        }
+        else
+            if(inmb==2)
+        {
+           if(Pana<=255 && Pana>15)
+            {printf("\n%s%X",inmcm,Pana);
+            ///p10
+                c=0;
+                a=Pana;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    xbeiby[c]=b+55;
+                    else
+                        xbeiby[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            xbeiby[c]='\0';
+            strcat(xbeiby,strrev(inmcm));
+            strrev(xbeiby);
+            ///p10
+            }
+        else
+            if(Pana<=15)
+            {printf("\n%s0%X",inmcm,Pana);
+            ///p10
+                c=0;
+                a=Pana;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    xbeiby[c]=b+55;
+                    else
+                        xbeiby[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            while(a<1)
+            {
+                xbeiby[c]='0';
+                a++;
+                c++;
+            }
+            xbeiby[c]='\0';
+            strcat(xbeiby,strrev(inmcm));
+            strrev(xbeiby);
+            ///p10
+            }
+        }
+    }
+}
+else
+    if((operando[0]=='$' || operando[0]=='%' || operando[0]=='@' || (operando[0]>=48 && operando[0]<=57) || (operando[0]>=65 && operando[0]<=90) || (operando[0]>=97 && operando[0]<=122)))
+{
+   if(operando[0]=='$')
+    {
+        Sona=0;
+        for(Pana=1;Pana<strlen(operando);Pana++)
+        {
+            cad4[Sona]=operando[Pana];
+            Sona++;
+        }
+        cad4[Sona]='\0';
+        Pana=hex(cad4);
+        if(Pana>=0 && Pana<=255)
+        {
+            if(Pana<=15)
+        {printf("\n%s0%X",dircm,Pana);
+        ///p10
+                c=0;
+                a=Pana;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    xbeiby[c]=b+55;
+                    else
+                        xbeiby[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            while(a<1)
+            {
+                xbeiby[c]='0';
+                a++;
+                c++;
+            }
+            xbeiby[c]='\0';
+            strcat(xbeiby,strrev(inmcm));
+            strrev(xbeiby);
+            ///p10
+        }
+           else
+            {printf("\n%s%X",dircm,Pana);
+            ///p10
+                c=0;
+                a=Pana;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    xbeiby[c]=b+55;
+                    else
+                        xbeiby[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            xbeiby[c]='\0';
+            strcat(xbeiby,strrev(inmcm));
+            strrev(xbeiby);
+            ///p10
+            }
+        }
+        else
+        if(Pana>=256 && Pana<=65535)
+        {
+            if(Pana<=4095)
+        {printf("\n%s0%X",extcm,Pana);
+        ///p10
+                c=0;
+                a=Pana;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    xbeiby[c]=b+55;
+                    else
+                        xbeiby[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            while(a<1)
+            {
+                xbeiby[c]='0';
+                a++;
+                c++;
+            }
+            xbeiby[c]='\0';
+            strcat(xbeiby,strrev(extcm));
+            strrev(xbeiby);
+            ///p10
+        }
+        else
+            {printf("\n%s%X",extcm,Pana);
+            ///p10
+                c=0;
+                a=Pana;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    xbeiby[c]=b+55;
+                    else
+                        xbeiby[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            while(a<1)
+            {
+                xbeiby[c]='0';
+                a++;
+                c++;
+            }
+            xbeiby[c]='\0';
+            strcat(xbeiby,strrev(extcm));
+            strrev(xbeiby);
+            ///p10
+            }
+        }
+    }
+    else
+    if(operando[0]=='%')
+    {
+       Sona=0;
+        for(Pana=1;Pana<strlen(operando);Pana++)
+        {
+            cad4[Sona]=operando[Pana];
+            Sona++;
+        }
+        cad4[Sona]='\0';
+        Pana=base(cad4,2);
+        if(Pana>=0 && Pana<=255)
+        {
+            if(Pana<=15)
+        {printf("\n%s0%X",dircm,Pana);
+        ///p10
+                c=0;
+                a=Pana;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    xbeiby[c]=b+55;
+                    else
+                        xbeiby[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            while(a<1)
+            {
+                xbeiby[c]='0';
+                a++;
+                c++;
+            }
+            xbeiby[c]='\0';
+            strcat(xbeiby,strrev(inmcm));
+            strrev(xbeiby);
+            ///p10
+        }
+           else
+            {printf("\n%s%X",dircm,Pana);
+            ///p10
+                c=0;
+                a=Pana;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    xbeiby[c]=b+55;
+                    else
+                        xbeiby[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            xbeiby[c]='\0';
+            strcat(xbeiby,strrev(inmcm));
+            strrev(xbeiby);
+            ///p10
+            }
+        }
+        else
+        if(Pana>=256 && Pana<=65535)
+        {
+            if(Pana<=4095)
+        {printf("\n%s0%X",extcm,Pana);
+        ///p10
+                c=0;
+                a=Pana;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    xbeiby[c]=b+55;
+                    else
+                        xbeiby[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            while(a<1)
+            {
+                xbeiby[c]='0';
+                a++;
+                c++;
+            }
+            xbeiby[c]='\0';
+            strcat(xbeiby,strrev(extcm));
+            strrev(xbeiby);
+            ///p10
+        }
+        else
+            {printf("\n%s%X",extcm,Pana);
+            ///p10
+                c=0;
+                a=Pana;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    xbeiby[c]=b+55;
+                    else
+                        xbeiby[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            while(a<1)
+            {
+                xbeiby[c]='0';
+                a++;
+                c++;
+            }
+            xbeiby[c]='\0';
+            strcat(xbeiby,strrev(extcm));
+            strrev(xbeiby);
+            ///p10
+            }
+        }
+    }
+    else
+    if(operando[0]=='@')
+    {
+        Sona=0;
+        for(Pana=1;Pana<strlen(operando);Pana++)
+        {
+            cad4[Sona]=operando[Pana];
+            Sona++;
+        }
+        cad4[Sona]='\0';
+        Pana=base(cad4,8);
+if(Pana>=0 && Pana<=255)
+        {
+            if(Pana<=15)
+        {printf("\n%s0%X",dircm,Pana);
+        ///p10
+                c=0;
+                a=Pana;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    xbeiby[c]=b+55;
+                    else
+                        xbeiby[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            while(a<1)
+            {
+                xbeiby[c]='0';
+                a++;
+                c++;
+            }
+            xbeiby[c]='\0';
+            strcat(xbeiby,strrev(inmcm));
+            strrev(xbeiby);
+            ///p10
+        }
+           else
+            {printf("\n%s%X",dircm,Pana);
+            ///p10
+                c=0;
+                a=Pana;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    xbeiby[c]=b+55;
+                    else
+                        xbeiby[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            xbeiby[c]='\0';
+            strcat(xbeiby,strrev(inmcm));
+            strrev(xbeiby);
+            ///p10
+            }
+        }
+        else
+        if(Pana>=256 && Pana<=65535)
+        {
+            if(Pana<=4095)
+        {printf("\n%s0%X",extcm,Pana);
+        ///p10
+                c=0;
+                a=Pana;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    xbeiby[c]=b+55;
+                    else
+                        xbeiby[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            while(a<1)
+            {
+                xbeiby[c]='0';
+                a++;
+                c++;
+            }
+            xbeiby[c]='\0';
+            strcat(xbeiby,strrev(extcm));
+            strrev(xbeiby);
+            ///p10
+        }
+        else
+            {printf("\n%s%X",extcm,Pana);
+            ///p10
+                c=0;
+                a=Pana;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    xbeiby[c]=b+55;
+                    else
+                        xbeiby[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            xbeiby[c]='\0';
+            strcat(xbeiby,strrev(extcm));
+            strrev(xbeiby);
+            ///p10
+            }
+        }
+    }
+    else
+    if(operando[0]>=48 && operando[0]<=57)
+    {
+      Sona=0;
+        for(Pana=0;Pana<strlen(operando);Pana++)
+        {
+            cad4[Sona]=operando[Pana];
+            Sona++;
+        }
+        cad4[Sona]='\0';
+        Pana=atoi(cad4);
+        if(Pana>=0 && Pana<=255)
+        {
+            if(Pana<=15)
+        {printf("\n%s0%X",dircm,Pana);
+        ///p10
+                c=0;
+                a=Pana;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    xbeiby[c]=b+55;
+                    else
+                        xbeiby[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            while(a<1)
+            {
+                xbeiby[c]='0';
+                a++;
+                c++;
+            }
+            xbeiby[c]='\0';
+            strcat(xbeiby,strrev(dircm));
+            strrev(xbeiby);
+            ///p10
+        }
+           else
+            {printf("\n%s%X",dircm,Pana);
+            ///p10
+                c=0;
+                a=Pana;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    xbeiby[c]=b+55;
+                    else
+                        xbeiby[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            xbeiby[c]='\0';
+            strcat(xbeiby,strrev(dircm));
+            strrev(xbeiby);
+            ///p10
+            }
+        }
+        else
+        if(Pana>=256 && Pana<=65535)
+        {
+            if(Pana<=4095)
+        {printf("\n%s0%X",extcm,Pana);
+        ///p10
+                c=0;
+                a=Pana;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    xbeiby[c]=b+55;
+                    else
+                        xbeiby[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            while(a<1)
+            {
+                xbeiby[c]='0';
+                a++;
+                c++;
+            }
+            xbeiby[c]='\0';
+            strcat(xbeiby,strrev(extcm));
+            strrev(xbeiby);
+            ///p10
+        }
+        else
+            {printf("\n%s%X",extcm,Pana);
+            ///p10
+                c=0;
+                a=Pana;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    xbeiby[c]=b+55;
+                    else
+                        xbeiby[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            while(a<1)
+            {
+                xbeiby[c]='0';
+                a++;
+                c++;
+            }
+            xbeiby[c]='\0';
+            strcat(xbeiby,strrev(extcm));
+            strrev(xbeiby);
+            ///p10
+            }
+        }
+    }
+    else
+        ///Practica 8 & 9
+    {
+        if((operando[0]>=65 && operando[0]<=90) || (operando[0]>=97 && operando[0]<=122))
+        {
+           for(Pana=0;Pana<strlen(operando);Pana++)
+             if((operando[Pana]>=48 && operando[Pana]<=57) || (operando[Pana]>=65 && operando[Pana]<=90) || (operando[Pana]>=97 && operando[Pana]<=122) || operando[Pana]==95)
+             ;
+        else
+            ece=1;
+karina=strlen(operando);
+if(karina>8)
+    if(ext==1)
+    printf("    Error, el operando de un extendido debe de tener una longitud menor o igual a 8\n");
+else
+    if(rel==1)
+    printf("    Error, el operando de un relativo debe de tener una longitud menor o igual a 8\n");
+     if(ece==1 && ext==1)
+        printf(" Error, la sintaxis del operando de un direccionamiento extendido es:\n\tBase numerica+ digitos y/o letras validas, segun la base.\n\tO bien: letra mayuscula o minuscula + letras, digitos y/o guiones bajos.\n");
+    else
+    if(ece==0 && (rel==0 && ext==1))
+        {             ///busqueda de etiquetas
+k=open("TABSIM.txt",0);
+do{
+            cad3[0]='\0';
+            c=0;
+            Mio=0;
+            ritsu=0;
+        while(read(k,&Mugi,1)>0 && (Mugi!='/' && Mugi!='\0'))
+        {
+            cad3[Mio]=Mugi;
+            Mio++;
+        }
+        cad3[Mio]='\0';
+        if(strcmpi(operando,cad3)==0 && operando[0]!='\0')
+        {
+            c=1;
+
+           cad3[0]='\0';
+            Mio=0;
+        while(read(k,&Mugi,1)>0 && (Mugi!='\n' && Mugi!='\0'))
+        {
+            cad3[Mio]=Mugi;
+            Mio++;
+        }
+        cad3[Mio-1]='\0';
+         Nico=hex(cad3);
+        }
+else
+                while(read(k,&Mugi,1)>0 && Mugi!='\0' && Mugi!='\n')
+                ritsu++;
+     if(c==1)
+        break;
+     }while(ritsu>0);
+close(k);
+if(c==0)
+    printf("\nError, no se encontro el opernado en el TABSIM");
+else
+{printf("\n%s%s",extcm,cad3);
+strcpy(xbeiby, extcm);
+strcat(xbeiby,cad3);
+}
+        }
+    else
+    if(ece==1 && rel==1)
+     printf(" Error, la sintaxis del operando de un direccionamiento relativo es:\n\tLetra mayuscula o minuscula + letras, digitos y/o guiones bajos.");
+    else
+        if(ece==0 && (rel==1 && ext==0))
+        {
+            if(relb==2)
+         {
+             ///busqueda de etiquetas
+k=open("TABSIM.txt",0);
+do{
+            cad3[0]='\0';
+            c=0;
+            Mio=0;
+            ritsu=0;
+        while(read(k,&Mugi,1)>0 && (Mugi!='/' && Mugi!='\0'))
+        {
+            cad3[Mio]=Mugi;
+            Mio++;
+        }
+        cad3[Mio]='\0';
+
+        if(strcmpi(operando,cad3)==0 && operando[0]!='\0')
+        {
+            c=1;
+
+           cad3[0]='\0';
+            Mio=0;
+        while(read(k,&Mugi,1)>0 && (Mugi!='\n' && Mugi!='\0'))
+        {
+            cad3[Mio]=Mugi;
+            Mio++;
+        }
+        cad3[Mio-1]='\0';
+         Nico=hex(cad3);
+        }
+else
+                while(read(k,&Mugi,1)>0 && Mugi!='\0' && Mugi!='\n')
+                ritsu++;
+     if(c==1)
+        break;
+     }while(ritsu>0);
+close(k);
+
+Maki=hex(valor);
+Maki=Maki+relb;
+Maki=Nico-Maki;
+if(c==0)
+    printf("\nError, no se econtro el operando en el TABSIM");
+else
+    ///kaori
+if(Maki>=-128 && Maki<=127)
+{
+    printf("\n%s",relcm);
+    if(Maki<0)
+        {strcpy(xbeiby,xbb(Maki,0,8,0,0));
+        strrev(relcm);
+        strcat(xbeiby,relcm);
+        strrev(xbeiby);
+       }
+    else
+        {
+        if(Maki>=0 && Maki<=15)
+        {printf("0%X",Maki);
+        ///p10
+                c=0;
+                a=Maki;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    xbeiby[c]=b+55;
+                    else
+                        xbeiby[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            while(a<1)
+            {
+                xbeiby[c]='0';
+                a++;
+                c++;
+            }
+            xbeiby[c]='\0';
+            strcat(xbeiby,strrev(relcm));
+            strrev(xbeiby);
+            ///p10
+        }
+        else
+    if(Maki>15 && Maki<=255)
+        {printf("%X",Maki);
+        ///p10
+                c=0;
+                a=Maki;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    xbeiby[c]=b+55;
+                    else
+                        xbeiby[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            xbeiby[c]='\0';
+            strcat(xbeiby,strrev(relcm));
+            strrev(xbeiby);
+            ///p10
+        }
+    else
+        if(Maki>255 && Maki<=4095)
+        {printf("%X",Maki);
+        ///p10
+                c=0;
+                a=Maki;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    xbeiby[c]=b+55;
+                    else
+                        xbeiby[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            while(a<1)
+            {
+                xbeiby[c]='0';
+                a++;
+                c++;
+            }
+            xbeiby[c]='\0';
+            strcat(xbeiby,strrev(relcm));
+            strrev(xbeiby);
+            ///p10
+        }
+        }
+
+}
+else
+    printf("\nError:\n\t El byte por calcular de un relativo de 8 bits debe estar en el siguente rango: de -128 a 127");
+
+         }
+         if(relb==4)
+         {
+             ///busqueda de etiquetas
+k=open("TABSIM.txt",0);
+do{
+            cad3[0]='\0';
+            c=0;
+            Mio=0;
+            ritsu=0;
+        while(read(k,&Mugi,1)>0 && (Mugi!='/' && Mugi!='\0'))
+        {
+            cad3[Mio]=Mugi;
+            Mio++;
+        }
+        cad3[Mio]='\0';
+        if(strcmpi(operando,cad3)==0 && operando[0]!='\0')
+        {
+            c=1;
+
+           cad3[0]='\0';
+            Mio=0;
+        while(read(k,&Mugi,1)>0 && (Mugi!='\n' && Mugi!='\0'))
+        {
+            cad3[Mio]=Mugi;
+            Mio++;
+        }
+        cad3[Mio-1]='\0';
+         Nico=hex(cad3);
+        }
+else
+                while(read(k,&Mugi,1)>0 && Mugi!='\0' && Mugi!='\n')
+                ritsu++;
+     if(c==1)
+        break;
+     }while(ritsu>0);
+close(k);
+
+Maki=hex(valor);
+Maki=Maki+relb;
+Maki=Nico-Maki;
+if(c==0)
+    printf("\nError, no se econtro el operando en el TABSIM");
+else
+if(Maki>=-32768 && Maki<=32767)
+{
+    printf("\n%s",relcm);
+    if(Maki<0)
+        {strcpy(xbeiby,xbb(Maki,0,9,0,0));
+        strrev(relcm);
+        strcat(xbeiby,relcm);
+        strrev(xbeiby);
+            }
+            else
+        {
+        if(Maki>=0 && Maki<=15)
+        {printf("000%X",Maki);
+        ///p10
+                c=0;
+                a=Maki;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    xbeiby[c]=b+55;
+                    else
+                        xbeiby[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            while(a<4)
+            {
+                xbeiby[c]='0';
+                a++;
+                c++;
+            }
+            xbeiby[c]='\0';
+            strcat(xbeiby,strrev(relcm));
+            strrev(xbeiby);
+            ///p10
+        }
+        else
+    if(Maki>15 && Maki<=255)
+        {printf("00%X",Maki);
+        ///p10
+                c=0;
+                a=Maki;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    xbeiby[c]=b+55;
+                    else
+                        xbeiby[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            while(a<2)
+            {
+                xbeiby[c]='0';
+                a++;
+                c++;
+            }
+            xbeiby[c]='\0';
+            strcat(xbeiby,strrev(relcm));
+            strrev(xbeiby);
+            ///p10
+        }
+        else
+        if(Maki>255 && Maki<=4095)
+        {printf("0%X",Maki);
+        ///p10
+                c=0;
+                a=Maki;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    xbeiby[c]=b+55;
+                    else
+                        xbeiby[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            while(a<1)
+            {
+                xbeiby[c]='0';
+                a++;
+                c++;
+            }
+            xbeiby[c]='\0';
+            strcat(xbeiby,strrev(relcm));
+            strrev(xbeiby);
+            ///p10
+        }
+        else
+        {printf("%X",Maki);
+        ///p10
+                c=0;
+                a=Maki;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    xbeiby[c]=b+55;
+                    else
+                        xbeiby[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            xbeiby[c]='\0';
+            strcat(xbeiby,strrev(relcm));
+            strrev(xbeiby);
+            ///p10
+        }
+        }
+
+}
+else
+    printf("\nError:\n\t El byte por calcular de un relativo de 16 bits debe estar en el siguente rango: de -32768 a 32767");
+
+         }
+        }
+        }
+        else
+            if(ext==1)
+            printf("    Error, la sintaxis del operando de un direccionamiento extendido es:\n      Base numerica+ digitos y/o letras validas, segun la base.\n\tO bien: letra mayuscula o minuscula + letras, digitos y/o guiones bajos.\n");
+            else
+            if(rel==1)
+            printf("    Error, la sintaxis del operando de un direccionamiento relativo es:\n      Letra mayuscula o minuscula + letras, digitos y/o guiones bajos.\n");
+    }
+}
+else
+    if(operando[0]=='-')
+    printf("    Error, los direccionamientos directos no admiten numeros negativos\n");
+    else
+        if(operando[0]=='-')
+ printf("    Error, los direccionamientos directos son numeros naturales,\n      y no hay necesidad de poner signos positivos\n");
+}
+///p9
+else
+    if(strcmpi(codop,"DB")==0 || strcmpi(codop,"DC.B")==0 || strcmpi(codop,"FCB")==0)
+{
+
+ if((operando[0]=='$' || operando[0]=='%' || operando[0]=='@' || (operando[0]>=48 && operando[0]<=57) || (operando[0]>=65 && operando[0]<=90) || (operando[0]>=97 && operando[0]<=122)))
+{
+   if(operando[0]=='$')
+    {
+        Sona=0;
+        for(Pana=1;Pana<strlen(operando);Pana++)
+        {
+            cad4[Sona]=operando[Pana];
+            Sona++;
+        }
+        cad4[Sona]='\0';
+        Pana=hex(cad4);
+        if(Pana>=0 && Pana<=255)
+        {
+            if(Pana<=15)
+        {printf("\n0%X",Pana);
+        ///p10
+                c=0;
+                a=Pana;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    xbeiby[c]=b+55;
+                    else
+                        xbeiby[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            while(a<1)
+            {
+                xbeiby[c]='0';
+                a++;
+                c++;
+            }
+            xbeiby[c]='\0';
+            strrev(xbeiby);
+            ///p10
+        }
+        else
+        {printf("\n%X",Pana);
+        ///p10
+                c=0;
+                a=Pana;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    xbeiby[c]=b+55;
+                    else
+                        xbeiby[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            xbeiby[c]='\0';
+            strrev(xbeiby);
+            ///p10
+        }
+        }
+        else
+            printf("\nError, el rango para una directiva de constante %s es de 0 a 255",operando);
+    }
+    else
+        if(operando[0]=='@')
+    {
+        Sona=0;
+        for(Pana=1;Pana<strlen(operando);Pana++)
+        {
+            cad4[Sona]=operando[Pana];
+            Sona++;
+        }
+        cad4[Sona]='\0';
+        Pana=base(cad4,8);
+        if(Pana>=0 && Pana<=255)
+        {
+            if(Pana<=15)
+        {printf("\n0%X",Pana);
+        ///p10
+                c=0;
+                a=Pana;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    xbeiby[c]=b+55;
+                    else
+                        xbeiby[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            while(a<1)
+            {
+                xbeiby[c]='0';
+                a++;
+                c++;
+            }
+            xbeiby[c]='\0';
+            strrev(xbeiby);
+            ///p10
+        }
+        else
+        {printf("\n%X",Pana);
+        ///p10
+                c=0;
+                a=Pana;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    xbeiby[c]=b+55;
+                    else
+                        xbeiby[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            xbeiby[c]='\0';
+            strrev(xbeiby);
+            ///p10
+        }
+        }
+        else
+            printf("\nError, el rango para una directiva de constante %s es de 0 a 255",operando);
+    }
+    else
+        if(operando[0]=='%')
+    {
+        Sona=0;
+        for(Pana=1;Pana<strlen(operando);Pana++)
+        {
+            cad4[Sona]=operando[Pana];
+            Sona++;
+        }
+        cad4[Sona]='\0';
+        Pana=base(cad4,2);
+        if(Pana>=0 && Pana<=255)
+        {
+            if(Pana<=15)
+        {printf("\n0%X",Pana);
+
+        ///p10
+                c=0;
+                a=Pana;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    xbeiby[c]=b+55;
+                    else
+                        xbeiby[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            while(a<1)
+            {
+                xbeiby[c]='0';
+                a++;
+                c++;
+            }
+            xbeiby[c]='\0';
+            strrev(xbeiby);
+            ///p10
+        }
+        else
+        {printf("\n%X",Pana);
+        ///p10
+                c=0;
+                a=Pana;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    xbeiby[c]=b+55;
+                    else
+                        xbeiby[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            xbeiby[c]='\0';
+            strrev(xbeiby);
+            ///p10
+        }
+        }
+        else
+            printf("\nError, el rango para una directiva de constante %s es de 0 a 255",operando);
+    }
+    else
+    {
+        ///p9dec1
+        Pana=atoi(operando);
+        if(Pana>=0 && Pana<=255)
+        {
+            if(Pana<=15)
+        {printf("\n0%X",Pana);
+        ///p10
+                c=0;
+                a=Pana;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    xbeiby[c]=b+55;
+                    else
+                        xbeiby[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            while(a<1)
+            {
+                xbeiby[c]='0';
+                a++;
+                c++;
+            }
+            xbeiby[c]='\0';
+            strrev(xbeiby);
+            ///p10
+        }
+        else
+        {printf("\n%X",Pana);
+        ///p10
+                c=0;
+                a=Pana;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    xbeiby[c]=b+55;
+                    else
+                        xbeiby[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            xbeiby[c]='\0';
+            strrev(xbeiby);
+            ///p10
+        }
+        }
+        else
+            printf("\nError, el rango para una directiva de constante %s es de 0 a 255",operando);
+    }
+}
+}
+else
+    if(strcmpi(codop,"DW")==0 || strcmpi(codop,"DC.W")==0 || strcmpi(codop,"FDB")==0)
+{
+    if((operando[0]=='$' || operando[0]=='%' || operando[0]=='@' || (operando[0]>=48 && operando[0]<=57) || (operando[0]>=65 && operando[0]<=90) || (operando[0]>=97 && operando[0]<=122)))
+{
+   if(operando[0]=='$')
+    {
+        Sona=0;
+        for(Pana=1;Pana<strlen(operando);Pana++)
+        {
+            cad4[Sona]=operando[Pana];
+            Sona++;
+        }
+        cad4[Sona]='\0';
+        Pana=hex(cad4);
+        if(Pana>=0 && Pana<=65535)
+        {
+            if(Pana>0 && Pana<=15)
+        {printf("\n000%X",Pana);
+        ///p10
+                c=0;
+                a=Pana;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    xbeiby[c]=b+55;
+                    else
+                        xbeiby[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            while(a<4)
+            {
+                xbeiby[c]='0';
+                a++;
+                c++;
+            }
+            xbeiby[c]='\0';
+            strrev(xbeiby);
+            ///p10
+        }
+        else
+            if(Pana>0 && Pana<=15)
+        {printf("\n00%X",Pana);
+        ///p10
+                c=0;
+                a=Pana;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    xbeiby[c]=b+55;
+                    else
+                        xbeiby[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            while(a<2)
+            {
+                xbeiby[c]='0';
+                a++;
+                c++;
+            }
+            xbeiby[c]='\0';
+            strrev(xbeiby);
+            ///p10
+        }
+        else
+            if(Pana>0 && Pana<=15)
+        {printf("\n0%X",Pana);
+        ///p10
+                c=0;
+                a=Pana;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    xbeiby[c]=b+55;
+                    else
+                        xbeiby[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            while(a<1)
+            {
+                xbeiby[c]='0';
+                a++;
+                c++;
+            }
+            xbeiby[c]='\0';
+            strrev(xbeiby);
+            ///p10
+        }
+        else
+        {printf("\n%X",Pana);
+        ///p10
+                c=0;
+                a=Pana;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    xbeiby[c]=b+55;
+                    else
+                        xbeiby[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            xbeiby[c]='\0';
+            strrev(xbeiby);
+            ///p10
+        }
+        }
+        else
+            printf("\nError, el rango para una directiva de constante %s es de 0 a 255",operando);
+    }
+    else
+        if(operando[0]=='@')
+    {
+        Sona=0;
+        for(Pana=1;Pana<strlen(operando);Pana++)
+        {
+            cad4[Sona]=operando[Pana];
+            Sona++;
+        }
+        cad4[Sona]='\0';
+        Pana=base(cad4,8);
+        if(Pana>=0 && Pana<=65535)
+        {
+            if(Pana>0 && Pana<=15)
+        {printf("\n000%X",Pana);
+        ///p10
+                c=0;
+                a=Pana;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    xbeiby[c]=b+55;
+                    else
+                        xbeiby[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            while(a<4)
+            {
+                xbeiby[c]='0';
+                a++;
+                c++;
+            }
+            xbeiby[c]='\0';
+            strrev(xbeiby);
+            ///p10
+        }
+        else
+            if(Pana>15 && Pana<=255)
+        {printf("\n00%X",Pana);
+        ///p10
+                c=0;
+                a=Pana;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    xbeiby[c]=b+55;
+                    else
+                        xbeiby[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            while(a<2)
+            {
+                xbeiby[c]='0';
+                a++;
+                c++;
+            }
+            xbeiby[c]='\0';
+            strrev(xbeiby);
+            ///p10
+        }
+        else
+            if(Pana>255 && Pana<=4095)
+        {printf("\n0%X",Pana);
+        ///p10
+                c=0;
+                a=Pana;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    xbeiby[c]=b+55;
+                    else
+                        xbeiby[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            while(a<1)
+            {
+                xbeiby[c]='0';
+                a++;
+                c++;
+            }
+            xbeiby[c]='\0';
+            strrev(xbeiby);
+            ///p10
+        }
+        else
+        {printf("\n%X",Pana);
+        ///p10
+                c=0;
+                a=Pana;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    xbeiby[c]=b+55;
+                    else
+                        xbeiby[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            xbeiby[c]='\0';
+            strrev(xbeiby);
+            ///p10
+        }
+        }
+        else
+            printf("\nError, el rango para una directiva de constante %s es de 0 a 255",operando);
+    }
+    else
+        if(operando[0]=='%')
+    {
+        Sona=0;
+        for(Pana=1;Pana<strlen(operando);Pana++)
+        {
+            cad4[Sona]=operando[Pana];
+            Sona++;
+        }
+        cad4[Sona]='\0';
+        ///p9bin
+        Pana=base(cad4,2);
+        if(Pana>=0 && Pana<=65535)
+        {
+            if(Pana>0 && Pana<=15)
+        {printf("\n000%X",Pana);
+        ///p10
+                c=0;
+                a=Pana;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    xbeiby[c]=b+55;
+                    else
+                        xbeiby[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            while(a<4)
+            {
+                xbeiby[c]='0';
+                a++;
+                c++;
+            }
+            xbeiby[c]='\0';
+            strrev(xbeiby);
+            ///p10
+        }
+        else
+            if(Pana>15 && Pana<=255)
+        {printf("\n00%X",Pana);
+        ///p10
+                c=0;
+                a=Pana;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    xbeiby[c]=b+55;
+                    else
+                        xbeiby[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            while(a<2)
+            {
+                xbeiby[c]='0';
+                a++;
+                c++;
+            }
+            xbeiby[c]='\0';
+            strrev(xbeiby);
+            ///p10
+        }
+        else
+            if(Pana>255 && Pana<=4095)
+        {printf("\n0%X",Pana);
+        ///p10
+                c=0;
+                a=Pana;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    xbeiby[c]=b+55;
+                    else
+                        xbeiby[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            while(a<1)
+            {
+                xbeiby[c]='0';
+                a++;
+                c++;
+            }
+            xbeiby[c]='\0';
+            strrev(xbeiby);
+            ///p10
+        }
+        else
+        {printf("\n%X",Pana);
+        ///p10
+                c=0;
+                a=Pana;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    xbeiby[c]=b+55;
+                    else
+                        xbeiby[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            xbeiby[c]='\0';
+            strrev(xbeiby);
+            ///p10
+        }
+        }
+        else
+            printf("\nError, el rango para una directiva de constante %s es de 0 a 255",operando);
+    }
+    else
+    {
+        ///p9dec2
+        Pana=atoi(operando);
+        if(Pana>=0 && Pana<=65535)
+        {
+            if(Pana>0 && Pana<=15)
+        {printf("\n000%X",Pana);
+        ///p10
+                c=0;
+                a=Pana;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    xbeiby[c]=b+55;
+                    else
+                        xbeiby[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            while(a<4)
+            {
+                xbeiby[c]='0';
+                a++;
+                c++;
+            }
+            xbeiby[c]='\0';
+            strrev(xbeiby);
+            ///p10
+        }
+        else
+            if(Pana>15 && Pana<=255)
+        {printf("\n00%X",Pana);
+        ///p10
+                c=0;
+                a=Pana;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    xbeiby[c]=b+55;
+                    else
+                        xbeiby[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            while(a<2)
+            {
+                xbeiby[c]='0';
+                a++;
+                c++;
+            }
+            xbeiby[c]='\0';
+            strrev(xbeiby);
+            ///p10
+        }
+        else
+            if(Pana>255 && Pana<=4095)
+        {printf("\n0%X",Pana);
+        ///p10
+                c=0;
+                a=Pana;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    xbeiby[c]=b+55;
+                    else
+                        xbeiby[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            while(a<1)
+            {
+                xbeiby[c]='0';
+                a++;
+                c++;
+            }
+            xbeiby[c]='\0';
+            strrev(xbeiby);
+            ///p10
+        }
+        else
+        {printf("\n%X",Pana);
+        ///p10
+                c=0;
+                a=Pana;
+                while(a!=0)
+            {
+                b=a%16;
+                if(b>=10)
+                    xbeiby[c]=b+55;
+                    else
+                        xbeiby[c]=b+48;
+                    c++;
+                    a=a/16;
+            }
+            xbeiby[c]='\0';
+            strrev(xbeiby);
+            ///p10
+        }
+        }
+        else
+            printf("\nError, el rango para una directiva de constante %s es de 0 a 255",operando);
+    }
+}
+}
+else
+    if(strcmpi(codop,"FCC")==0)
+{
+    printf("\n");
+   for(Nico=0;Nico<strlen(operando);Nico++)
+   {
+       if(operando[Nico]=='"')
+        ;
+       else
+        printf("%X",operando[Nico]);
+   }
+   Nico=0;
+for(Sona=0;Sona<strlen(operando);Sona++)
+{
+    if(operando[Sona]=='"')
+        ;
+    else
+     {
+    Pana=operando[Sona];
+     b=Pana/16;
+     c=Pana%16;
+     if(b>=10)
+         Chihiro[0]=d[b-10];
+         else
+            Chihiro[0]=b+48;
+    if(c>=10)
+        Chihiro[1]=d[c-10];
+         else
+            Chihiro[1]=c+48;
+    Chihiro[2]='\0';
+    b=0;
+ while(b<2)
+ {
+  xbeiby[Nico]=Chihiro[b];
+  b++;
+  Nico++;
+ }
+}
+}
+xbeiby[Nico]='\0';
+}
+}
+///practica10
+    if(Minami->sukulemcia==1)
+{
+///finish
+if(Minami->Alive==0)
+{
+    if(strcmpi(codop,"END")==0)
+        Minami->sukulemcia++;
+    else
+    if(xbeiby[0]=='\0')
+    ;
+    else
+        if(xbeiby[0]!='\0')
+    {
+        strcpy(Minami->enriquesegoviano,valor);
+        Minami->CoD[0]='\0';
+        strcpy(Minami->CoD,xbeiby);
+        Minami->Alive=1;
+    }
+
+}
+else
+{
+    if(strcmpi(codop,"End")==0)
+    {
+      strcpy(Minami->RiceBall,"S1");
+      strrev(Minami->enriquesegoviano);
+      strrev(Minami->CoD);
+      strcat(Minami->CoD,Minami->enriquesegoviano);
+      Nico=0;
+      Sona=(strlen(Minami->CoD)+2)/2;
+       while(Nico<2)
+    {
+    b=Sona%16;
+    if(b>=10)
+        Minami->LR[Nico]=d[b-10];
+    else
+        Minami->LR[Nico]=b+48;
+        Nico++;
+        Sona=Sona/16;
+        }
+        if(Nico==1)
+            {
+                Minami->LR[Nico]='0';
+                Nico++;
+            }
+        Minami->LR[Nico]='\0';
+        strcat(Minami->CoD,Minami->LR);
+        strrev(Minami->CoD);
+      strcpy(cad5,Minami->CoD);
+      ///checksum
+strcpy(cad5,Minami->CoD);
+b=0;
+    x=0;
+    a=0;
+    while(x<strlen(cad5))
+    {
+        c=0;
+        while(c<2)
+        {
+            Chihiro[c]=cad5[x];
+            x++;
+            if(c==0)
+            {
+                if(Chihiro[c]>=65 && Chihiro[c]<=70)
+                {
+                    b=Chihiro[c]-55;
+                    b=b*16;
+                    a=a+b;
+                }
+                else
+                {
+                    b=Chihiro[c]-48;
+                    b=b*16;
+                    a=a+b;
+                }
+            }
+            else
+            {
+                if(Chihiro[c]>=65 && Chihiro[c]<=70)
+                {
+                    b=Chihiro[c]-55;
+                    a=a+b;
+                }
+                else
+                {
+                b=Chihiro[c]-48;
+                a=a+b;
+                }
+            }
+              c++;
+        }
+    }
+    c=0;
+    while(c<2)
+    {
+    b=a%16;
+    b=15-b;
+    if(b>=10)
+        Chihiro[c]=d[b-10];
+    else
+        Chihiro[c]=b+48;
+        c++;
+        a=a/16;
+        }
+        Chihiro[c]='\0';
+        strrev(Chihiro);
+///fin Checksum
+        strcpy(Minami->ChickS,Chihiro);
+      strcat(Minami->CoD,Minami->ChickS);
+
+        strcat(Minami->RiceBall,Minami->CoD);
+
+        k=fopen(nb,"at");
+        fwrite(Minami->RiceBall,sizeof(char),strlen(Minami->RiceBall),k);
+        fputs("\n",k);
+        fclose(k);
+
+    Minami->sukulemcia++;
+
+    }
+    else
+         if(xbeiby[0]=='\0')
+    {
+        if(strcmpi(codop,"equ")==0)
+            ;
+        else
+        {
+        strcpy(Minami->RiceBall,"S1");
+      strrev(Minami->enriquesegoviano);
+      strrev(Minami->CoD);
+      strcat(Minami->CoD,Minami->enriquesegoviano);
+      Sona=strlen(Minami->CoD)+2;
+        Sona=Sona/2;
+        Nico=0;
+       while(Sona>0)
+    {
+    b=Sona%16;
+   if(b>=10)
+    Minami->LR[Nico]=d[b-10];
+   else
+    Minami->LR[Nico]=b+48;
+    Sona=Sona/16;
+   Nico++;
+        }
+        if(Nico==1)
+            {
+                Minami->LR[Nico]='0';
+                Nico++;
+            }
+        Minami->LR[Nico]='\0';
+        strcat(Minami->CoD,Minami->LR);
+      strrev(Minami->CoD);
+                      ///checksum
+strcpy(cad5,Minami->CoD);
+b=0;
+    x=0;
+    a=0;
+    while(x<strlen(cad5))
+    {
+        c=0;
+        while(c<2)
+        {
+            Chihiro[c]=cad5[x];
+            x++;
+            if(c==0)
+            {
+                if(Chihiro[c]>=65 && Chihiro[c]<=70)
+                {
+                    b=Chihiro[c]-55;
+                    b=b*16;
+                    a=a+b;
+                }
+                else
+                {
+                    b=Chihiro[c]-48;
+                    b=b*16;
+                    a=a+b;
+                }
+            }
+            else
+            {
+                if(Chihiro[c]>=65 && Chihiro[c]<=70)
+                {
+                    b=Chihiro[c]-55;
+                    a=a+b;
+                }
+                else
+                {
+                b=Chihiro[c]-48;
+                a=a+b;
+                }
+            }
+              c++;
+        }
+    }
+    c=0;
+    while(c<2)
+    {
+    b=a%16;
+    b=15-b;
+    if(b>=10)
+        Chihiro[c]=d[b-10];
+    else
+        Chihiro[c]=b+48;
+        c++;
+        a=a/16;
+        }
+        Chihiro[c]='\0';
+        strrev(Chihiro);
+///fin Checksum
+strcpy(Minami->ChickS,Chihiro);
+        strcat(Minami->CoD,Minami->ChickS);
+        strcat(Minami->RiceBall,Minami->CoD);
+        k=fopen(nb,"at");
+        fwrite(Minami->RiceBall,sizeof(char),strlen(Minami->RiceBall),k);
+        fputs("\n",k);
+        fclose(k);
+        Minami->Alive=0;
+        }
+    }
+    else
+        if((strlen(Minami->CoD)+strlen(xbeiby))==32)
+    {
+        strcat(Minami->CoD,xbeiby);
+        strcpy(Minami->RiceBall,"S1");
+      strrev(Minami->enriquesegoviano);
+      strrev(Minami->CoD);
+      strcat(Minami->CoD,Minami->enriquesegoviano);
+      strcpy(Minami->LR,"31");
+      strcat(Minami->CoD,Minami->LR);
+      strrev(Minami->CoD);
+      ///checksum
+strcpy(cad5,Minami->CoD);
+b=0;
+    x=0;
+    a=0;
+    while(x<strlen(cad5))
+    {
+        c=0;
+        while(c<2)
+        {
+            Chihiro[c]=cad5[x];
+            x++;
+            if(c==0)
+            {
+                if(Chihiro[c]>=65 && Chihiro[c]<=70)
+                {
+                    b=Chihiro[c]-55;
+                    b=b*16;
+                    a=a+b;
+                }
+                else
+                {
+                    b=Chihiro[c]-48;
+                    b=b*16;
+                    a=a+b;
+                }
+            }
+            else
+            {
+                if(Chihiro[c]>=65 && Chihiro[c]<=70)
+                {
+                    b=Chihiro[c]-55;
+                    a=a+b;
+                }
+                else
+                {
+                b=Chihiro[c]-48;
+                a=a+b;
+                }
+            }
+              c++;
+        }
+    }
+    c=0;
+    while(c<2)
+    {
+    b=a%16;
+    b=15-b;
+    if(b>=10)
+        Chihiro[c]=d[b-10];
+    else
+        Chihiro[c]=b+48;
+        c++;
+        a=a/16;
+        }
+        Chihiro[c]='\0';
+        strrev(Chihiro);
+///fin Checksum
+        strcpy(Minami->ChickS,Chihiro);
+        strcat(Minami->CoD,Minami->ChickS);
+        strcat(Minami->RiceBall,Minami->CoD);
+        k=fopen(nb,"at");
+        fwrite(Minami->RiceBall,sizeof(char),strlen(Minami->RiceBall),k);
+        fputs("\n",k);
+        fclose(k);
+        Minami->Alive=0;
+
+    }
+    else
+        if((strlen(Minami->CoD)+strlen(xbeiby))>32)
+    {
+        a=32-strlen(Minami->CoD);
+        b=0;
+        Minami->acum=a/2;
+        strcpy(cad5,xbeiby);
+        cad5[a]='\0';
+        strcat(Minami->CoD,cad5);
+        strrev(xbeiby);
+        b=strlen(xbeiby)-a;
+        xbeiby[b]='\0';
+
+        strcpy(Minami->RiceBall,"S1");
+      strrev(Minami->enriquesegoviano);
+      strrev(Minami->CoD);
+      strcat(Minami->CoD,Minami->enriquesegoviano);
+      strcpy(Minami->LR,"31");
+      strcat(Minami->CoD,Minami->LR);
+      strrev(Minami->CoD);
+              ///checksum
+strcpy(cad5,Minami->CoD);
+b=0;
+    x=0;
+    a=0;
+    while(x<strlen(cad5))
+    {
+        c=0;
+        while(c<2)
+        {
+            Chihiro[c]=cad5[x];
+            x++;
+            if(c==0)
+            {
+                if(Chihiro[c]>=65 && Chihiro[c]<=70)
+                {
+                    b=Chihiro[c]-55;
+                    b=b*16;
+                    a=a+b;
+                }
+                else
+                {
+                    b=Chihiro[c]-48;
+                    b=b*16;
+                    a=a+b;
+                }
+            }
+            else
+            {
+                if(Chihiro[c]>=65 && Chihiro[c]<=70)
+                {
+                    b=Chihiro[c]-55;
+                    a=a+b;
+                }
+                else
+                {
+                b=Chihiro[c]-48;
+                a=a+b;
+                }
+            }
+              c++;
+        }
+    }
+    c=0;
+    while(c<2)
+    {
+    b=a%16;
+    b=15-b;
+    if(b>=10)
+        Chihiro[c]=d[b-10];
+    else
+        Chihiro[c]=b+48;
+        c++;
+        a=a/16;
+        }
+        Chihiro[c]='\0';
+        strrev(Chihiro);
+///fin Checksum
+        strcpy(Minami->ChickS,Chihiro);
+        strcat(Minami->CoD,Minami->ChickS);
+        strcat(Minami->RiceBall,Minami->CoD);
+        k=fopen(nb,"at");
+        fwrite(Minami->RiceBall,sizeof(char),strlen(Minami->RiceBall),k);
+        fputs("\n",k);
+        fclose(k);
+
+    Sona=hex(valor);
+    Sona=Sona+Minami->acum;
+        Nico=0;
+       while(Sona>0)
+    {
+    b=Sona%16;
+   if(b>=10)
+    Minami->enriquesegoviano[Nico]=d[b-10];
+   else
+    Minami->enriquesegoviano[Nico]=b+48;
+    Sona=Sona/16;
+   Nico++;
+        }
+        if(Nico==1)
+        {
+            while(Nico<4)
+            {
+                Minami->enriquesegoviano[Nico]='0';
+                Nico++;
+            }
+        }
+        else
+            if(Nico==2)
+        {
+            while(Nico<3)
+            {
+                Minami->enriquesegoviano[Nico]='0';
+                Nico++;
+            }
+        }
+        else
+            if(Nico==3)
+        {
+            while(Nico<2)
+            {
+                Minami->enriquesegoviano[Nico]='0';
+                Nico++;
+            }
+        }
+        Nico++;
+        Minami->enriquesegoviano[Nico]='\0';
+        strrev(Minami->enriquesegoviano);
+        strrev(xbeiby);
+        strcpy(Minami->CoD,xbeiby);
+    }
+    else
+       if((strlen(Minami->CoD)+strlen(xbeiby))<32)
+    {
+        strcat(Minami->CoD,xbeiby);
+    }
+}
+}
+    if(Minami->sukulemcia==2)
+    {
+        strcpy(Minami->RiceBall,"S9030000FC");
+         k=fopen(nb,"at");
+fwrite(Minami->RiceBall,sizeof(char),strlen(Minami->RiceBall),k);
+fclose(k);
+Minami->sukulemcia++;
+    }
+}
+void h2(int Pana)
+{
+    char hexa[4], d[6]={'A','B','C','D','E','F'};
+    int modulo, residuo, centinela;
+    ///conversion a hexa
+    residuo=Pana;
+ centinela=3;
+ do
+{
+ modulo=residuo%16;
+ residuo=residuo/16;
+ if(modulo<10)
+ hexa[centinela]=48+modulo;
+ else
+    hexa[centinela]=d[modulo-10];
+centinela--;
+}
+ while(residuo!=0);
+ if(centinela>=0)
+    while(centinela>=0)
+    {
+      hexa[centinela]=48;
+      centinela--;
+    }
+hexa[4]='\0';
+return(hexa);
+}
+void CS(char cad5[])
+{
+    int a, b, c, x;
+    char charanko[3], e[6]={'A','B','C','D','E','F'};
+    b=0;
+    x=0;
+    a=0;
+    while(x<strlen(cad5))
+    {
+        c=0;
+        while(c<2)
+        {
+            charanko[c]=cad5[x];
+            x++;
+            if(c==0)
+            {
+                if(charanko[c]>=65 && charanko[c]<=70)
+                {
+                    b=charanko[c]-55;
+                    b=b*16;
+                    a=a+b;
+                }
+            }
+            else
+            {
+                b=charanko[c]+48;
+                a=a+b;
+            }
+              c++;
+        }
+    }
+    c=0;
+    while(c<2)
+    {
+    b=a%16;
+    b=15-b;
+    if(b>=10)
+        charanko[c]=e[b-10];
+    else
+        charanko[c]=b+48;
+        c++;
+        a=a/16;
+        }
+        charanko[c]='\0';
+        strrev(charanko);
+        return(charanko);
+}

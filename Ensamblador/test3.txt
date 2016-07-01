@@ -1,0 +1,3 @@
+	org	$0
+	ldaa	31483,x
+	end

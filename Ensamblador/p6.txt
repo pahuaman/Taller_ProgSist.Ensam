@@ -1,0 +1,5 @@
+	org	$0
+	ldaa	b,x
+	ldaa	a,x
+	ldaa	d,x
+	end

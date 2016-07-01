@@ -1,0 +1,19 @@
+;comentario uno
+uno	equ	1
+dos	equ	2
+;comentario dos
+	org	3
+tres	equ	3
+cuatro	ds.w	2
+	swi
+cinco	equ	5
+	swi
+seis	equ	6
+	dc.b	3
+;comentario tres
+siete	equ	7
+ocho	equ	8
+	rmb	3
+	rmb	4
+nuevo	equ	9
+	end

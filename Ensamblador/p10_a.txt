@@ -1,0 +1,4 @@
+	org	0
+	ds.b	1
+	rmw	2
+	end
